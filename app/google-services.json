@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "493058329867",
+    "firebase_url": "https://dibapp-6df11.firebaseio.com",
+    "project_id": "dibapp-6df11",
+    "storage_bucket": "dibapp-6df11.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:493058329867:android:62ba25dd02c66dc8",
+        "android_client_info": {
+          "package_name": "com.dibapp.dibapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "493058329867-n49uk36eoi2g200l6jp1pun4qab4siak.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFT8YywyRdlm1LnklKFckTXEwyodcxE5s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "493058329867-n49uk36eoi2g200l6jp1pun4qab4siak.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
