@@ -4,7 +4,7 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="accedi">ACCEDI</string>
-    <string name="textview">TextView</string>
+    <string name="textview">Registrati</string>
     <string name="Registrati" />
     <string name="benvenuti_in_dibapp">Benvenuti in DibApp</string>
 </resources>
