@@ -12,11 +12,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="436dp"
+        android:layout_marginTop="312dp"
         android:layout_marginEnd="152dp"
         android:text="logOut"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.938"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="336dp"
+        android:layout_marginTop="244dp"
         android:layout_marginEnd="8dp"
         android:text="Hai effettuato correttamente l'accesso. Benvenuto!"
         app:layout_constraintEnd_toEndOf="parent"

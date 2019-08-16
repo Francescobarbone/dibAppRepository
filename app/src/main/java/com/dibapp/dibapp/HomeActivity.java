@@ -1,7 +1,9 @@
 package com.dibapp.dibapp;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +17,29 @@ public class HomeActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
     @Override
+    public void onBackPressed(){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
+        builder.setMessage("Vuoi effettuare il logout?");
+        builder.setCancelable(true);
+        builder.setNegativeButton("Sì", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finish();
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(HomeActivity.this, MainActivity.class));
+            }
+        });
+        builder.setPositiveButton("Chiudi", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
@@ -24,7 +49,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 FirebaseAuth.getInstance().signOut();
-                Intent intToMain = new Intent(HomeActivity.this, RegistrazioneActivity.class);
+                Intent intToMain = new Intent(HomeActivity.this, MainActivity.class);
                 startActivity(intToMain);
             }
         });
