@@ -1,8 +1,10 @@
 package com.dibapp.dibapp;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -70,12 +72,8 @@ public class MainActivity extends AppCompatActivity {
                             if(!task.isSuccessful()){
                                 Toast.makeText(MainActivity.this, "Errore durante il login, riprova", Toast.LENGTH_SHORT).show();
                             } else {
-                                if(firebaseAuth.getCurrentUser().isEmailVerified()){
-                                    startActivity(new Intent(MainActivity.this, HomeActivity.class));
-                                }
-                                else{
-                                    Toast.makeText(MainActivity.this, "Verifica il tuo indirizzo e-mail", Toast.LENGTH_SHORT).show();                                }
-
+                                Intent intToHome = new Intent(MainActivity.this, HomeActivity.class);
+                                startActivity(intToHome);
                             }
                         }
                     });

@@ -24,9 +24,10 @@ public class HomeActivity extends AppCompatActivity {
         builder.setNegativeButton("Sì", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                finish();
                 FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(HomeActivity.this, MainActivity.class));
+                Intent intToMain = new Intent(HomeActivity.this, MainActivity.class);
+                startActivity(intToMain);
+                finishAffinity();
             }
         });
         builder.setPositiveButton("Chiudi", new DialogInterface.OnClickListener() {
@@ -51,6 +52,7 @@ public class HomeActivity extends AppCompatActivity {
                 FirebaseAuth.getInstance().signOut();
                 Intent intToMain = new Intent(HomeActivity.this, MainActivity.class);
                 startActivity(intToMain);
+                finishAffinity();
             }
         });
     }

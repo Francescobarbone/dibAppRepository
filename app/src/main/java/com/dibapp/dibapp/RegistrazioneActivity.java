@@ -31,6 +31,7 @@ public class RegistrazioneActivity extends AppCompatActivity {
         password = findViewById(R.id.editText4);
         btnRegistrati = findViewById(R.id.button2);
         btnRegistrati.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 String email = emailId.getText().toString();
