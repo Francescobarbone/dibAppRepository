@@ -7,4 +7,6 @@
     <string name="textview">Registrati</string>
     <string name="Registrati" />
     <string name="benvenuti_in_dibapp">Benvenuti in DibApp</string>
+    <string name="logout">logOut</string>
+    <string name="hai_effettuato_correttamente_l_accesso_benvenuto">Hai effettuato correttamente l\'accesso. Benvenuto!</string>
 </resources>

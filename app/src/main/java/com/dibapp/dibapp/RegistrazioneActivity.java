@@ -47,9 +47,9 @@ public class RegistrazioneActivity extends AppCompatActivity {
                     emailId.requestFocus();
                 }
                 else if(!(email.isEmpty() && pwd.isEmpty())){
-                    //Aggiungi controllo sulla presenza della mail nel db
                     //Aggiungi procedura di verifica e-mail
                     if(email.endsWith("@studenti.uniba.it") || email.endsWith("@uniba.it")) {
+
                         firebaseAuth.createUserWithEmailAndPassword(email, pwd).addOnCompleteListener(RegistrazioneActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -57,6 +57,20 @@ public class RegistrazioneActivity extends AppCompatActivity {
                                     Toast.makeText(RegistrazioneActivity.this,"Registrazione non Riuscita, Riprova!",Toast.LENGTH_SHORT).show();
                                 }
                                 else{
+                                    firebaseAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if(task.isSuccessful()){
+                                                Toast.makeText(RegistrazioneActivity.this,"Registrazione avvenuta con successo, Controlla la tua e-mail",
+                                                        Toast.LENGTH_SHORT).show();
+
+                                            }
+                                            else{
+                                                Toast.makeText(RegistrazioneActivity.this,task.getException().getMessage(),
+                                                        Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
                                     startActivity(new Intent(RegistrazioneActivity.this, MainActivity.class));
                                 }
                             }

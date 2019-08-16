@@ -14,7 +14,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="436dp"
         android:layout_marginEnd="152dp"
-        android:text="logOut"
+        android:text="@string/logout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.938"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +27,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="336dp"
         android:layout_marginEnd="8dp"
-        android:text="Hai effettuato correttamente l'accesso. Benvenuto!"
+        android:text="@string/hai_effettuato_correttamente_l_accesso_benvenuto"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

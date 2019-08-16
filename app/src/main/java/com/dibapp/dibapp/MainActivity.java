@@ -70,8 +70,12 @@ public class MainActivity extends AppCompatActivity {
                             if(!task.isSuccessful()){
                                 Toast.makeText(MainActivity.this, "Errore durante il login, riprova", Toast.LENGTH_SHORT).show();
                             } else {
-                                Intent intToHome = new Intent(MainActivity.this, HomeActivity.class);
-                                startActivity(intToHome);
+                                if(firebaseAuth.getCurrentUser().isEmailVerified()){
+                                    startActivity(new Intent(MainActivity.this, HomeActivity.class));
+                                }
+                                else{
+                                    Toast.makeText(MainActivity.this, "Verifica il tuo indirizzo e-mail", Toast.LENGTH_SHORT).show();                                }
+
                             }
                         }
                     });
