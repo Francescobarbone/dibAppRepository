@@ -36,38 +36,39 @@ public class RegistrazioneActivity extends AppCompatActivity {
                 String email = emailId.getText().toString();
                 String pwd = password.getText().toString();
 
-                if(email.isEmpty()){
-                    emailId.setError("Inserisci l'email");
-                    emailId.requestFocus();
+                if(email.isEmpty() && pwd.isEmpty()){
+                    Toast.makeText( RegistrazioneActivity.this, "I campi sono vuoti!", Toast.LENGTH_SHORT).show();
                 }
                 else if(pwd.isEmpty()){
                     password.setError("Inserisci una password");
                     password.requestFocus();
-                }else if(email.isEmpty() && pwd.isEmpty()){
-                    Toast.makeText( RegistrazioneActivity.this, "I campi sono vuoti!", Toast.LENGTH_SHORT);
+                }else if(email.isEmpty()){
+                    emailId.setError("Inserisci l'email");
+                    emailId.requestFocus();
                 }
                 else if(!(email.isEmpty() && pwd.isEmpty())){
-
+                    //Aggiungi controllo sulla presenza della mail nel db
+                    //Aggiungi procedura di verifica e-mail
                     if(email.endsWith("@studenti.uniba.it") || email.endsWith("@uniba.it")) {
                         firebaseAuth.createUserWithEmailAndPassword(email, pwd).addOnCompleteListener(RegistrazioneActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if(!task.isSuccessful()) {
-                                    Toast.makeText(RegistrazioneActivity.this,"Registrazione non Riuscita, Riprova!",Toast.LENGTH_SHORT);
+                                    Toast.makeText(RegistrazioneActivity.this,"Registrazione non Riuscita, Riprova!",Toast.LENGTH_SHORT).show();
                                 }
                                 else{
-                                    startActivity(new Intent(RegistrazioneActivity.this, HomeActivity.class));
+                                    startActivity(new Intent(RegistrazioneActivity.this, MainActivity.class));
                                 }
                             }
                         });
 
                         }
                     else {
-                        Toast.makeText(RegistrazioneActivity.this, "Puoi eseguire la registrazione  solo con un e-mail istituzionale",Toast.LENGTH_SHORT);
+                        Toast.makeText(RegistrazioneActivity.this, "Puoi eseguire la registrazione  solo con un e-mail istituzionale",Toast.LENGTH_SHORT).show();
                     }
 
                 }else{
-                    Toast.makeText(RegistrazioneActivity.this, "Errore!", Toast.LENGTH_SHORT);
+                    Toast.makeText(RegistrazioneActivity.this, "Errore!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
