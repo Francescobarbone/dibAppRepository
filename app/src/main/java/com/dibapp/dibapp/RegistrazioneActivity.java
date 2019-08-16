@@ -43,10 +43,10 @@ public class RegistrazioneActivity extends AppCompatActivity {
                 else if(pwd.isEmpty()){
                     password.setError("Inserisci una password");
                     password.requestFocus();
-                }else if(email.isEmpty() && email.isEmpty()){
+                }else if(email.isEmpty() && pwd.isEmpty()){
                     Toast.makeText( RegistrazioneActivity.this, "I campi sono vuoti!", Toast.LENGTH_SHORT);
                 }
-                else if(!(email.isEmpty() && email.isEmpty())){
+                else if(!(email.isEmpty() && pwd.isEmpty())){
 
                     if(email.endsWith("@studenti.uniba.it") || email.endsWith("@uniba.it")) {
                         firebaseAuth.createUserWithEmailAndPassword(email, pwd).addOnCompleteListener(RegistrazioneActivity.this, new OnCompleteListener<AuthResult>() {
@@ -63,7 +63,7 @@ public class RegistrazioneActivity extends AppCompatActivity {
 
                         }
                     else {
-                        Toast.makeText(RegistrazioneActivity.this, "Puoi eseguire la registrazione con un e-mail istituzionale",Toast.LENGTH_SHORT);
+                        Toast.makeText(RegistrazioneActivity.this, "Puoi eseguire la registrazione  solo con un e-mail istituzionale",Toast.LENGTH_SHORT);
                     }
 
                 }else{
