@@ -22,6 +22,12 @@ public class RegistrazioneActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
 
     @Override
+    public void onBackPressed(){
+        Intent regToMain = new Intent(RegistrazioneActivity.this, MainActivity.class);
+        startActivity(regToMain);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrazione);
