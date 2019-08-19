@@ -44,9 +44,16 @@ public class MainActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser fireBaseUser = firebaseAuth.getCurrentUser();
                 if (fireBaseUser != null && fireBaseUser.isEmailVerified()) {
-                    Toast.makeText(MainActivity.this, "Login avvenuto con successo", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(MainActivity.this, HomeActivity.class);
-                    startActivity(i);
+                    if(emailId.getText().toString().endsWith("@uniba.it")){
+                        Toast.makeText(MainActivity.this, "Login avvenuto con successo!", Toast.LENGTH_SHORT).show();
+                        Intent intToHome = new Intent(MainActivity.this, DocenteActivity.class);
+                        startActivity(intToHome);
+                    }
+                    if(emailId.getText().toString().endsWith("@studenti.uniba.it")){
+                        Toast.makeText(MainActivity.this, "Login avvenuto con successo!", Toast.LENGTH_SHORT).show();
+                        Intent intToHome = new Intent(MainActivity.this, StudenteActivity.class);
+                        startActivity(intToHome);
+                    }
                 }
             }
         };
