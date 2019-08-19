@@ -47,8 +47,6 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Login avvenuto con successo", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(MainActivity.this, HomeActivity.class);
                     startActivity(i);
-                } else {
-                    Toast.makeText(MainActivity.this, "Per favore, effettuare il login", Toast.LENGTH_SHORT).show();
                 }
             }
         };
@@ -76,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
                                 if(firebaseAuth.getCurrentUser().isEmailVerified()){
                                     Intent intToHome = new Intent(MainActivity.this, HomeActivity.class);
                                     startActivity(intToHome);
+                                }else{
+                                    Toast.makeText(MainActivity.this, "Verifica la tua E-mail", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }

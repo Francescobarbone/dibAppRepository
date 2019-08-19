@@ -66,7 +66,6 @@ public class RegistrazioneActivity extends AppCompatActivity {
                                                 Toast.makeText(RegistrazioneActivity.this, "Registrazione avvenuta con successo. Controlla la casella di posta per la verifica.", Toast.LENGTH_LONG).show();
                                                 emailId.setText("");
                                                 password.setText("");
-                                                finishAffinity();
                                             } else {
                                                 Toast.makeText(RegistrazioneActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
                                             }
