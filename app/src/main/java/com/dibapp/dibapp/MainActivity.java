@@ -65,14 +65,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v){
                 final String email = emailId.getText().toString();
                 String psw = password.getText().toString();
-                if(email.isEmpty()){
-                    emailId.setError("Per favore, inserisca l'indirizzo e-mail");
-                    emailId.requestFocus();
+                if(email.isEmpty() && psw.isEmpty()){
+                    Toast.makeText(MainActivity.this, "I campi sono vuoti!", Toast.LENGTH_SHORT).show();
+                } else if(email.isEmpty()){
+                    password.setError("Per favore, inserisca l'indirizzo e-mail");
+                    password.requestFocus();
                 } else if(psw.isEmpty()){
                     password.setError("Per favore, inserisca la password");
                     password.requestFocus();
-                } else if(email.isEmpty() && psw.isEmpty())
-                    Toast.makeText(MainActivity.this, "I campi sono vuoti!", Toast.LENGTH_SHORT).show();
+                }
                 else if (!(email.isEmpty() && psw.isEmpty())){
                     firebaseAuth.signInWithEmailAndPassword(email, psw).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
