@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         btnSignIn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                String email = emailId.getText().toString();
+                final String email = emailId.getText().toString();
                 String psw = password.getText().toString();
                 if(email.isEmpty()){
                     emailId.setError("Per favore, inserisca l'indirizzo e-mail");
@@ -72,8 +72,15 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(MainActivity.this, "Errore durante il login, riprova", Toast.LENGTH_SHORT).show();
                             } else {
                                 if(firebaseAuth.getCurrentUser().isEmailVerified()){
-                                    Intent intToHome = new Intent(MainActivity.this, HomeActivity.class);
-                                    startActivity(intToHome);
+                                    if(email.endsWith("@uniba.it")){
+                                        Intent intToHome = new Intent(MainActivity.this, DocenteActivity.class);
+                                        startActivity(intToHome);
+                                    }
+                                    if(email.endsWith("@studenti.uniba.it")){
+                                        Intent intToHome = new Intent(MainActivity.this, StudenteActivity.class);
+                                        startActivity(intToHome);
+                                    }
+
                                 }else{
                                     Toast.makeText(MainActivity.this, "Verifica la tua E-mail", Toast.LENGTH_SHORT).show();
                                 }
