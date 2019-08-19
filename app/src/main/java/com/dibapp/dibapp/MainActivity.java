@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     EditText emailId, password;
     Button btnSignIn;
     TextView tvSignUp;
+    TextView forgotPsw;
     FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
 
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         password = findViewById(R.id.editText4);
         btnSignIn = findViewById(R.id.button2);
         tvSignUp = findViewById(R.id.textView);
+        forgotPsw = findViewById(R.id.textView2);
 
         authStateListener = new FirebaseAuth.AuthStateListener() {
 
@@ -104,6 +106,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v){
                 Intent intSignUp = new Intent (MainActivity.this, RegistrazioneActivity.class);
                 startActivity(intSignUp);
+            }
+        });
+
+        forgotPsw.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intFrgPw = new Intent (MainActivity.this, ForgotPasswordActivity.class);
+                startActivity(intFrgPw);
             }
         });
     }

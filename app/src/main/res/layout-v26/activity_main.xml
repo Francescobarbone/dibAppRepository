@@ -7,6 +7,23 @@
     tools:context="com.dibapp.dibapp.MainActivity">
 
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="64dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/textview"
+        android:textColor="#3F51B5"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.694"
+        tools:text="Registrati" />
+
     <EditText
         android:id="@+id/editText3"
         android:layout_width="wrap_content"
@@ -55,22 +72,23 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.6" />
+        app:layout_constraintVertical_bias="0.518" />
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="64dp"
-        android:layout_height="36dp"
+        android:id="@+id/textView2"
+        android:layout_width="189dp"
+        android:layout_height="60dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="@string/textview"
+        android:text="Password dimenticata?"
         android:textColor="#3F51B5"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.606"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.694"
-        tools:text="Registrati" />
+        app:layout_constraintVertical_bias="0.796"
+        tools:text="Password dimenticata?" />
 </androidx.constraintlayout.widget.ConstraintLayout>
