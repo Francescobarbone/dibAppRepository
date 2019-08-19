@@ -54,7 +54,6 @@ public class RegistrazioneActivity extends AppCompatActivity {
                     emailId.requestFocus();
                 }
                 else if(!(email.isEmpty() && pwd.isEmpty())){
-                    //Aggiungi procedura di verifica e-mail
                     if(email.endsWith("@studenti.uniba.it") || email.endsWith("@uniba.it")) {
                         firebaseAuth.createUserWithEmailAndPassword(email, pwd).addOnCompleteListener(new OnCompleteListener<AuthResult>(){
                             @Override
@@ -70,8 +69,6 @@ public class RegistrazioneActivity extends AppCompatActivity {
                                                 finishAffinity();
                                             } else {
                                                 Toast.makeText(RegistrazioneActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                                                emailId.setText("");
-                                                password.setText("");
                                             }
                                         }
                                     });

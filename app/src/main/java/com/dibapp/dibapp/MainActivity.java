@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser fireBaseUser = firebaseAuth.getCurrentUser();
-                if (fireBaseUser != null) {
+                if (fireBaseUser != null && fireBaseUser.isEmailVerified()) {
                     Toast.makeText(MainActivity.this, "Login avvenuto con successo", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(MainActivity.this, HomeActivity.class);
                     startActivity(i);
@@ -73,8 +73,10 @@ public class MainActivity extends AppCompatActivity {
                             if(!task.isSuccessful()){
                                 Toast.makeText(MainActivity.this, "Errore durante il login, riprova", Toast.LENGTH_SHORT).show();
                             } else {
-                                Intent intToHome = new Intent(MainActivity.this, HomeActivity.class);
-                                startActivity(intToHome);
+                                if(firebaseAuth.getCurrentUser().isEmailVerified()){
+                                    Intent intToHome = new Intent(MainActivity.this, HomeActivity.class);
+                                    startActivity(intToHome);
+                                }
                             }
                         }
                     });
