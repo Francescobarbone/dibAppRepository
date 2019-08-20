@@ -81,18 +81,18 @@ public class MainActivity extends AppCompatActivity {
                             if(!task.isSuccessful()){
                                 Toast.makeText(MainActivity.this, "Errore durante il login, riprova", Toast.LENGTH_SHORT).show();
                             } else {
-                                if(firebaseAuth.getCurrentUser().isEmailVerified()){
-                                    if(email.endsWith("@uniba.it")){
-                                        Intent intToHome = new Intent(MainActivity.this, DocenteActivity.class);
-                                        startActivity(intToHome);
-                                    }
-                                    if(email.endsWith("@studenti.uniba.it")){
+                                if(email.endsWith("@studenti.uniba.it")){
+                                    if(firebaseAuth.getCurrentUser().isEmailVerified()){
                                         Intent intToHome = new Intent(MainActivity.this, StudenteActivity.class);
                                         startActivity(intToHome);
                                     }
+                                    else{
+                                        Toast.makeText(MainActivity.this, "Verifica la tua E-mail", Toast.LENGTH_SHORT).show();
+                                    }
 
-                                }else{
-                                    Toast.makeText(MainActivity.this, "Verifica la tua E-mail", Toast.LENGTH_SHORT).show();
+                                }else if(email.endsWith("@uniba.it")){
+                                    Intent intToHome = new Intent(MainActivity.this, DocenteActivity.class);
+                                    startActivity(intToHome);
                                 }
                             }
                         }

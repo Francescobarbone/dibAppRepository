@@ -54,7 +54,7 @@ public class RegistrazioneActivity extends AppCompatActivity {
                     emailId.requestFocus();
                 }
                 else if(!(email.isEmpty() && pwd.isEmpty())){
-                    if(email.endsWith("@studenti.uniba.it") || email.endsWith("@uniba.it")) {
+                    if(email.endsWith("@studenti.uniba.it")) {
                         firebaseAuth.createUserWithEmailAndPassword(email, pwd).addOnCompleteListener(new OnCompleteListener<AuthResult>(){
                             @Override
                             public void onComplete(Task<AuthResult> task){
@@ -74,7 +74,22 @@ public class RegistrazioneActivity extends AppCompatActivity {
                                 }
                             }
                         });
-                } else
+                } else if (email.endsWith("@uniba.it")){
+                        firebaseAuth.createUserWithEmailAndPassword(email, pwd).addOnCompleteListener(new OnCompleteListener<AuthResult>(){
+                            @Override
+                            public void onComplete(Task<AuthResult> task){
+                                            if (task.isSuccessful()) {
+                                                Toast.makeText(RegistrazioneActivity.this, "Registrazione avvenuta con successo.", Toast.LENGTH_LONG).show();
+                                                emailId.setText("");
+                                                password.setText("");
+                                            } else {
+                                                Toast.makeText(RegistrazioneActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                            }
+                                        }
+                                    });
+
+                    }
+                    else
                      Toast.makeText(RegistrazioneActivity.this, "Puoi eseguire la registrazione  solo con un e-mail istituzionale",Toast.LENGTH_SHORT).show();
 
             } else

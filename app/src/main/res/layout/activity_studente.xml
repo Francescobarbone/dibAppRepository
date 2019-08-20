@@ -6,14 +6,34 @@
     android:layout_height="match_parent"
     tools:context=".StudenteActivity">
 
+    <Button
+        android:id="@+id/logoutStudente"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="360dp"
+        android:layout_marginEnd="160dp"
+        android:text="@string/logout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="244dp"
+        android:layout_marginTop="164dp"
         android:layout_marginEnd="116dp"
         android:text="Benvenuto studente!"
         android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="292dp"
+        android:layout_marginEnd="116dp"
+        android:text="Visualizza lezione"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
