@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
     EditText emailId, password;
     Button btnSignIn;
     TextView tvSignUp;
-    TextView forgotPsw;
     FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
 
@@ -38,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
         password = findViewById(R.id.editText4);
         btnSignIn = findViewById(R.id.button2);
         tvSignUp = findViewById(R.id.textView);
-        forgotPsw = findViewById(R.id.textView2);
 
         authStateListener = new FirebaseAuth.AuthStateListener() {
 
@@ -67,12 +65,13 @@ public class MainActivity extends AppCompatActivity {
                 String psw = password.getText().toString();
                 if(email.isEmpty() && psw.isEmpty()){
                     Toast.makeText(MainActivity.this, "I campi sono vuoti!", Toast.LENGTH_SHORT).show();
-                } else if(email.isEmpty()){
-                    password.setError("Per favore, inserisca l'indirizzo e-mail");
-                    password.requestFocus();
+
                 } else if(psw.isEmpty()){
                     password.setError("Per favore, inserisca la password");
                     password.requestFocus();
+                } else if(email.isEmpty()){
+                    emailId.setError("Per favore, inserisca l'indirizzo e-mail");
+                    emailId.requestFocus();
                 }
                 else if (!(email.isEmpty() && psw.isEmpty())){
                     firebaseAuth.signInWithEmailAndPassword(email, psw).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
@@ -107,14 +106,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v){
                 Intent intSignUp = new Intent (MainActivity.this, RegistrazioneActivity.class);
                 startActivity(intSignUp);
-            }
-        });
-
-        forgotPsw.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent intFrgPw = new Intent (MainActivity.this, ForgotPasswordActivity.class);
-                startActivity(intFrgPw);
             }
         });
     }
