@@ -39,7 +39,7 @@ public class QRCode extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if(result.getContents()==null) {
+        if(result!=null) {
             if(result.getContents()==null)
                 Toast.makeText(this, "Errore di scan", Toast.LENGTH_LONG).show();
             else

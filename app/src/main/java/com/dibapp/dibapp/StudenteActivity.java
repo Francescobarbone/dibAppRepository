@@ -14,6 +14,8 @@ import com.google.firebase.auth.FirebaseUser;
 public class StudenteActivity extends HomeActivity{
 
     private Button logOut;
+    private Button visualizzaLezione;
+
     private TextView textViewBenvenuto;
     private FirebaseAuth firebaseAuth;
     private Lezione lezione= new Lezione();
@@ -23,10 +25,10 @@ public class StudenteActivity extends HomeActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_studente);
+
+        visualizzaLezione = findViewById(R.id.buttonLezione);
         logOut = findViewById(R.id.logoutStudente);
-
         firebaseAuth = FirebaseAuth.getInstance();
-
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
         textViewBenvenuto = (TextView) findViewById(R.id.textView4);
@@ -38,6 +40,15 @@ public class StudenteActivity extends HomeActivity{
                 FirebaseAuth.getInstance().signOut();
                 Intent intToMain = new Intent(StudenteActivity.this, MainActivity.class);
                 startActivity(intToMain);
+                finishAffinity();
+            }
+        });
+
+        visualizzaLezione.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent studToQR = new Intent(StudenteActivity.this, QRCode.class);
+                startActivity(studToQR);
                 finishAffinity();
             }
         });
