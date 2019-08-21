@@ -16,16 +16,23 @@ import com.google.zxing.integration.android.IntentResult;
 public class QRCode extends AppCompatActivity {
 
     private Button scanButton;
+
+    @Override
+    public void onBackPressed(){
+        Intent regToMain = new Intent(QRCode.this, StudenteActivity.class);
+        startActivity(regToMain);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qrcode);
         scanButton = findViewById(R.id.scanBtn);
-        final Activity act = this;
+        final Activity activity = this;
         scanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                IntentIntegrator integrator = new IntentIntegrator(act);
+                IntentIntegrator integrator = new IntentIntegrator(activity);
                 integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
                 integrator.setPrompt("Scan");
                 integrator.setCameraId(0);
