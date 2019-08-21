@@ -16,6 +16,7 @@ public class StudenteActivity extends HomeActivity{
     private Button logOut;
     private TextView textViewBenvenuto;
     private FirebaseAuth firebaseAuth;
+    private Lezione lezione= new Lezione();
 
 
     @Override
