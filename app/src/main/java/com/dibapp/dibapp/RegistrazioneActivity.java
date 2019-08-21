@@ -17,9 +17,9 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class RegistrazioneActivity extends AppCompatActivity {
 
-    EditText emailId, password;
-    Button btnRegistrati;
-    FirebaseAuth firebaseAuth;
+    private EditText emailId, password;
+    private Button btnRegistrati;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     public void onBackPressed(){

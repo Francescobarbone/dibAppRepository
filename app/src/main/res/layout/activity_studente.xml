@@ -22,7 +22,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="164dp"
         android:layout_marginEnd="116dp"
-        android:text="Benvenuto studente!"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

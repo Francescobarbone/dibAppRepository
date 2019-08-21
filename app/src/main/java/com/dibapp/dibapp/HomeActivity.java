@@ -13,7 +13,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeActivity extends AppCompatActivity {
 
-    Button btnLogout;
+    private Button btnLogout;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
     @Override

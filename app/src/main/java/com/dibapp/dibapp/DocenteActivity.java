@@ -1,23 +1,36 @@
 package com.dibapp.dibapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class DocenteActivity extends HomeActivity {
 
-    Button logOut;
+    private Button logOut;
+    private TextView textViewBenvenuto;
+    private FirebaseAuth firebaseAuth;
+    private EditText argomento, corsoDiLaurea;
+    //private Lezione lezione = new Lezione(corsoDiLaurea.getText().toString(), argomento.getText().toString(), data);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_docente);
         logOut = findViewById(R.id.logoutDocente);
+
+
+        firebaseAuth = FirebaseAuth.getInstance();
+
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+
+        textViewBenvenuto = (TextView) findViewById(R.id.textView3);
+        textViewBenvenuto.setText("Benvenuto " + user.getEmail().substring( 0, (user.getEmail().indexOf('@'))));
 
         logOut.setOnClickListener(new View.OnClickListener(){
             @Override

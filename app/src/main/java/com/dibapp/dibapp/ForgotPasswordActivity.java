@@ -16,9 +16,9 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
 
-    EditText userEmail;
-    Button userPass;
-    FirebaseAuth firebaseAuth;
+    private EditText userEmail;
+    private Button userPass;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     public void onBackPressed(){
