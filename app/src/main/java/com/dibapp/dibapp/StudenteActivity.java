@@ -16,7 +16,6 @@ public class StudenteActivity extends HomeActivity{
 
     private TextView textViewBenvenuto;
     private FirebaseAuth firebaseAuth;
-    private Lezione lezione= new Lezione();
 
 
     @Override
@@ -24,7 +23,7 @@ public class StudenteActivity extends HomeActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_studente);
 
-        visualizzaLezione = findViewById(R.id.buttonLezione);
+        visualizzaLezione = findViewById(R.id.butLezione);
         logOut = findViewById(R.id.logoutStudente);
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();

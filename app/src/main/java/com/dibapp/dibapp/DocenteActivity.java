@@ -16,7 +16,7 @@ public class DocenteActivity extends HomeActivity {
     private TextView textViewBenvenuto;
     private FirebaseAuth firebaseAuth;
     private EditText argomento, corsoDiLaurea, data;
-    private Lezione lezione = new Lezione(corsoDiLaurea.getText().toString(), argomento.getText().toString(), data.getText().toString());
+    //private Lezione lezione = new Lezione(corsoDiLaurea.getText().toString(), argomento.getText().toString(), data.getText().toString());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
