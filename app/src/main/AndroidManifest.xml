@@ -10,15 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".QRCodeScanner" />
-        <activity android:name=".ForgotPasswordActivity" />
-        <activity android:name=".StudenteActivity" />
-        <activity android:name=".DocenteActivity" />
+        <activity android:name=".autenticazione.ForgotPasswordActivity" />
+        <activity android:name=".home.StudenteActivity" />
+        <activity android:name=".home.DocenteActivity" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".home.HomeActivity"
             android:noHistory="true" />
-        <activity android:name=".RegistrazioneActivity" />
+        <activity android:name=".autenticazione.RegistrazioneActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name=".autenticazione.MainActivity"
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

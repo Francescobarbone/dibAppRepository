@@ -1,4 +1,4 @@
-package com.dibapp.dibapp;
+package com.dibapp.dibapp.home;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.dibapp.dibapp.autenticazione.MainActivity;
+import com.dibapp.dibapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeActivity extends AppCompatActivity {

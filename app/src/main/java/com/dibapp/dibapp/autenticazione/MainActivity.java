@@ -1,10 +1,8 @@
-package com.dibapp.dibapp;
+package com.dibapp.dibapp.autenticazione;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +11,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dibapp.dibapp.R;
+import com.dibapp.dibapp.home.DocenteActivity;
+import com.dibapp.dibapp.home.StudenteActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
