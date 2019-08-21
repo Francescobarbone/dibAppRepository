@@ -13,13 +13,18 @@ import android.widget.Toast;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-public class QRCode extends AppCompatActivity {
+public class QRCodeScanner extends AppCompatActivity {
 
     private Button scanButton;
 
+
+    public QRCodeScanner(int id){
+
+    }
+
     @Override
     public void onBackPressed(){
-        Intent regToMain = new Intent(QRCode.this, StudenteActivity.class);
+        Intent regToMain = new Intent(QRCodeScanner.this, StudenteActivity.class);
         startActivity(regToMain);
     }
 

@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".QRCode"></activity>
+        <activity android:name=".QRCodeScanner" />
         <activity android:name=".ForgotPasswordActivity" />
         <activity android:name=".StudenteActivity" />
         <activity android:name=".DocenteActivity" />

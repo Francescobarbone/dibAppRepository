@@ -1,7 +1,5 @@
 package com.dibapp.dibapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -47,7 +45,7 @@ public class StudenteActivity extends HomeActivity{
         visualizzaLezione.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent studToQR = new Intent(StudenteActivity.this, QRCode.class);
+                Intent studToQR = new Intent(StudenteActivity.this, QRCodeScanner.class);
                 startActivity(studToQR);
                 finishAffinity();
             }
