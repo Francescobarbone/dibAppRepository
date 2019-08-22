@@ -59,14 +59,16 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="152dp"
         android:layout_marginTop="328dp"
-        android:hint="hh:mm"
+        android:hint="@string/hh_mm"
         android:text="@string/orario_inizio"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        android:inputType=""
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/oraEnd"
@@ -74,14 +76,16 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="152dp"
         android:layout_marginTop="408dp"
-        android:hint="hh:mm"
+        android:hint="@string/hh_mm"
         android:text="@string/fine_lezione"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        android:inputType=""
+        android:autofillHints="" />
 
     <Button
         android:id="@+id/salvaLezione"

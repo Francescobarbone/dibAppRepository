@@ -3,7 +3,12 @@ package com.dibapp.dibapp.autenticazione;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +25,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity {
 
     private EditText emailId, password;
@@ -28,18 +35,22 @@ public class MainActivity extends AppCompatActivity {
     private TextView forgotPsw;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
+    private Button changeLang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        loadLocale();
         setContentView(R.layout.activity_main);
+
 
         firebaseAuth = FirebaseAuth.getInstance();
         emailId = findViewById(R.id.editText3);
         password = findViewById(R.id.editText4);
-        btnSignIn = findViewById(R.id.button2);
+        btnSignIn = findViewById(R.id.buttonRegister);
         tvSignUp = findViewById(R.id.textView);
-        forgotPsw = findViewById(R.id.textView2);
+        forgotPsw = findViewById(R.id.passwordForg);
+        changeLang = findViewById(R.id.buttonLang);
 
         authStateListener = new FirebaseAuth.AuthStateListener() {
 
@@ -118,6 +129,56 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intFrgPw);
             }
         });
+
+        changeLang.setOnClickListener(new View.OnClickListener(){
+            //Mostra l'alertDialog per il cambio della lingua
+            @Override
+            public void onClick(View view){
+                showChangeLanguageDialog();
+            }
+        });
+    }
+
+    //si creano differenti strings.xml per ognuna delle lingue
+    private void showChangeLanguageDialog() {
+        //array delle lingue da mostrare nella finestra di alert
+        final String [] listItems = {"Italiano", "English"};
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainActivity.this);
+        mBuilder.setTitle("Seleziona la lingua..");
+        mBuilder.setSingleChoiceItems(listItems, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if(i==0) {
+                    setLocale("it");
+                    recreate();
+                } else if(i==1){
+                    setLocale("en");
+                    recreate();
+                }
+                dialogInterface.dismiss();
+            }
+        });
+        AlertDialog mDialog = mBuilder.create();
+        mDialog.show();
+    }
+
+    private void setLocale(String lang){
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        //salva dati per preferenze condivise
+        SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
+        editor.putString("Mia_lingua", lang);
+        editor.apply();
+    }
+
+    //carica lingua salvata nelle preferenze condivise
+    public void loadLocale(){
+        SharedPreferences prefs = getSharedPreferences("Settings", Activity.MODE_PRIVATE);
+        String language = prefs.getString("Mia_lingua", "");
+        setLocale(language);
     }
 
     @Override

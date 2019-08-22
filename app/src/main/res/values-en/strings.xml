@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">dibApp</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="accedi">Log in</string>
+    <string name="textview">Sign in</string>
+    <string name="benvenuti_in_dibapp">Welcome to DibApp</string>
+    <string name="logout">logOut</string>
+    <string name="hai_effettuato_correttamente_l_accesso_benvenuto">Succesful Login!</string>
+    <string name="passwordForg">Password forgotten?</string>
+    <string name="fine_lezione">End lesson</string>
+    <string name="corso_di_laurea">Degree course</string>
+    <string name="orario_inizio">Start lesson</string>
+    <string name="argomento">Topic</string>
+    <string name="salva_lezione">Save lesson</string>
+    <string name="password_dimenticata">Forgotten password?</string>
+    <string name="seleziona_lingua">select language</string>
+    <string name="e_mail">E-mail</string>
+    <string name="invia">Send e-mail</string>
+    <string name="registrati">Sign in</string>
+    <string name="visualizza_lezione">show lesson</string>
+    <string name="crea_lezione">create lesson</string>
+    <string name="visualizza_lezioni">show lessons</string>
+</resources>

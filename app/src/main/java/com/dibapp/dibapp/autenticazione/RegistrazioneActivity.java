@@ -36,7 +36,7 @@ public class RegistrazioneActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         emailId = findViewById(R.id.editText3);
         password = findViewById(R.id.editText4);
-        btnRegistrati = findViewById(R.id.button2);
+        btnRegistrati = findViewById(R.id.buttonRegister);
         btnRegistrati.setOnClickListener(new View.OnClickListener() {
 
             @Override

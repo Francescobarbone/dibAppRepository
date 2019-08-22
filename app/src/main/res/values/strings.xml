@@ -12,16 +12,25 @@
     <string name="app_name">dibApp</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name="accedi">ACCEDI</string>
+    <string name="accedi">Accedi</string>
     <string name="textview">Registrati</string>
-    <string name="Registrati" />
     <string name="benvenuti_in_dibapp">Benvenuti in DibApp</string>
     <string name="logout">logOut</string>
     <string name="hai_effettuato_correttamente_l_accesso_benvenuto">Hai effettuato correttamente l\'accesso. Benvenuto!</string>
-    <string name="password_dimenticata">Password dimenticata?</string>
+    <string name="passwordForg">Password dimenticata?</string>
     <string name="fine_lezione">Fine lezione</string>
     <string name="corso_di_laurea">Corso di Laurea</string>
     <string name="orario_inizio">Orario inizio</string>
     <string name="argomento">Argomento</string>
     <string name="salva_lezione">Salva Lezione</string>
+    <string name="password_dimenticata">Password dimenticata?</string>
+    <string name="seleziona_lingua">seleziona lingua</string>
+    <string name="e_mail">E-mail</string>
+    <string name="invia">Invia</string>
+    <string name="registrati">registrati</string>
+    <string name="visualizza_lezione">Visualizza lezione</string>
+    <string name="crea_lezione">crea lezione</string>
+    <string name="visualizza_lezioni">visualizza lezioni</string>
+    <string name="dd_mm_yyyy" translatable="false">dd/MM/yyyy</string>
+    <string name="hh_mm" translatable="false">hh:mm</string>
 </resources>

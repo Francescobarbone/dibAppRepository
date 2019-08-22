@@ -40,8 +40,8 @@ public class DocenteActivity extends HomeActivity {
         createless.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
-                startActivity(new Intent(DocenteActivity.this, CreaLezioneActivity.class));
+                Intent docToCreate = new Intent(DocenteActivity.this, CreaLezioneActivity.class);
+                startActivity(docToCreate);
             }
         });
 
