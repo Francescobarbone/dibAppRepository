@@ -19,9 +19,6 @@ public class QRCodeScanner extends AppCompatActivity {
     private Button scanButton;
 
 
-    public QRCodeScanner(int id){
-
-    }
 
     @Override
     public void onBackPressed(){

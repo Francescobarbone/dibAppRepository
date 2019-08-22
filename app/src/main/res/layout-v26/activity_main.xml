@@ -9,8 +9,8 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="64dp"
-        android:layout_height="36dp"
+        android:layout_width="159dp"
+        android:layout_height="47dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -19,9 +19,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.694"
+        app:layout_constraintVertical_bias="0.746"
         tools:text="Registrati" />
 
     <EditText
@@ -81,14 +82,14 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="Password dimenticata?"
+        android:text="@string/password_dimenticata"
         android:textColor="#3F51B5"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.606"
+        app:layout_constraintHorizontal_bias="0.616"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.796"
+        app:layout_constraintVertical_bias="0.897"
         tools:text="Password dimenticata?" />
 </androidx.constraintlayout.widget.ConstraintLayout>
