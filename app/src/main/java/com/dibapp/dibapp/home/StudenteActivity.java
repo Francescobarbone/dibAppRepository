@@ -47,9 +47,8 @@ public class StudenteActivity extends HomeActivity {
         visualizzaLezione.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent studToQR = new Intent(StudenteActivity.this, QRCodeScanner.class);
+                Intent studToQR = new Intent(StudenteActivity.this, LezioneActivity.class);
                 startActivity(studToQR);
-                finishAffinity();
             }
         });
     }

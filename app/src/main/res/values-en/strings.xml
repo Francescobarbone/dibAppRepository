@@ -22,4 +22,6 @@
     <string name="visualizza_lezione">show lesson</string>
     <string name="crea_lezione">create lesson</string>
     <string name="visualizza_lezioni">show lessons</string>
+    <string name="name_course">Name course</string>
+    <string name="date">Date</string>
 </resources>

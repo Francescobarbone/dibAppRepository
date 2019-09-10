@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "493058329867-21lq90610rjea53qp4lbjhgp1evkh402.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dibapp.dibapp",
+            "certificate_hash": "2b08e178239bbbbe530ebfe4eb7a4b9276ab8c05"
+          }
+        },
+        {
+          "client_id": "493058329867-62663rfjc4ocjr4jlh3pk2gn68u0t66n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dibapp.dibapp",
+            "certificate_hash": "0f46ed4d1d15b62c17b53b078545db6fbb60bd48"
+          }
+        },
+        {
           "client_id": "493058329867-n49uk36eoi2g200l6jp1pun4qab4siak.apps.googleusercontent.com",
           "client_type": 3
         }

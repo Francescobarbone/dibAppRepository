@@ -19,10 +19,6 @@ public class QRCodeScanner extends AppCompatActivity {
     private Button scanButton;
 
 
-    public QRCodeScanner(int id){
-
-    }
-
     @Override
     public void onBackPressed(){
         Intent regToMain = new Intent(QRCodeScanner.this, StudenteActivity.class);
