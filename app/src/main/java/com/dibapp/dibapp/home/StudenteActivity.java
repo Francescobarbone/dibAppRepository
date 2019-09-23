@@ -7,7 +7,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.dibapp.dibapp.autenticazione.MainActivity;
-import com.dibapp.dibapp.QRCodeScanner;
 import com.dibapp.dibapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -47,7 +46,7 @@ public class StudenteActivity extends HomeActivity {
         visualizzaLezione.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent studToQR = new Intent(StudenteActivity.this, LezioneActivity.class);
+                Intent studToQR = new Intent(StudenteActivity.this, CourseActivity.class);
                 startActivity(studToQR);
             }
         });

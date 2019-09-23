@@ -4,10 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
-import com.dibapp.dibapp.CreaLezioneActivity;
 import com.dibapp.dibapp.autenticazione.MainActivity;
 import com.dibapp.dibapp.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,13 +33,22 @@ public class DocenteActivity extends HomeActivity {
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
         textViewBenvenuto = (TextView) findViewById(R.id.textView3);
-        textViewBenvenuto.setText("Benvenuto " + user.getEmail().substring( 0, (user.getEmail().indexOf('@'))));
+
+        if(user!=null)
+            textViewBenvenuto.setText("Benvenuto " + user.getEmail().substring( 0, (user.getEmail().indexOf('@'))));
+
+
+        showLess.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(DocenteActivity.this, LezioniDocenteActivity.class));
+            }
+        });
 
         createless.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent docToCreate = new Intent(DocenteActivity.this, CreaLezioneActivity.class);
-                startActivity(docToCreate);
+                startActivity(new Intent(DocenteActivity.this, CreaLezioneActivity.class));
             }
         });
 
@@ -52,7 +59,6 @@ public class DocenteActivity extends HomeActivity {
                 firebaseAuth.signOut();
                 Intent intToMain = new Intent(DocenteActivity.this, MainActivity.class);
                 startActivity(intToMain);
-                finishAffinity();
             }
         });
     }

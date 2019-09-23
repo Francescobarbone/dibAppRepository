@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dibapp.dibapp">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,19 +9,33 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".home.LezioneActivity"></activity>
-        <activity android:name=".CreaLezioneActivity" />
+        <activity android:name=".home.LezioniDocenteActivity"></activity>
+        <activity
+            android:name=".home.CreaLezioneActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".home.CourseActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".QRCodeScanner" />
-        <activity android:name=".autenticazione.ForgotPasswordActivity" />
-        <activity android:name=".home.StudenteActivity" />
-        <activity android:name=".home.DocenteActivity" />
+        <activity
+            android:name=".autenticazione.ForgotPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".home.StudenteActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".home.DocenteActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".home.HomeActivity"
             android:noHistory="true" />
-        <activity android:name=".autenticazione.RegistrazioneActivity" />
+        <activity
+            android:name=".autenticazione.RegistrazioneActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".autenticazione.MainActivity"
-            android:noHistory="true">
+            android:noHistory="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,5 +43,7 @@
             </intent-filter>
         </activity>
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

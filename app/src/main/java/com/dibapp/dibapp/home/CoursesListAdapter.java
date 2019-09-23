@@ -16,17 +16,17 @@ import java.util.List;
 
 public class CoursesListAdapter extends RecyclerView.Adapter<CoursesListAdapter.ViewHolder> {
 
-    public List<Course> courseList;
-    public Context context;
+    private List<Course> courseList;
+    public Context contextCourse;
 
-    public CoursesListAdapter(Context context, List<Course> courseList){
+    public CoursesListAdapter(Context contextCourse, List<Course> courseList){
         this.courseList = courseList;
-        this.context = context;
+        this.contextCourse = contextCourse;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_courses, parent, false);
         return new ViewHolder(view);
     }
 
@@ -39,7 +39,7 @@ public class CoursesListAdapter extends RecyclerView.Adapter<CoursesListAdapter.
         holder.mView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Toast.makeText(context, "Course ID : " + course_id, Toast.LENGTH_SHORT).show();
+                Toast.makeText(contextCourse, "Course ID : " + course_id, Toast.LENGTH_SHORT).show();
             }
         });
     }

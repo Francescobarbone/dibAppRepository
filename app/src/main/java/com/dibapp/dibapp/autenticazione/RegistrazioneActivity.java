@@ -12,15 +12,23 @@ import android.widget.Toast;
 
 import com.dibapp.dibapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegistrazioneActivity extends AppCompatActivity {
 
     private EditText emailId, password;
     private Button btnRegistrati;
     private FirebaseAuth firebaseAuth;
+    private FirebaseFirestore mFirestore;
 
     @Override
     public void onBackPressed(){
@@ -33,6 +41,7 @@ public class RegistrazioneActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrazione);
 
+        mFirestore = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
         emailId = findViewById(R.id.editText3);
         password = findViewById(R.id.editText4);
@@ -41,9 +50,9 @@ public class RegistrazioneActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                String email = emailId.getText().toString();
+                final String email = emailId.getText().toString();
                 String pwd = password.getText().toString();
-
+                final Map<String, String> userMap = new HashMap<>();
                 if(email.isEmpty() && pwd.isEmpty()){
                     Toast.makeText( RegistrazioneActivity.this, "I campi sono vuoti!", Toast.LENGTH_SHORT).show();
                 }
@@ -75,21 +84,7 @@ public class RegistrazioneActivity extends AppCompatActivity {
                                 }
                             }
                         });
-                } else if (email.endsWith("@uniba.it")){
-                        firebaseAuth.createUserWithEmailAndPassword(email, pwd).addOnCompleteListener(new OnCompleteListener<AuthResult>(){
-                            @Override
-                            public void onComplete(Task<AuthResult> task){
-                                            if (task.isSuccessful()) {
-                                                Toast.makeText(RegistrazioneActivity.this, "Registrazione avvenuta con successo.", Toast.LENGTH_LONG).show();
-                                                emailId.setText("");
-                                                password.setText("");
-                                            } else {
-                                                Toast.makeText(RegistrazioneActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                                            }
-                                        }
-                                    });
-
-                    }
+                }
                     else
                      Toast.makeText(RegistrazioneActivity.this, "Puoi eseguire la registrazione  solo con un e-mail istituzionale",Toast.LENGTH_SHORT).show();
 
