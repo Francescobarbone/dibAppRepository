@@ -9,12 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".home.LezioniDocenteActivity"></activity>
+        <activity android:name=".home.CourseActivity"></activity>
+        <activity android:name=".home.LezioniDocenteActivity" />
         <activity
             android:name=".home.CreaLezioneActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".home.CourseActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".QRCodeScanner" />
         <activity

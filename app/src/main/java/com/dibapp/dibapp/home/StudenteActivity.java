@@ -6,8 +6,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.dibapp.dibapp.autenticazione.MainActivity;
 import com.dibapp.dibapp.R;
+import com.dibapp.dibapp.autenticazione.*;
+import com.dibapp.dibapp.home.*;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 

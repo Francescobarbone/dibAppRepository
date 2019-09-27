@@ -1,41 +1,29 @@
 package com.dibapp.dibapp.home;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.dibapp.dibapp.R;
-import com.dibapp.dibapp.autenticazione.MainActivity;
-import com.dibapp.dibapp.autenticazione.RegistrazioneActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.model.Document;
 
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.annotation.Nullable;
 
 public class CreaLezioneActivity extends AppCompatActivity {
 
@@ -99,7 +87,15 @@ public class CreaLezioneActivity extends AppCompatActivity {
                 } else {
                     lessonMap.put("Argomento", "Argomento del " + currentDate);
                     lessonMap.put("Nome", arg);
-                    mFirestore.collection("Courses ").document(admin.getCourseId()).collection("Lessons").add(lessonMap);
+                    mFirestore.collection("Courses ").document(admin.getCourseId()).collection("Lessons").add(lessonMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentReference> task) {
+                            if(task.isSuccessful()){
+                                Toast.makeText(CreaLezioneActivity.this, "Lezione inserita", Toast.LENGTH_SHORT).show();
+                                argomento.setText("");
+                            }
+                        }
+                    });
                 }
             }
         });
