@@ -44,11 +44,14 @@ public class CreaLezioneActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crea_lezione);
+
+        //Istanza firebase dell'utente in uso corrente
         firebaseAuth = FirebaseAuth.getInstance();
+
         argomento = findViewById(R.id.argText);
         saveLesson = findViewById(R.id.saveLessonButton);
 
-        //utente in uso corrente
+        //Memorizza utente in uso corrente
         final FirebaseUser user = firebaseAuth.getCurrentUser();
 
         //salvo le info dell'user
@@ -57,7 +60,8 @@ public class CreaLezioneActivity extends AppCompatActivity {
         mFirestore = FirebaseFirestore.getInstance();
 
 
-        mFirestore.collection("Users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        //Metodo per la memorizzazione dell'ID del corso del docente
+        mFirestore.collection("Users").get().addOnCompleteListener(CreaLezioneActivity.this, new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 boolean flag = false;
@@ -65,7 +69,7 @@ public class CreaLezioneActivity extends AppCompatActivity {
                     String email = doc.getString("email");
                     if(email.equals(admin.getEmail())){
                         flag = true;
-                        admin.setCourseId(doc.getString("idCorso"));
+                        admin.setCourseId(doc.getString("idCorso")); //ID memorizzato
                         break;
                     }
                 }
@@ -74,7 +78,7 @@ public class CreaLezioneActivity extends AppCompatActivity {
             }
         });
 
-
+        //Metodo per la creazione della lezione
         saveLesson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,9 +89,9 @@ public class CreaLezioneActivity extends AppCompatActivity {
                     argomento.setError("Inserisci un argomento");
                     argomento.requestFocus();
                 } else {
-                    lessonMap.put("Argomento", "Argomento del " + currentDate);
+                    lessonMap.put("Argomento", "Lezione del " + currentDate);
                     lessonMap.put("Nome", arg);
-                    mFirestore.collection("Courses ").document(admin.getCourseId()).collection("Lessons").add(lessonMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                    mFirestore.collection("Courses ").document(admin.getCourseId()).collection("Lessons").add(lessonMap).addOnCompleteListener(CreaLezioneActivity.this, new OnCompleteListener<DocumentReference>() {
                         @Override
                         public void onComplete(@NonNull Task<DocumentReference> task) {
                             if(task.isSuccessful()){

@@ -81,8 +81,8 @@ public class LezioniDocenteActivity extends AppCompatActivity {
                         public void onEvent(@Nullable QuerySnapshot documentSnapshots, @Nullable FirebaseFirestoreException e) {
                             for(DocumentChange doc : documentSnapshots.getDocumentChanges()){
                                 if(doc.getType() == DocumentChange.Type.ADDED){
-                                    Lesson lessons = doc.getDocument().toObject(Lesson.class).withID(doc.getDocument().getId());
-                                    lessonList.add(lessons);
+                                    Lesson lesson = new Lesson(doc.getDocument().getString("Argomento"), doc.getDocument().getString("Nome")).withID(doc.getDocument().getId());
+                                    lessonList.add(lesson);
                                     lessonsListAdapter.notifyDataSetChanged();
                                 }
                             }

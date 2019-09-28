@@ -1,7 +1,6 @@
 package com.dibapp.dibapp.home;
 
 import android.content.Context;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +12,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.dibapp.dibapp.R;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 public class LessonsListAdapter extends RecyclerView.Adapter<LessonsListAdapter.ViewHolder> {
 
-    private List<Lesson> lessonList;
+    public List<Lesson> lessonList;
     public Context contextLess;
 
     public LessonsListAdapter(List<Lesson> lessonList, Context context){
