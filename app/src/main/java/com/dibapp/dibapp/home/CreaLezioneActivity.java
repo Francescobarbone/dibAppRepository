@@ -47,7 +47,6 @@ public class CreaLezioneActivity extends AppCompatActivity {
 
         //Istanza firebase dell'utente in uso corrente
         firebaseAuth = FirebaseAuth.getInstance();
-
         argomento = findViewById(R.id.argText);
         saveLesson = findViewById(R.id.saveLessonButton);
 
@@ -91,7 +90,7 @@ public class CreaLezioneActivity extends AppCompatActivity {
                 } else {
                     lessonMap.put("Argomento", "Lezione del " + currentDate);
                     lessonMap.put("Nome", arg);
-                    mFirestore.collection("Courses ").document(admin.getCourseId()).collection("Lessons").add(lessonMap).addOnCompleteListener(CreaLezioneActivity.this, new OnCompleteListener<DocumentReference>() {
+                    mFirestore.collection("Courses /" + admin.getCourseId() + "/Lessons").add(lessonMap).addOnCompleteListener(CreaLezioneActivity.this, new OnCompleteListener<DocumentReference>() {
                         @Override
                         public void onComplete(@NonNull Task<DocumentReference> task) {
                             if(task.isSuccessful()){

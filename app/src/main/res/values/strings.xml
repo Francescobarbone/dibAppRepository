@@ -38,4 +38,5 @@
     <string name="inserire_argomento">Inserire argomento</string>
     <string name="day_of_lesson">day_of_lesson</string>
     <string name="argument">argument</string>
+    <string name="todo" />
 </resources>
