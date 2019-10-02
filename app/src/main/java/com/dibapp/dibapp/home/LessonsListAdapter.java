@@ -34,6 +34,7 @@ public class LessonsListAdapter extends RecyclerView.Adapter<LessonsListAdapter.
 
     public LessonsListAdapter(List<Lesson> lessonList, Context context){
         this.lessonList = lessonList;
+
         this.context = this.context;
     }
 
@@ -55,6 +56,7 @@ public class LessonsListAdapter extends RecyclerView.Adapter<LessonsListAdapter.
         holder.dayText.setText(lessonList.get(position).getLessonDate());
         holder.argText.setText(lessonList.get(position).getArgument());
         final String lessID = lessonList.get(position).lessonID;
+        final String corso_id = lessonList.get(position).getIdCourse();
         final int i = position;
 
         firebaseFirestore.collection("Users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -85,7 +87,7 @@ public class LessonsListAdapter extends RecyclerView.Adapter<LessonsListAdapter.
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int position) {
 
-                                            firebaseFirestore.document("Courses /"+ admin.getCourseId() +"/Lessons/"+ lessID).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            firebaseFirestore.document("Courses /"+ corso_id +"/Lessons/"+ lessID).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {
                                                     Toast.makeText(context, "Lezione rimossa", Toast.LENGTH_SHORT).show();

@@ -60,32 +60,23 @@ public class LezioniDocenteActivity extends AppCompatActivity {
         mMainList.setAdapter(lessonsListAdapter);
         firebaseAuth = FirebaseAuth.getInstance();
 
+        course_id = getIntent().getStringExtra("idC");
+
         //utente in uso corrente
         final FirebaseUser user = firebaseAuth.getCurrentUser();
         admin.setEmail(user.getEmail());
         mFirestore = FirebaseFirestore.getInstance();
 
-        mFirestore.collection("Users").get().addOnCompleteListener(LezioniDocenteActivity.this, new OnCompleteListener<QuerySnapshot>() {
+
+        mFirestore.collection("Courses /" +course_id + "/Lessons").addSnapshotListener(LezioniDocenteActivity.this, new EventListener<QuerySnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                boolean flag = false;
-                for(QueryDocumentSnapshot doc : task.getResult()){
-                    String email = doc.getString("email");
-                    if(email.equals(admin.getEmail())){
-                        admin.setCourseId(doc.getString("idCorso"));
-                        mFirestore.collection("Courses /" + admin.getCourseId() + "/Lessons").addSnapshotListener(LezioniDocenteActivity.this, new EventListener<QuerySnapshot>() {
-                            @Override
-                            public void onEvent(@Nullable QuerySnapshot documentSnapshots, @Nullable FirebaseFirestoreException e) {
-                                for(DocumentChange doc : documentSnapshots.getDocumentChanges()){
-                                    if(doc.getType() == DocumentChange.Type.ADDED){
-                                        Lesson lesson = new Lesson(doc.getDocument().getString("Argomento"), doc.getDocument().getString("Nome"));
-                                        lessonList.add(lesson);
-                                        lessonsListAdapter.notifyDataSetChanged();
-                                    }
-                                }
-                            }
-                        });
-                        break;
+            public void onEvent(@Nullable QuerySnapshot documentSnapshots, @Nullable FirebaseFirestoreException e) {
+                for(DocumentChange doc : documentSnapshots.getDocumentChanges()){
+                    if(doc.getType() == DocumentChange.Type.ADDED){
+                        Lesson lesson = new Lesson(doc.getDocument().getString("Argomento"), doc.getDocument().getString("Nome"));
+                        lesson.setIdCourse(course_id);
+                        lessonList.add(lesson);
+                        lessonsListAdapter.notifyDataSetChanged();
                     }
                 }
             }

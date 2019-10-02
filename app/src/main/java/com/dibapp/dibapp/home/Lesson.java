@@ -7,8 +7,17 @@ public class Lesson extends LessonID{
     private String lessonDate;
     private String argument;
     private List<String> usersList;
+    private String idCourse;
 
     public Lesson(){}
+
+    public String getIdCourse() {
+        return idCourse;
+    }
+
+    public void setIdCourse(String idCourse) {
+        this.idCourse = idCourse;
+    }
 
     public Lesson(String lessonDate, String argument){
         this.lessonDate = lessonDate;
@@ -34,4 +43,5 @@ public class Lesson extends LessonID{
     public void setArgument(String argument) {
         this.argument = argument;
     }
+
 }
