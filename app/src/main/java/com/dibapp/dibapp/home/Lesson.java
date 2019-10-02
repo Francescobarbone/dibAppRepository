@@ -19,9 +19,10 @@ public class Lesson extends LessonID{
         this.idCourse = idCourse;
     }
 
-    public Lesson(String lessonDate, String argument){
+    public Lesson(String idCourse, String lessonDate, String argument){
         this.lessonDate = lessonDate;
         this.argument = argument;
+        this.idCourse = idCourse;
     }
 
     public void addUser(String email){

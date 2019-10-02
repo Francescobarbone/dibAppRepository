@@ -14,6 +14,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -23,8 +24,7 @@ public class DocenteActivity extends HomeActivity {
     private Button showLess, createless, logOut;
     private TextView textViewBenvenuto;
     private FirebaseAuth firebaseAuth;
-
-
+    private final User admin = new User();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,39 +33,35 @@ public class DocenteActivity extends HomeActivity {
         showLess = findViewById(R.id.showLessons);
         createless = findViewById(R.id.creaLezione);
         logOut = findViewById(R.id.logoutDocente);
-
-
         firebaseAuth = FirebaseAuth.getInstance();
-        final FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
-        final User admin = new User();
-        admin.setEmail(user.getEmail());
 
         textViewBenvenuto = (TextView) findViewById(R.id.textView3);
 
         if(user!=null)
             textViewBenvenuto.setText("Benvenuto " + user.getEmail().substring( 0, (user.getEmail().indexOf('@'))));
 
+        mFirestore.collection("Users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                boolean find = false;
+                for (DocumentSnapshot doc : task.getResult()) {
+                    String email = doc.getString("email");
+                    if (email.equals(admin.getEmail())) {
+                        find = true;
+                        //getting admin's courseID
+                        admin.setCourseId(doc.getString("courseId"));
+                        break;
+                    }
+                }
+            }
+        });
 
         showLess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                mFirestore.collection("Users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        for(QueryDocumentSnapshot doc : task.getResult()){
-                            String email = doc.getString("email");
-                            if(email.equals(admin.getEmail())){
-                                admin.setCourseId(doc.getString("idCorso"));
-                                break;
-                            }
-                        }
-                        Intent intent = new Intent(DocenteActivity.this, LezioniDocenteActivity.class);
-                        intent.putExtra("idC",admin.getCourseId());
-                        DocenteActivity.this.startActivity(intent);
-                    }
-                });
+                startActivity(new Intent(DocenteActivity.this, LezioniDocenteActivity.class));
             }
         });
 

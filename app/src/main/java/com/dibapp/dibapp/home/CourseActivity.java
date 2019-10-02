@@ -38,6 +38,7 @@ public class CourseActivity extends AppCompatActivity {
         mMainList.setLayoutManager(new LinearLayoutManager(this));
         mMainList.setAdapter(courseListAdapter);
         mFirestore = FirebaseFirestore.getInstance();
+
         mFirestore.collection("Courses ").addSnapshotListener(CourseActivity.this, new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot documentSnapshots, @Nullable FirebaseFirestoreException e) {

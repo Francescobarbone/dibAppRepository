@@ -2,6 +2,7 @@ package com.dibapp.dibapp.home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -60,21 +61,32 @@ public class LezioniDocenteActivity extends AppCompatActivity {
         mMainList.setAdapter(lessonsListAdapter);
         firebaseAuth = FirebaseAuth.getInstance();
 
-        course_id = getIntent().getStringExtra("idC");
-
         //utente in uso corrente
         final FirebaseUser user = firebaseAuth.getCurrentUser();
         admin.setEmail(user.getEmail());
         mFirestore = FirebaseFirestore.getInstance();
 
+        mFirestore.collection("Users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                boolean find = false;
+                for (DocumentSnapshot doc : task.getResult()) {
+                    String email = doc.getString("email");
+                    if (email.equals(admin.getEmail())) {
+                        //getting admin's courseID
+                        admin.setCourseId(doc.getString("idCorso"));
+                        break;
+                    }
+                }
+            }
+        });
 
-        mFirestore.collection("Courses /" +course_id + "/Lessons").addSnapshotListener(LezioniDocenteActivity.this, new EventListener<QuerySnapshot>() {
+        mFirestore.collection("Courses /" + admin.getCourseId() + "/Lessons").addSnapshotListener(LezioniDocenteActivity.this, new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot documentSnapshots, @Nullable FirebaseFirestoreException e) {
                 for(DocumentChange doc : documentSnapshots.getDocumentChanges()){
                     if(doc.getType() == DocumentChange.Type.ADDED){
-                        Lesson lesson = new Lesson(doc.getDocument().getString("Argomento"), doc.getDocument().getString("Nome"));
-                        lesson.setIdCourse(course_id);
+                        Lesson lesson = doc.getDocument().toObject(Lesson.class);
                         lessonList.add(lesson);
                         lessonsListAdapter.notifyDataSetChanged();
                     }

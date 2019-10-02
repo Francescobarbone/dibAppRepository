@@ -16,13 +16,16 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class CreaLezioneActivity extends AppCompatActivity {
@@ -59,20 +62,20 @@ public class CreaLezioneActivity extends AppCompatActivity {
         mFirestore = FirebaseFirestore.getInstance();
 
 
-        //Metodo per la memorizzazione dell'ID del corso del docente
-        mFirestore.collection("Users").get().addOnCompleteListener(CreaLezioneActivity.this, new OnCompleteListener<QuerySnapshot>() {
+        mFirestore.collection("Users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                boolean flag = false;
-                for(QueryDocumentSnapshot doc : task.getResult()){
+                boolean find = false;
+                for (DocumentSnapshot doc : task.getResult()) {
                     String email = doc.getString("email");
-                    if(email.equals(admin.getEmail())){
-                        flag = true;
-                        admin.setCourseId(doc.getString("idCorso")); //ID memorizzato
+                    if (email.equals(admin.getEmail())) {
+                        find = true;
+                        //getting admin's courseID
+                        admin.setCourseId(doc.getString("idCorso"));
                         break;
                     }
                 }
-                if(flag)
+                if(find)
                     saveLesson.setVisibility(View.VISIBLE);
             }
         });
@@ -83,22 +86,20 @@ public class CreaLezioneActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(Calendar.getInstance().getTime());
                 String arg = argomento.getText().toString();
-                Map<String, String> lessonMap = new HashMap<>();
                 if(arg.isEmpty()){
                     argomento.setError("Inserisci un argomento");
                     argomento.requestFocus();
                 } else {
-                    lessonMap.put("Argomento", "Lezione del " + currentDate);
-                    lessonMap.put("Nome", arg);
-                    mFirestore.collection("Courses /" + admin.getCourseId() + "/Lessons").add(lessonMap).addOnCompleteListener(CreaLezioneActivity.this, new OnCompleteListener<DocumentReference>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentReference> task) {
-                            if(task.isSuccessful()){
-                                Toast.makeText(CreaLezioneActivity.this, "Lezione inserita", Toast.LENGTH_SHORT).show();
-                                argomento.setText("");
+                    final Lesson less = new Lesson(admin.getCourseId(), currentDate, arg);
+                        mFirestore.collection("Courses /" + admin.getCourseId() + "/Lessons").add(less).addOnCompleteListener(CreaLezioneActivity.this, new OnCompleteListener<DocumentReference>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentReference> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(CreaLezioneActivity.this, "Lezione inserita", Toast.LENGTH_SHORT).show();
+                                    argomento.setText("");
+                                }
                             }
-                        }
-                    });
+                        });
                 }
             }
         });
