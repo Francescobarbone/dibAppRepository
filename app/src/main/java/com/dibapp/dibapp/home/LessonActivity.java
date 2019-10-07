@@ -41,13 +41,16 @@ public class LessonActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-        startActivity(new Intent(LessonActivity.this, DocenteActivity.class));
+        if(firebaseAuth.getCurrentUser().getEmail().endsWith("@studenti.uniba.it"))
+            startActivity(new Intent(LessonActivity.this, StudenteActivity.class));
+        else
+            startActivity(new Intent(LessonActivity.this, DocenteActivity.class));
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lezioni_docente);
+        setContentView(R.layout.activity_lezioni);
 
         lessonList = new ArrayList<>();
         lessonsListAdapter = new LessonsListAdapter(lessonList, getApplicationContext());
@@ -56,15 +59,32 @@ public class LessonActivity extends AppCompatActivity {
         mMainList.setHasFixedSize(true);
         mMainList.setLayoutManager(new LinearLayoutManager(this));
         mMainList.setAdapter(lessonsListAdapter);
-        firebaseAuth = FirebaseAuth.getInstance();
 
-        //utente in uso corrente
+        firebaseAuth = FirebaseAuth.getInstance();
+        String courseID = getIntent().getStringExtra("course_id");
+
         final FirebaseUser user = firebaseAuth.getCurrentUser();
+        //utente in uso corrente
         admin.setEmail(user.getEmail());
         mFirestore = FirebaseFirestore.getInstance();
+        mFirestore.collection("Courses /" + courseID + "/Lessons").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot documentSnapshots, @Nullable FirebaseFirestoreException e) {
+                if(e!=null){
+                    Log.d(TAG, "Error :" + e.getMessage());
+                    return;
+                }
+                for(DocumentChange doc : documentSnapshots.getDocumentChanges()){
+                    if(doc.getType() == DocumentChange.Type.ADDED){
+                        Lesson lesson = doc.getDocument().toObject(Lesson.class);
+                        lessonList.add(lesson);
+                        lessonsListAdapter.notifyDataSetChanged();
+                    }
+                }
+            }
+        });
 
-        mFirestore = FirebaseFirestore.getInstance();
-        mFirestore.collection("Users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        /*mFirestore.collection("Users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 boolean find = false;
@@ -96,7 +116,7 @@ public class LessonActivity extends AppCompatActivity {
                     });
                 }
             }
-        });
+        }); */
 
     }
 }

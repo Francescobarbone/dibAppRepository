@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -23,7 +24,7 @@ public class DocenteActivity extends HomeActivity {
     private Button showLess, createless, logOut;
     private TextView textViewBenvenuto;
     private FirebaseAuth firebaseAuth;
-    private final User admin = new User();
+    private static User admin = new User();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,7 @@ public class DocenteActivity extends HomeActivity {
         textViewBenvenuto = (TextView) findViewById(R.id.textView3);
 
         if(user!=null)
-            textViewBenvenuto.setText("             Benvenuto " + user.getEmail().substring( 0, (user.getEmail().indexOf('@'))));
+            textViewBenvenuto.setText(" Benvenuto " + user.getEmail().substring( 0, (user.getEmail().indexOf('@'))));
 
         mFirestore.collection("Users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -56,6 +57,8 @@ public class DocenteActivity extends HomeActivity {
                 }
             }
         });
+
+        Toast.makeText(DocenteActivity.this, admin.getCourseId(), Toast.LENGTH_SHORT).show();
 
         showLess.setOnClickListener(new View.OnClickListener() {
             @Override

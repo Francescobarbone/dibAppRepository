@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.dibapp.dibapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -58,7 +59,7 @@ public class LessonsListAdapter extends RecyclerView.Adapter<LessonsListAdapter.
         final String courseID = lessonList.get(i).getIdCourse();
         final int position = i;
 
-        holder.mView.setOnClickListener(new View.OnClickListener() {
+        /*holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, CommentActivity.class);
@@ -66,7 +67,7 @@ public class LessonsListAdapter extends RecyclerView.Adapter<LessonsListAdapter.
                 intent.putExtra("course_id", courseID);
                 context.startActivity(intent);
             }
-        });
+        });*/
 
         firebaseFirestore.collection("Users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -87,17 +88,15 @@ public class LessonsListAdapter extends RecyclerView.Adapter<LessonsListAdapter.
                 holder.delete.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        final DocumentReference ref = firebaseFirestore.document("Courses /" + admin.getCourseId() + "/Lessons/" + lessID);
-                        firebaseFirestore.document("Courses /" + admin.getCourseId() + "/Lessons/" + lessID).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                          firebaseFirestore.document("Courses /" + admin.getCourseId() + "/Lessons/" + lessID).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                    Toast.makeText(context, "Lezione eliminata", Toast.LENGTH_SHORT).show();
-                                    lessonList.remove(position);
-                                    ref.delete();
-                                    notifyDataSetChanged();
-                            }
-                        });
-                    }
+                                 Toast.makeText(context, "Lezione eliminata", Toast.LENGTH_SHORT).show();
+                                 lessonList.remove(position);
+                                 notifyDataSetChanged();
+                              }
+                            });
+                        }
                 });
             } else holder.delete.setVisibility(View.INVISIBLE);
         }

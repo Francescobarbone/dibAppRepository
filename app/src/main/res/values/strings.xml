@@ -39,4 +39,6 @@
     <string name="day_of_lesson">day_of_lesson</string>
     <string name="argument">argument</string>
     <string name="todo" />
+    <string name="valuta_la_lezione" />
+    <string name="indica_la_motivazione" />
 </resources>

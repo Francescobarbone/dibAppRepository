@@ -3,7 +3,7 @@ package com.dibapp.dibapp.home;
 public class User {
 
     private String email;
-    private String courseId;
+    private static String courseId;
 
     public User(){}
 

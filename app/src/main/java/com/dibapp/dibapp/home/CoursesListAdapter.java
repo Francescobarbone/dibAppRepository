@@ -1,6 +1,7 @@
 package com.dibapp.dibapp.home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +41,9 @@ public class CoursesListAdapter extends RecyclerView.Adapter<CoursesListAdapter.
         holder.mView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Toast.makeText(contextCourse, "Course ID : " + course_id, Toast.LENGTH_SHORT).show();
+                Intent courseToLess = new Intent(contextCourse, LessonActivity.class);
+                courseToLess.putExtra("course_id", course_id);
+                contextCourse.startActivity(courseToLess);
             }
         });
     }
