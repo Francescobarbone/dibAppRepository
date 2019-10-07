@@ -16,7 +16,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 public class DocenteActivity extends HomeActivity {
@@ -40,7 +39,7 @@ public class DocenteActivity extends HomeActivity {
         textViewBenvenuto = (TextView) findViewById(R.id.textView3);
 
         if(user!=null)
-            textViewBenvenuto.setText("Benvenuto " + user.getEmail().substring( 0, (user.getEmail().indexOf('@'))));
+            textViewBenvenuto.setText("             Benvenuto " + user.getEmail().substring( 0, (user.getEmail().indexOf('@'))));
 
         mFirestore.collection("Users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -61,7 +60,7 @@ public class DocenteActivity extends HomeActivity {
         showLess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(DocenteActivity.this, LezioniDocenteActivity.class));
+                startActivity(new Intent(DocenteActivity.this, LessonActivity.class));
             }
         });
 

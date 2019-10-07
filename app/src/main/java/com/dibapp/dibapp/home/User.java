@@ -28,5 +28,10 @@ public class User {
         this.courseId = courseId;
     }
 
+    @Override
+    public String toString() {
+        return "User{" + "email='" + email + '\'' + ", courseId='" + courseId + '\'' + '}';
+    }
+
 
 }

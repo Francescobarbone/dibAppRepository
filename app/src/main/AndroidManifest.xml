@@ -9,12 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".home.CourseActivity"></activity>
-        <activity android:name=".home.LezioniDocenteActivity" />
+        <activity android:name=".home.CommentActivity"></activity>
+        <activity android:name=".home.CourseActivity" />
+        <activity android:name=".home.LessonActivity" />
         <activity
             android:name=".home.CreaLezioneActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".QRCodeScanner"/>
+        <activity android:name=".QRCodeScanner" />
         <activity
             android:name=".autenticazione.ForgotPasswordActivity"
             android:screenOrientation="portrait" />
@@ -36,11 +37,13 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA"/>
+
 </manifest>

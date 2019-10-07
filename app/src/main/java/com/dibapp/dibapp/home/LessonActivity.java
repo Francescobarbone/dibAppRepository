@@ -2,8 +2,7 @@ package com.dibapp.dibapp.home;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Toast;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,7 +19,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -29,7 +27,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 
-public class LezioniDocenteActivity extends AppCompatActivity {
+public class LessonActivity extends AppCompatActivity {
 
     private static final String TAG = "FireLog";
     private RecyclerView mMainList;
@@ -37,14 +35,13 @@ public class LezioniDocenteActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private LessonsListAdapter lessonsListAdapter;
     private List<Lesson> lessonList;
-    private String course_id;
 
     //admin per memorizzare le info
     private final User admin = new User();
 
     @Override
     public void onBackPressed(){
-        startActivity(new Intent(LezioniDocenteActivity.this, DocenteActivity.class));
+        startActivity(new Intent(LessonActivity.this, DocenteActivity.class));
     }
 
     @Override
@@ -66,6 +63,7 @@ public class LezioniDocenteActivity extends AppCompatActivity {
         admin.setEmail(user.getEmail());
         mFirestore = FirebaseFirestore.getInstance();
 
+        mFirestore = FirebaseFirestore.getInstance();
         mFirestore.collection("Users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -73,23 +71,29 @@ public class LezioniDocenteActivity extends AppCompatActivity {
                 for (DocumentSnapshot doc : task.getResult()) {
                     String email = doc.getString("email");
                     if (email.equals(admin.getEmail())) {
+                        find = true;
                         //getting admin's courseID
                         admin.setCourseId(doc.getString("idCorso"));
                         break;
                     }
                 }
-            }
-        });
-
-        mFirestore.collection("Courses /" + admin.getCourseId() + "/Lessons").addSnapshotListener(LezioniDocenteActivity.this, new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot documentSnapshots, @Nullable FirebaseFirestoreException e) {
-                for(DocumentChange doc : documentSnapshots.getDocumentChanges()){
-                    if(doc.getType() == DocumentChange.Type.ADDED){
-                        Lesson lesson = doc.getDocument().toObject(Lesson.class);
-                        lessonList.add(lesson);
-                        lessonsListAdapter.notifyDataSetChanged();
-                    }
+                if(find){
+                    mFirestore.collection("Courses /" + admin.getCourseId() + "/Lessons").addSnapshotListener(new EventListener<QuerySnapshot>() {
+                        @Override
+                        public void onEvent(@Nullable QuerySnapshot documentSnapshots, @Nullable FirebaseFirestoreException e) {
+                            if(e!=null){
+                                Log.d(TAG, "Error :" + e.getMessage());
+                                return;
+                            }
+                            for(DocumentChange doc : documentSnapshots.getDocumentChanges()){
+                                if(doc.getType() == DocumentChange.Type.ADDED){
+                                    Lesson lesson = doc.getDocument().toObject(Lesson.class);
+                                    lessonList.add(lesson);
+                                    lessonsListAdapter.notifyDataSetChanged();
+                                }
+                            }
+                        }
+                    });
                 }
             }
         });

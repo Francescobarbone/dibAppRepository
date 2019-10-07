@@ -1,8 +1,12 @@
 package com.dibapp.dibapp.home;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Course extends CourseID{
 
     private String courseName, courseTime;
+    private List<Lesson> lessonList = new ArrayList<>();
 
     public Course(){}
 
@@ -27,4 +31,12 @@ public class Course extends CourseID{
         this.courseTime = courseTime;
     }
 
+
+    public List<Lesson> getLessonList() {
+        return lessonList;
+    }
+
+    public void addLesson(Lesson lesson){
+        this.lessonList.add(lesson);
+    }
 }
