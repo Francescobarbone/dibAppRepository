@@ -56,7 +56,6 @@ public class LessonsListAdapter extends RecyclerView.Adapter<LessonsListAdapter.
         holder.argText.setText(lessonList.get(i).getArgument());
 
         final String lessID = lessonList.get(i).lessonID;
-        final String courseID = lessonList.get(i).getIdCourse();
         final int position = i;
 
         /*holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -98,7 +97,7 @@ public class LessonsListAdapter extends RecyclerView.Adapter<LessonsListAdapter.
                             });
                         }
                 });
-            } else holder.delete.setVisibility(View.INVISIBLE);
+            } else holder.delete.setVisibility(View.GONE);
         }
     });
     }

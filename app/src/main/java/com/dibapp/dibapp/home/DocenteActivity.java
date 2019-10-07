@@ -58,8 +58,6 @@ public class DocenteActivity extends HomeActivity {
             }
         });
 
-        Toast.makeText(DocenteActivity.this, admin.getCourseId(), Toast.LENGTH_SHORT).show();
-
         showLess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
