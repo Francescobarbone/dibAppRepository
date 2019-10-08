@@ -58,12 +58,11 @@ public class LessonsListAdapter extends RecyclerView.Adapter<LessonsListAdapter.
         final String lessID = lessonList.get(i).lessonID;
         final int position = i;
 
-        /*holder.mView.setOnClickListener(new View.OnClickListener() {
+       /* holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, CommentActivity.class);
                 intent.putExtra("lesson_id", lessID);
-                intent.putExtra("course_id", courseID);
                 context.startActivity(intent);
             }
         });*/
