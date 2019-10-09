@@ -84,6 +84,7 @@ public class CreaLezioneActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(Calendar.getInstance().getTime());
                 String arg = argomento.getText().toString();
+
                 if(arg.isEmpty()){
                     argomento.setError("Inserisci un argomento");
                     argomento.requestFocus();
