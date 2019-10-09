@@ -52,8 +52,8 @@ public class CreaCommentoActivity extends AppCompatActivity {
                 }else if(!((valutazione.getRating() == 0.0)&& (motivazione.getText().toString().isEmpty()))){
                     String currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(Calendar.getInstance().getTime());
                     String mComment = motivazione.getText().toString();
-                    //Comment commento = new Comment(mComment ,currentDate, );
-                    //mFirestore.collection("Courses /"+ +"/Lessons/"++"Comments").add(Comment)
+                    //Comment commento = new Comment(mComment, currentDate, );
+                    //mFirestore.collection("Courses /"+ +"/Lessons/"++"/Comments").add(Comment)
                 }
             }
         });
