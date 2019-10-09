@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".home.QRCodeGenerator"></activity>
         <activity android:name=".home.CreaCommentoActivity" />
         <activity android:name=".home.CommentActivity" />
         <activity android:name=".home.CourseActivity" />
@@ -43,8 +44,8 @@
             </intent-filter>
         </activity>
     </application>
-    <uses-permission android:name="android.permission.CAMERA" />
-
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
 
 </manifest>

@@ -21,7 +21,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 public class DocenteActivity extends HomeActivity {
 
-    private Button showLess, createless, logOut;
+    private Button showLess, createless, logOut, QR;
     private TextView textViewBenvenuto;
     private FirebaseAuth firebaseAuth;
     private static User admin = new User();
@@ -33,6 +33,7 @@ public class DocenteActivity extends HomeActivity {
         showLess = findViewById(R.id.showLessons);
         createless = findViewById(R.id.creaLezione);
         logOut = findViewById(R.id.logoutDocente);
+        QR = findViewById(R.id.provaQR);
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
@@ -58,10 +59,19 @@ public class DocenteActivity extends HomeActivity {
             }
         });
 
+
+
         showLess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(DocenteActivity.this, LessonActivity.class));
+            }
+        });
+
+        QR.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(DocenteActivity.this, QRCodeGenerator.class));
             }
         });
 
