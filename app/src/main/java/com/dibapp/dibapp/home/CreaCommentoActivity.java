@@ -24,6 +24,7 @@ public class CreaCommentoActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private Button saveComment;
     private RatingBar valutazione;
+    private Lesson lezione = new Lesson();//servirà per controllare che lo studente fosse presente a lezione
 
     @Override
     public void onBackPressed(){
@@ -39,6 +40,12 @@ public class CreaCommentoActivity extends AppCompatActivity {
         saveComment = (Button) findViewById(R.id.buttonComment);
         motivazione = (EditText)findViewById(R.id.editText);
         mFirestore = FirebaseFirestore.getInstance();
+        String corso = getIntent().getStringExtra("idCorso");
+        String userEmail = getIntent().getStringExtra("email");
+        String lezione = getIntent().getStringExtra("idLezione");
+
+
+
 
         saveComment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,7 +55,8 @@ public class CreaCommentoActivity extends AppCompatActivity {
                 }else if(valutazione.getRating() == 0.0){
                     Toast.makeText(CreaCommentoActivity.this, "Valutazione non espressa", Toast.LENGTH_SHORT).show();
                 }else if(motivazione.getText().toString().isEmpty()){
-                    Toast.makeText(CreaCommentoActivity.this, "Motivazione non espressa", Toast.LENGTH_SHORT).show();
+                    motivazione.setError("Per favore, inserisca una motivazione");
+                    motivazione.requestFocus();
                 }else if(!((valutazione.getRating() == 0.0)&& (motivazione.getText().toString().isEmpty()))){
                     String currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(Calendar.getInstance().getTime());
                     String mComment = motivazione.getText().toString();
