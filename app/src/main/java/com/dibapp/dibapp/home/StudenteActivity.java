@@ -31,7 +31,7 @@ public class StudenteActivity extends HomeActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
-        textViewBenvenuto = (TextView) findViewById(R.id.textView4);
+        textViewBenvenuto = (TextView) findViewById(R.id.benvenutoId);
         textViewBenvenuto.setText("Benvenuto " + user.getEmail().substring( 0, (user.getEmail().indexOf('@'))));
 
 

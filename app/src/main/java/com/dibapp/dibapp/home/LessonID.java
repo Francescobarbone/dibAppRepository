@@ -6,8 +6,12 @@ import com.google.firebase.firestore.Exclude;
 
 public class LessonID {
 
+    public String getLessonID() {
+        return lessonID;
+    }
+
     @Exclude
-    public String lessonID;
+    private String lessonID;
 
     public <T extends LessonID> T withID(@NonNull final String id){
         this.lessonID = id;

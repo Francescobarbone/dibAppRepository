@@ -59,12 +59,12 @@ public class MainActivity extends AppCompatActivity {
                 FirebaseUser fireBaseUser = firebaseAuth.getCurrentUser();
                 if (fireBaseUser != null && fireBaseUser.isEmailVerified()) {
                     if(emailId.getText().toString().endsWith("@uniba.it")){
-                        Toast.makeText(MainActivity.this, "Login avvenuto con successo!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, R.string.successful_login, Toast.LENGTH_SHORT).show();
                         Intent intToHome = new Intent(MainActivity.this, DocenteActivity.class);
                         startActivity(intToHome);
                     }
                     if(emailId.getText().toString().endsWith("@studenti.uniba.it")){
-                        Toast.makeText(MainActivity.this, "Login avvenuto con successo!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, R.string.successful_login, Toast.LENGTH_SHORT).show();
                         Intent intToHome = new Intent(MainActivity.this, StudenteActivity.class);
                         startActivity(intToHome);
                     }
@@ -78,12 +78,12 @@ public class MainActivity extends AppCompatActivity {
                 final String email = emailId.getText().toString();
                 String psw = password.getText().toString();
                 if(email.isEmpty() && psw.isEmpty()){
-                    Toast.makeText(MainActivity.this, "I campi sono vuoti!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, R.string.campi_vuoti, Toast.LENGTH_SHORT).show();
                 } else if(email.isEmpty()){
-                    password.setError("Per favore, inserisca l'indirizzo e-mail");
-                    password.requestFocus();
+                    emailId.setError("Inserire l'indirizzo email");
+                    emailId.requestFocus();
                 } else if(psw.isEmpty()){
-                    password.setError("Per favore, inserisca la password");
+                    password.setError("Inserire la password");
                     password.requestFocus();
                 }
                 else if (!(email.isEmpty() && psw.isEmpty())){
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(!task.isSuccessful()){
-                                Toast.makeText(MainActivity.this, "Errore durante il login, riprova", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, R.string.error, Toast.LENGTH_SHORT).show();
                             } else {
                                 if(email.endsWith("@studenti.uniba.it")){
                                     if(firebaseAuth.getCurrentUser().isEmailVerified()){
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                                         startActivity(intToHome);
                                     }
                                     else{
-                                        Toast.makeText(MainActivity.this, "Verifica la tua E-mail", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(MainActivity.this, R.string.verify, Toast.LENGTH_SHORT).show();
                                     }
 
                                 }else if(email.endsWith("@uniba.it")){
@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
                 } else
-                    Toast.makeText(MainActivity.this, "Errore durante il login", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, R.string.error, Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -37,7 +37,7 @@ public class CoursesListAdapter extends RecyclerView.Adapter<CoursesListAdapter.
         holder.nameText.setText(courseList.get(position).getCourseName());
         holder.dateText.setText(courseList.get(position).getCourseTime());
 
-        final String course_id = courseList.get(position).courseID;
+        final String course_id = courseList.get(position).getCourseID();
         holder.mView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){

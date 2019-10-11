@@ -51,9 +51,9 @@ public class CreaCommentoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if((valutazione.getRating() == 0.0)&& (motivazione.getText().toString().isEmpty())){
-                    Toast.makeText(CreaCommentoActivity.this, "I Campi sono vuoti", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreaCommentoActivity.this, R.string.campi_vuoti, Toast.LENGTH_SHORT).show();
                 }else if(valutazione.getRating() == 0.0){
-                    Toast.makeText(CreaCommentoActivity.this, "Valutazione non espressa", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreaCommentoActivity.this, R.string.exp_valutazione, Toast.LENGTH_SHORT).show();
                 }else if(motivazione.getText().toString().isEmpty()){
                     motivazione.setError("Per favore, inserisca una motivazione");
                     motivazione.requestFocus();

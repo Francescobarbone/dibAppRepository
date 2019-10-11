@@ -111,7 +111,7 @@ public class LessonActivity extends AppCompatActivity {
                                 }
                                 for(DocumentChange doc : documentSnapshots.getDocumentChanges()){
                                     if(doc.getType() == DocumentChange.Type.ADDED){
-                                        Lesson lesson = doc.getDocument().toObject(Lesson.class);
+                                        Lesson lesson = doc.getDocument().toObject(Lesson.class).withID(doc.getDocument().getId());
                                         lessonList.add(lesson);
                                         lessonsListAdapter.notifyDataSetChanged();
                                     }

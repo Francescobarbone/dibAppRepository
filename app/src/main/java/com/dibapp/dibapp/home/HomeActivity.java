@@ -21,9 +21,9 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public void onBackPressed(){
         final AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
-        builder.setMessage("Vuoi effettuare il logout?");
+        builder.setMessage(R.string.intent_logout);
         builder.setCancelable(true);
-        builder.setNegativeButton("Sì", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.yes, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 FirebaseAuth.getInstance().signOut();
@@ -32,7 +32,7 @@ public class HomeActivity extends AppCompatActivity {
                 finishAffinity();
             }
         });
-        builder.setPositiveButton("Chiudi", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.close, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.cancel();

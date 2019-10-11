@@ -41,6 +41,7 @@ public class LessonsListAdapter extends RecyclerView.Adapter<LessonsListAdapter.
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_lessons, parent, false);
+        context = parent.getContext();
         return new ViewHolder(view);
     }
 
@@ -55,7 +56,7 @@ public class LessonsListAdapter extends RecyclerView.Adapter<LessonsListAdapter.
         holder.dayText.setText(lessonList.get(i).getLessonDate());
         holder.argText.setText(lessonList.get(i).getArgument());
 
-        final String lessID = lessonList.get(i).lessonID;
+        final String lessID = lessonList.get(i).getLessonID();
         final int position = i;
 
        /* holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -67,6 +68,7 @@ public class LessonsListAdapter extends RecyclerView.Adapter<LessonsListAdapter.
             }
         });*/
 
+        holder.delete.setVisibility(View.INVISIBLE);
         firebaseFirestore.collection("Users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -77,7 +79,7 @@ public class LessonsListAdapter extends RecyclerView.Adapter<LessonsListAdapter.
                             if(email.equals(admin.getEmail())) {
                                 find = true;
                                 //getting admin's courseID
-                                admin.setCourseId(doc.getString("courseId"));
+                                admin.setCourseId(doc.getString("idCorso"));
                                 break;
                             }
                         }
@@ -89,7 +91,7 @@ public class LessonsListAdapter extends RecyclerView.Adapter<LessonsListAdapter.
                           firebaseFirestore.document("Courses /" + admin.getCourseId() + "/Lessons/" + lessID).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                 Toast.makeText(context, "Lezione eliminata", Toast.LENGTH_SHORT).show();
+                                 Toast.makeText(context, firebaseFirestore.document("Courses /" + admin.getCourseId() + "/Lessons/" + lessID).getPath().toString(), Toast.LENGTH_SHORT).show();
                                  lessonList.remove(position);
                                  notifyDataSetChanged();
                               }

@@ -12,12 +12,9 @@ import android.widget.Toast;
 
 import com.dibapp.dibapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -54,13 +51,13 @@ public class RegistrazioneActivity extends AppCompatActivity {
                 String pwd = password.getText().toString();
                 final Map<String, String> userMap = new HashMap<>();
                 if(email.isEmpty() && pwd.isEmpty()){
-                    Toast.makeText( RegistrazioneActivity.this, "I campi sono vuoti!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText( RegistrazioneActivity.this, R.string.campi_vuoti, Toast.LENGTH_SHORT).show();
                 }
                 else if(pwd.isEmpty()){
-                    password.setError("Inserisci una password");
+                    password.setError("Inserire la password");
                     password.requestFocus();
                 }else if(email.isEmpty()){
-                    emailId.setError("Inserisci l'email");
+                    emailId.setError("Inserire l'indirizzo email");
                     emailId.requestFocus();
                 }
                 else if(!(email.isEmpty() && pwd.isEmpty())){
@@ -73,11 +70,11 @@ public class RegistrazioneActivity extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
-                                                Toast.makeText(RegistrazioneActivity.this, "Registrazione avvenuta con successo. Controlla la casella di posta per la verifica.", Toast.LENGTH_LONG).show();
+                                                Toast.makeText(RegistrazioneActivity.this, R.string.registrazione_successo, Toast.LENGTH_LONG).show();
                                                 emailId.setText("");
                                                 password.setText("");
                                             } else {
-                                                Toast.makeText(RegistrazioneActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                                Toast.makeText(RegistrazioneActivity.this, R.string.registrazione_gia_effettuata, Toast.LENGTH_LONG).show();
                                             }
                                         }
                                     });
@@ -86,10 +83,10 @@ public class RegistrazioneActivity extends AppCompatActivity {
                         });
                 }
                     else
-                     Toast.makeText(RegistrazioneActivity.this, "Puoi eseguire la registrazione  solo con un e-mail istituzionale",Toast.LENGTH_SHORT).show();
+                     Toast.makeText(RegistrazioneActivity.this, R.string.reg_mail ,Toast.LENGTH_SHORT).show();
 
             } else
-                Toast.makeText(RegistrazioneActivity.this, "I campi sono vuoti!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegistrazioneActivity.this, R.string.campi_vuoti,Toast.LENGTH_SHORT).show();
             }
         });
     }

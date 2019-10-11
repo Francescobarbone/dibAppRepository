@@ -41,7 +41,7 @@ public class DocenteActivity extends HomeActivity {
         textViewBenvenuto = (TextView) findViewById(R.id.textView3);
 
         if(user!=null)
-            textViewBenvenuto.setText(" Benvenuto " + user.getEmail().substring( 0, (user.getEmail().indexOf('@'))));
+            textViewBenvenuto.setText("Benvenuto " + user.getEmail().substring( 0, (user.getEmail().indexOf('@'))));
 
         mFirestore.collection("Users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override

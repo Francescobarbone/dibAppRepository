@@ -94,7 +94,7 @@ public class CreaLezioneActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<DocumentReference> task) {
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(CreaLezioneActivity.this, "Lezione inserita", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(CreaLezioneActivity.this, R.string.lezione_inserita, Toast.LENGTH_SHORT).show();
                                     argomento.setText("");
                                 }
                             }
