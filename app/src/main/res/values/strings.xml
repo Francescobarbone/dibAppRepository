@@ -14,7 +14,7 @@
     <string name="password">Password</string>
     <string name="accedi">Accedi</string>
     <string name="textview">Registrati</string>
-    <string name="benvenuti_in_dibapp">Benvenuti in DibApp</string>
+    <string name="benvenuto_in_dibapp">Benvenuto in DibApp</string>
     <string name="logout">logOut</string>
     <string name="hai_effettuato_correttamente_l_accesso_benvenuto">Hai effettuato correttamente l\'accesso. Benvenuto!</string>
     <string name="passwordForg">Password dimenticata?</string>
@@ -30,6 +30,7 @@
     <string name="registrati">registrati</string>
     <string name="visualizza_lezione">Visualizza lezione</string>
     <string name="crea_lezione">crea lezione</string>
+    <string name="registra_dibapp">Registrati su DibApp</string>
     <string name="visualizza_lezioni">visualizza lezioni</string>
     <string name="dd_mm_yyyy" translatable="false">dd/MM/yyyy</string>
     <string name="hh_mm" translatable="false">hh:mm</string>
@@ -38,10 +39,11 @@
     <string name="inserire_argomento">Inserire argomento</string>
     <string name="day_of_lesson">day_of_lesson</string>
     <string name="argument">argument</string>
-    <string name="indica_la_motivazione">indica_la_motivazione</string>
+    <string name="indica_la_motivazione">Indica la motivazione</string>
     <string name="valuta_la_lezione">valuta_la_lezione</string>
     <string name="campi_vuoti">i_campi_sono_vuoti</string>
     <string name="inserisci_password">Inserire password</string>
+    <string name="inserisci_commento">Inserisci commento</string>
     <string name="inserisci_email">Inserire email</string>
     <string name="registrazione_successo">Registrazione avvenuta con successo</string>
     <string name="reg_mail">registrazione_mail</string>
@@ -56,4 +58,8 @@
     <string name="close">Chiudi</string>
     <string name="segui_lezione">Segui lezione</string>
     <string name="visualizza_corsi">Visualizza corsi</string>
+    <string name="valuta_lezione">Valuta la lezione</string>
+    <string name="recupero_password">Recupera la password</string>
+    <string name="pagina_lezione">Pagina di inserimento lezione</string>
+    <string name="grazie_voto">Grazie per il tuo voto</string>
 </resources>

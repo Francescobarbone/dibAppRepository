@@ -96,6 +96,7 @@ public class CreaLezioneActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     Toast.makeText(CreaLezioneActivity.this, R.string.lezione_inserita, Toast.LENGTH_SHORT).show();
                                     argomento.setText("");
+                                    startActivity(new Intent(CreaLezioneActivity.this, DocenteActivity.class));
                                 }
                             }
                         });

@@ -67,7 +67,9 @@ public class CreaCommentoActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<DocumentReference> task) {
                             if(task.isSuccessful()){
-                                Toast.makeText(CreaCommentoActivity.this, "Commento creato", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(CreaCommentoActivity.this, R.string.grazie_voto, Toast.LENGTH_SHORT).show();
+                                motivazione.setText("");
+                                startActivity(new Intent(CreaCommentoActivity.this, StudenteActivity.class));
                             }
                         }
                     });

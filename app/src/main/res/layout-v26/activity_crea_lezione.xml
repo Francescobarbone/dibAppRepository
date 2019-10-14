@@ -15,8 +15,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pagina di inserimento lezione"
-            android:textSize="40sp"
+            android:text="@string/pagina_lezione"
+            android:textSize="30sp"
             android:layout_marginBottom="75dp"
             />
 

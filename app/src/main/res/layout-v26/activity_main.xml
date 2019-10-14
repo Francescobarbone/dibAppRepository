@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--suppress ALL -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -15,7 +16,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Accedi a DibApp"
+            android:text="@string/benvenuto_in_dibapp"
             android:textSize="40sp"
             android:layout_marginBottom="75dp"
             />
@@ -26,7 +27,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/email"
-            android:inputType="textEmailAddress"/>
+            android:inputType="textEmailAddress"
+            android:importantForAutofill="no" />
 
         <EditText
             android:id="@+id/editText4"
@@ -34,7 +36,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:importantForAutofill="no" />
 
         <Button
             android:id="@+id/buttonRegister"

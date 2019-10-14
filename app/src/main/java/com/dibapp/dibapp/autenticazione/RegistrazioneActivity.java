@@ -70,11 +70,11 @@ public class RegistrazioneActivity extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
-                                                Toast.makeText(RegistrazioneActivity.this, R.string.registrazione_successo, Toast.LENGTH_LONG).show();
+                                                Toast.makeText(RegistrazioneActivity.this, R.string.registrazione_successo, Toast.LENGTH_SHORT).show();
                                                 emailId.setText("");
                                                 password.setText("");
                                             } else {
-                                                Toast.makeText(RegistrazioneActivity.this, R.string.registrazione_gia_effettuata, Toast.LENGTH_LONG).show();
+                                                Toast.makeText(RegistrazioneActivity.this, R.string.registrazione_gia_effettuata, Toast.LENGTH_SHORT).show();
                                             }
                                         }
                                     });
