@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.dibapp.dibapp.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,9 +22,8 @@ import javax.annotation.Nullable;
 
 public class CommentActivity extends AppCompatActivity {
 
+    private static final String TAG = "FireLog";
     private RecyclerView commentRecycler;
-    private String lessonID;
-    private String courseID;
     private List<Comment> commentList;
     private CommentsListAdapter commentsListAdapter;
     private FirebaseFirestore firebaseFirestore;
@@ -31,31 +31,33 @@ public class CommentActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
 
         //get information from lessonListAdapter
-        lessonID = getIntent().getStringExtra("lesson_id");
-        courseID = getIntent().getStringExtra("course_id");
+        final String lessonID = getIntent().getStringExtra("lesson_id");
+        final String courseID = getIntent().getStringExtra("course_id");
 
         //firebase info
         firebaseFirestore = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
 
-        //comments collection
-        String path = "Courses /" + courseID + "/Lessons/" + lessonID + "/Comments";
-
-        //lesson document
-        String userPath = "Courses /" + courseID + "/Lessons/" + lessonID;
-
         commentList = new ArrayList<>();
+        commentsListAdapter = new CommentsListAdapter(commentList, getApplicationContext());
+
+        commentRecycler = (RecyclerView)findViewById(R.id.comment_list);
         commentRecycler.setHasFixedSize(true);
         commentRecycler.setLayoutManager(new LinearLayoutManager(this));
         commentRecycler.setAdapter(commentsListAdapter);
 
-        firebaseFirestore.collection(path).addSnapshotListener(CommentActivity.this, new EventListener<QuerySnapshot>() {
+        firebaseFirestore.collection("Courses /" + courseID + "/Lessons/" + lessonID + "/Comments").addSnapshotListener(CommentActivity.this, new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot documentSnapshots, @Nullable FirebaseFirestoreException e) {
+                if(e!=null){
+                    Log.d(TAG, "Error: " + e.getMessage());
+                    return;
+                }
                 for(DocumentChange doc : documentSnapshots.getDocumentChanges()){
                     if(doc.getType() == DocumentChange.Type.ADDED){
                         Comment comment = doc.getDocument().toObject(Comment.class);

@@ -56,19 +56,36 @@ public class LessonsListAdapter extends RecyclerView.Adapter<LessonsListAdapter.
         holder.dayText.setText(lessonList.get(i).getLessonDate());
         holder.argText.setText(lessonList.get(i).getArgument());
 
+        final String courseID = lessonList.get(i).getIdCourse();
         final String lessID = lessonList.get(i).getLessonID();
         final int position = i;
 
-       /* holder.mView.setOnClickListener(new View.OnClickListener() {
+       holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, CommentActivity.class);
+                intent.putExtra("course_id", courseID);
                 intent.putExtra("lesson_id", lessID);
                 context.startActivity(intent);
             }
-        });*/
+        });
 
-        holder.delete.setVisibility(View.INVISIBLE);
+        holder.delete.setVisibility(View.GONE);
+        holder.create.setVisibility(View.GONE);
+
+        if(firebaseAuth.getCurrentUser().getEmail().endsWith("@studenti.uniba.it")){
+            holder.create.setVisibility(View.VISIBLE);
+            holder.create.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, CreaCommentoActivity.class);
+                    intent.putExtra("course_id", courseID);
+                    intent.putExtra("lesson_id", lessID);
+                    context.startActivity(intent);
+                }
+            });
+        }
+
         firebaseFirestore.collection("Users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -91,7 +108,7 @@ public class LessonsListAdapter extends RecyclerView.Adapter<LessonsListAdapter.
                           firebaseFirestore.document("Courses /" + admin.getCourseId() + "/Lessons/" + lessID).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                 Toast.makeText(context, firebaseFirestore.document("Courses /" + admin.getCourseId() + "/Lessons/" + lessID).getPath().toString(), Toast.LENGTH_SHORT).show();
+                                 Toast.makeText(context, "Lezione eliminata", Toast.LENGTH_SHORT).show();
                                  lessonList.remove(position);
                                  notifyDataSetChanged();
                               }
@@ -115,6 +132,7 @@ public class LessonsListAdapter extends RecyclerView.Adapter<LessonsListAdapter.
         public TextView dayText;
         public TextView argText;
         public ImageView delete;
+        public ImageView create;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -122,6 +140,7 @@ public class LessonsListAdapter extends RecyclerView.Adapter<LessonsListAdapter.
             dayText = (TextView) mView.findViewById(R.id.time_text);
             argText = (TextView) mView.findViewById(R.id.arg_text);
             delete = (ImageView) mView.findViewById(R.id.ic_delete);
+            create = (ImageView) mView.findViewById(R.id.ic_create);
         }
     }
 }

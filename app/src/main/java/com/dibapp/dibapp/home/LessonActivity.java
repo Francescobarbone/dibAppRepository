@@ -3,7 +3,6 @@ package com.dibapp.dibapp.home;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,7 +30,7 @@ import javax.annotation.Nullable;
 public class LessonActivity extends AppCompatActivity {
 
     private static final String TAG = "FireLog";
-    private RecyclerView mMainList;
+    private RecyclerView lessonRecycler;
     private FirebaseFirestore mFirestore;
     private FirebaseAuth firebaseAuth;
     private LessonsListAdapter lessonsListAdapter;
@@ -56,10 +55,10 @@ public class LessonActivity extends AppCompatActivity {
         lessonList = new ArrayList<>();
         lessonsListAdapter = new LessonsListAdapter(lessonList, getApplicationContext());
 
-        mMainList = (RecyclerView)findViewById(R.id.lesson_list);
-        mMainList.setHasFixedSize(true);
-        mMainList.setLayoutManager(new LinearLayoutManager(this));
-        mMainList.setAdapter(lessonsListAdapter);
+        lessonRecycler = (RecyclerView)findViewById(R.id.lesson_list);
+        lessonRecycler.setHasFixedSize(true);
+        lessonRecycler.setLayoutManager(new LinearLayoutManager(this));
+        lessonRecycler.setAdapter(lessonsListAdapter);
 
         firebaseAuth = FirebaseAuth.getInstance();
         String courseID = getIntent().getStringExtra("course_id");
@@ -80,7 +79,7 @@ public class LessonActivity extends AppCompatActivity {
                     }
                     for (DocumentChange doc : documentSnapshots.getDocumentChanges()) {
                         if (doc.getType() == DocumentChange.Type.ADDED) {
-                            Lesson lesson = doc.getDocument().toObject(Lesson.class);
+                            Lesson lesson = doc.getDocument().toObject(Lesson.class).withID(doc.getDocument().getId());
                             lessonList.add(lesson);
                             lessonsListAdapter.notifyDataSetChanged();
                         }

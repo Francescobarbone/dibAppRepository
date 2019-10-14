@@ -1,5 +1,6 @@
 package com.dibapp.dibapp.home;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,7 +12,10 @@ import android.widget.RatingBar;
 import android.widget.Toast;
 
 import com.dibapp.dibapp.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.DateFormat;
@@ -24,7 +28,7 @@ public class CreaCommentoActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private Button saveComment;
     private RatingBar valutazione;
-    private Lesson lezione = new Lesson();//servirà per controllare che lo studente fosse presente a lezione
+
 
     @Override
     public void onBackPressed(){
@@ -40,12 +44,10 @@ public class CreaCommentoActivity extends AppCompatActivity {
         saveComment = (Button) findViewById(R.id.buttonComment);
         motivazione = (EditText)findViewById(R.id.editText);
         mFirestore = FirebaseFirestore.getInstance();
-        String corso = getIntent().getStringExtra("idCorso");
-        String userEmail = getIntent().getStringExtra("email");
-        String lezione = getIntent().getStringExtra("idLezione");
 
-
-
+        final String corso = getIntent().getStringExtra("course_id");
+        final String userEmail = getIntent().getStringExtra("email");
+        final String less = getIntent().getStringExtra("lesson_id");
 
         saveComment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,8 +62,15 @@ public class CreaCommentoActivity extends AppCompatActivity {
                 }else if(!((valutazione.getRating() == 0.0)&& (motivazione.getText().toString().isEmpty()))){
                     String currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(Calendar.getInstance().getTime());
                     String mComment = motivazione.getText().toString();
-                    //Comment commento = new Comment(mComment, currentDate, );
-                    //mFirestore.collection("Courses /"+ +"/Lessons/"++"/Comments").add(Comment)
+                    Comment commento = new Comment(mComment, currentDate, less);
+                    mFirestore.collection("Courses /" + corso + "/Lessons/" + less + "/Comments").add(commento).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentReference> task) {
+                            if(task.isSuccessful()){
+                                Toast.makeText(CreaCommentoActivity.this, "Commento creato", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
                 }
             }
         });

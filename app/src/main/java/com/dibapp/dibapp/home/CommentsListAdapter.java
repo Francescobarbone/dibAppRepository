@@ -29,13 +29,14 @@ public class CommentsListAdapter extends RecyclerView.Adapter<CommentsListAdapte
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_lessons, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_comment, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
+        holder.dateText.setText(commentList.get(position).getTimestamp());
+        holder.commentText.setText(commentList.get(position).getMessage());
     }
 
     @Override

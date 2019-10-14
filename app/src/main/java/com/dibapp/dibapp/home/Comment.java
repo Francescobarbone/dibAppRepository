@@ -5,12 +5,12 @@ import java.util.Date;
 public class Comment {
 
     private String message;
-    private Date timestamp;
+    private String timestamp;
     private String lessonID;
 
     public Comment(){}
 
-    public Comment(String message, Date timestamp, String lessonID){
+    public Comment(String message, String timestamp, String lessonID){
         this.message = message;
         this.timestamp = timestamp;
         this.lessonID = lessonID;
@@ -24,11 +24,11 @@ public class Comment {
         this.message = message;
     }
 
-    public Date getTimestamp() {
+    public String getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Date timestamp) {
+    public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
 

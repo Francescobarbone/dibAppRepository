@@ -6,29 +6,35 @@
     android:layout_height="match_parent"
     tools:context=".home.CreaLezioneActivity">
 
-    <Button
-        android:id="@+id/saveLessonButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="384dp"
-        android:layout_marginEnd="175dp"
-        android:text="@string/salva_lezione"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/argText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="320dp"
-        android:layout_marginEnd="91dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="@string/inserire_argomento"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pagina di inserimento lezione"
+            android:textSize="40sp"
+            android:layout_marginBottom="75dp"
+            />
+
+        <EditText
+            android:id="@+id/argText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/inserire_argomento"
+            android:inputType="textPersonName" />
+
+        <Button
+            android:id="@+id/saveLessonButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="@string/salva_lezione" />
+
+    </LinearLayout>
 
 </RelativeLayout>
