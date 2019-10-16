@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -19,7 +18,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
-public class DocenteActivity extends HomeActivity {
+public class TeacherActivity extends HomeActivity {
 
     private Button showLess, createless, logOut, QR;
     private TextView textViewBenvenuto;
@@ -41,7 +40,7 @@ public class DocenteActivity extends HomeActivity {
         textViewBenvenuto = (TextView) findViewById(R.id.textView3);
 
         if(user!=null)
-            textViewBenvenuto.setText("Benvenuto " + user.getEmail().substring( 0, (user.getEmail().indexOf('@'))));
+            textViewBenvenuto.setText(user.getEmail().substring( 0, (user.getEmail().indexOf('@'))));
 
         mFirestore.collection("Users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -64,21 +63,21 @@ public class DocenteActivity extends HomeActivity {
         showLess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(DocenteActivity.this, LessonActivity.class));
+                startActivity(new Intent(TeacherActivity.this, LessonActivity.class));
             }
         });
 
         QR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(DocenteActivity.this, QRCodeGenerator.class));
+                startActivity(new Intent(TeacherActivity.this, QRCodeGenerator.class));
             }
         });
 
         createless.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(DocenteActivity.this, CreaLezioneActivity.class));
+                startActivity(new Intent(TeacherActivity.this, LessonCreateActivity.class));
             }
         });
 
@@ -87,7 +86,7 @@ public class DocenteActivity extends HomeActivity {
             @Override
             public void onClick(View v){
                 firebaseAuth.signOut();
-                Intent intToMain = new Intent(DocenteActivity.this, MainActivity.class);
+                Intent intToMain = new Intent(TeacherActivity.this, MainActivity.class);
                 startActivity(intToMain);
             }
         });

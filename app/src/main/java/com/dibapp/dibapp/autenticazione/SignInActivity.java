@@ -20,7 +20,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RegistrazioneActivity extends AppCompatActivity {
+public class SignInActivity extends AppCompatActivity {
 
     private EditText emailId, password;
     private Button btnRegistrati;
@@ -29,7 +29,7 @@ public class RegistrazioneActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-        Intent regToMain = new Intent(RegistrazioneActivity.this, MainActivity.class);
+        Intent regToMain = new Intent(SignInActivity.this, MainActivity.class);
         startActivity(regToMain);
     }
 
@@ -51,7 +51,7 @@ public class RegistrazioneActivity extends AppCompatActivity {
                 String pwd = password.getText().toString();
                 final Map<String, String> userMap = new HashMap<>();
                 if(email.isEmpty() && pwd.isEmpty()){
-                    Toast.makeText( RegistrazioneActivity.this, R.string.campi_vuoti, Toast.LENGTH_SHORT).show();
+                    Toast.makeText( SignInActivity.this, R.string.campi_vuoti, Toast.LENGTH_SHORT).show();
                 }
                 else if(pwd.isEmpty()){
                     password.setError("Inserire la password");
@@ -70,11 +70,11 @@ public class RegistrazioneActivity extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
-                                                Toast.makeText(RegistrazioneActivity.this, R.string.registrazione_successo, Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(SignInActivity.this, R.string.registrazione_successo, Toast.LENGTH_SHORT).show();
                                                 emailId.setText("");
                                                 password.setText("");
                                             } else {
-                                                Toast.makeText(RegistrazioneActivity.this, R.string.registrazione_gia_effettuata, Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(SignInActivity.this, R.string.registrazione_gia_effettuata, Toast.LENGTH_SHORT).show();
                                             }
                                         }
                                     });
@@ -83,10 +83,10 @@ public class RegistrazioneActivity extends AppCompatActivity {
                         });
                 }
                     else
-                     Toast.makeText(RegistrazioneActivity.this, R.string.reg_mail ,Toast.LENGTH_SHORT).show();
+                     Toast.makeText(SignInActivity.this, R.string.reg_mail ,Toast.LENGTH_SHORT).show();
 
             } else
-                Toast.makeText(RegistrazioneActivity.this, R.string.campi_vuoti,Toast.LENGTH_SHORT).show();
+                Toast.makeText(SignInActivity.this, R.string.campi_vuoti,Toast.LENGTH_SHORT).show();
             }
         });
     }

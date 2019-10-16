@@ -4,13 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    tools:context=".home.DocenteActivity">
+    tools:context=".home.TeacherActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textViewBenvDoc"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:text="@string/benvenuto" />
 
         <TextView
             android:id="@+id/textView3"
@@ -23,24 +30,35 @@
             android:id="@+id/showLessons"
             android:layout_width="170dp"
             android:layout_height="wrap_content"
+            android:background="@drawable/rounded_button"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/txtColor"
             android:text="@string/visualizza_lezioni"/>
 
         <Button
             android:id="@+id/creaLezione"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/rounded_button"
+            android:textColor="@color/txtColor"
             android:text="@string/crea_lezione"/>
 
         <Button
             android:id="@+id/provaQR"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/rounded_button"
+            android:textColor="@color/txtColor"
             android:text="QRCODE"/>
 
         <Button
             android:id="@+id/logoutDocente"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:background="@drawable/rounded_button"
+            android:textColor="@color/txtColor"
             android:text="@string/logout" />
 
     </LinearLayout>

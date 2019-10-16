@@ -14,12 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.dibapp.dibapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -78,7 +76,7 @@ public class LessonsListAdapter extends RecyclerView.Adapter<LessonsListAdapter.
             holder.create.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, CreaCommentoActivity.class);
+                    Intent intent = new Intent(context, CommentCreateActivity.class);
                     intent.putExtra("course_id", courseID);
                     intent.putExtra("lesson_id", lessID);
                     context.startActivity(intent);

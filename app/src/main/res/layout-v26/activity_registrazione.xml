@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".autenticazione.RegistrazioneActivity">
+    tools:context=".autenticazione.SignInActivity">
 
 
     <LinearLayout
@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/registra_dibapp"
-            android:textSize="40sp"
+            android:textSize="35sp"
             android:layout_marginBottom="75dp"
             />
 
@@ -45,6 +45,8 @@
             android:layout_width="127dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="65dp"
+            android:background="@drawable/rounded_button"
+            android:textColor="@color/txtColor"
             android:text="@string/registrati"/>
 
   

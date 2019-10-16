@@ -42,9 +42,9 @@ public class LessonActivity extends AppCompatActivity {
     @Override
     public void onBackPressed(){
         if(firebaseAuth.getCurrentUser().getEmail().endsWith("@studenti.uniba.it"))
-            startActivity(new Intent(LessonActivity.this, StudenteActivity.class));
+            startActivity(new Intent(LessonActivity.this, StudentActivity.class));
         else
-            startActivity(new Intent(LessonActivity.this, DocenteActivity.class));
+            startActivity(new Intent(LessonActivity.this, TeacherActivity.class));
     }
 
     @Override

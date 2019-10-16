@@ -12,7 +12,7 @@ import com.dibapp.dibapp.autenticazione.MainActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class StudenteActivity extends HomeActivity {
+public class StudentActivity extends HomeActivity {
 
     private Button logOut;
     private Button visualizzaLezione;
@@ -32,35 +32,40 @@ public class StudenteActivity extends HomeActivity {
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
         textViewBenvenuto = (TextView) findViewById(R.id.benvenutoId);
-        textViewBenvenuto.setText("Benvenuto " + user.getEmail().substring( 0, (user.getEmail().indexOf('@'))));
+        textViewBenvenuto.setText(user.getEmail().substring(0, (user.getEmail().indexOf('@'))));
 
 
         //Logout
-        logOut.setOnClickListener(new View.OnClickListener(){
+        logOut.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
-                Intent intToMain = new Intent(StudenteActivity.this, MainActivity.class);
+                Intent intToMain = new Intent(StudentActivity.this, MainActivity.class);
                 startActivity(intToMain);
                 finishAffinity();
             }
         });
 
         //Accesso alla lezione previa scansione del codice QR
-        seguiLezione.setOnClickListener(new View.OnClickListener(){
+        seguiLezione.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(StudenteActivity.this, QRCodeScanner.class));
+                startActivity(new Intent(StudentActivity.this, QRCodeScanner.class));
             }
         });
 
         //Visualizzazione dei corsi, lezione e commenti
-        visualizzaLezione.setOnClickListener(new View.OnClickListener(){
+        visualizzaLezione.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-                Intent studToQR = new Intent(StudenteActivity.this, CourseActivity.class);
+            public void onClick(View v) {
+                Intent studToQR = new Intent(StudentActivity.this, CourseActivity.class);
                 startActivity(studToQR);
             }
         });
+
+        /*@Override
+        public boolean onOptionsItemSelected (MenuItem item){
+
+        }*/
     }
 }

@@ -10,6 +10,7 @@
     </array>
 
     <string name="app_name">dibApp</string>
+    <string name="benvenuto">Benvenuto</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="accedi">Accedi</string>
@@ -41,7 +42,7 @@
     <string name="argument">argument</string>
     <string name="indica_la_motivazione">Indica la motivazione</string>
     <string name="valuta_la_lezione">valuta_la_lezione</string>
-    <string name="campi_vuoti">i_campi_sono_vuoti</string>
+    <string name="campi_vuoti">I campi sono vuoti</string>
     <string name="inserisci_password">Inserire password</string>
     <string name="inserisci_commento">Inserisci commento</string>
     <string name="inserisci_email">Inserire email</string>

@@ -17,8 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dibapp.dibapp.R;
-import com.dibapp.dibapp.home.DocenteActivity;
-import com.dibapp.dibapp.home.StudenteActivity;
+import com.dibapp.dibapp.home.TeacherActivity;
+import com.dibapp.dibapp.home.StudentActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -60,12 +60,12 @@ public class MainActivity extends AppCompatActivity {
                 if (fireBaseUser != null && fireBaseUser.isEmailVerified()) {
                     if(emailId.getText().toString().endsWith("@uniba.it")){
                         Toast.makeText(MainActivity.this, R.string.successful_login, Toast.LENGTH_SHORT).show();
-                        Intent intToHome = new Intent(MainActivity.this, DocenteActivity.class);
+                        Intent intToHome = new Intent(MainActivity.this, TeacherActivity.class);
                         startActivity(intToHome);
                     }
                     if(emailId.getText().toString().endsWith("@studenti.uniba.it")){
                         Toast.makeText(MainActivity.this, R.string.successful_login, Toast.LENGTH_SHORT).show();
-                        Intent intToHome = new Intent(MainActivity.this, StudenteActivity.class);
+                        Intent intToHome = new Intent(MainActivity.this, StudentActivity.class);
                         startActivity(intToHome);
                     }
                 }
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
                             } else {
                                 if(email.endsWith("@studenti.uniba.it")){
                                     if(firebaseAuth.getCurrentUser().isEmailVerified()){
-                                        Intent intToHome = new Intent(MainActivity.this, StudenteActivity.class);
+                                        Intent intToHome = new Intent(MainActivity.this, StudentActivity.class);
                                         startActivity(intToHome);
                                     }
                                     else{
@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
                                     }
 
                                 }else if(email.endsWith("@uniba.it")){
-                                    Intent intToHome = new Intent(MainActivity.this, DocenteActivity.class);
+                                    Intent intToHome = new Intent(MainActivity.this, TeacherActivity.class);
                                     startActivity(intToHome);
                                 }
                             }
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
         tvSignUp.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intSignUp = new Intent (MainActivity.this, RegistrazioneActivity.class);
+                Intent intSignUp = new Intent (MainActivity.this, SignInActivity.class);
                 startActivity(intSignUp);
             }
         });

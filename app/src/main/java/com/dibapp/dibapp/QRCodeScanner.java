@@ -11,8 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.dibapp.dibapp.home.CreaCommentoActivity;
-import com.dibapp.dibapp.home.StudenteActivity;
+import com.dibapp.dibapp.home.CommentCreateActivity;
+import com.dibapp.dibapp.home.StudentActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -29,7 +29,7 @@ public class QRCodeScanner extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-        Intent regToMain = new Intent(QRCodeScanner.this, StudenteActivity.class);
+        Intent regToMain = new Intent(QRCodeScanner.this, StudentActivity.class);
         startActivity(regToMain);
     }
 
@@ -84,7 +84,7 @@ public class QRCodeScanner extends AppCompatActivity {
                     }
 
                     if(isSub){
-                        Intent intent = new Intent(QRCodeScanner.this, CreaCommentoActivity.class);
+                        Intent intent = new Intent(QRCodeScanner.this, CommentCreateActivity.class);
                         intent.putExtra("idLezione",lezione);
                         intent.putExtra("idCorso",corso);
                         intent.putExtra("email",userEmail);

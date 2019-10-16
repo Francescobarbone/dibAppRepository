@@ -10,28 +10,28 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".home.QRCodeGenerator"></activity>
-        <activity android:name=".home.CreaCommentoActivity" />
+        <activity android:name=".home.CommentCreateActivity" />
         <activity android:name=".home.CommentActivity" />
         <activity android:name=".home.CourseActivity" />
         <activity android:name=".home.LessonActivity" />
         <activity
-            android:name=".home.CreaLezioneActivity"
+            android:name=".home.LessonCreateActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".QRCodeScanner" />
         <activity
             android:name=".autenticazione.ForgotPasswordActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".home.StudenteActivity"
+            android:name=".home.StudentActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".home.DocenteActivity"
+            android:name=".home.TeacherActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".home.HomeActivity"
             android:noHistory="true" />
         <activity
-            android:name=".autenticazione.RegistrazioneActivity"
+            android:name=".autenticazione.SignInActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".autenticazione.MainActivity"

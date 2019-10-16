@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/benvenuto_in_dibapp"
-            android:textSize="40sp"
+            android:textSize="35sp"
             android:layout_marginBottom="75dp"
             />
 
@@ -45,6 +45,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:layout_marginBottom="20dp"
+            android:background="@drawable/rounded_button"
+            android:textColor="@color/txtColor"
             android:text="@string/accedi"/>
 
 
@@ -70,9 +72,11 @@
 
         <Button
             android:id="@+id/buttonLang"
-            android:layout_width="wrap_content"
+            android:layout_width="151dp"
             android:layout_height="wrap_content"
-            android:text="@string/seleziona_lingua"/>
+            android:background="@drawable/rounded_button"
+            android:text="@string/seleziona_lingua"
+            android:textColor="@color/txtColor" />
 
     </LinearLayout>
 </RelativeLayout>

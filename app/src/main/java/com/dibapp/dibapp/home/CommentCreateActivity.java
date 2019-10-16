@@ -21,7 +21,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.text.DateFormat;
 import java.util.Calendar;
 
-public class CreaCommentoActivity extends AppCompatActivity {
+public class CommentCreateActivity extends AppCompatActivity {
 
     private EditText motivazione;
     private FirebaseFirestore mFirestore;
@@ -32,7 +32,7 @@ public class CreaCommentoActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-        startActivity(new Intent(CreaCommentoActivity.this, StudenteActivity.class));
+        startActivity(new Intent(CommentCreateActivity.this, StudentActivity.class));
     }
 
     @Override
@@ -53,9 +53,9 @@ public class CreaCommentoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if((valutazione.getRating() == 0.0)&& (motivazione.getText().toString().isEmpty())){
-                    Toast.makeText(CreaCommentoActivity.this, R.string.campi_vuoti, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CommentCreateActivity.this, R.string.campi_vuoti, Toast.LENGTH_SHORT).show();
                 }else if(valutazione.getRating() == 0.0){
-                    Toast.makeText(CreaCommentoActivity.this, R.string.exp_valutazione, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CommentCreateActivity.this, R.string.exp_valutazione, Toast.LENGTH_SHORT).show();
                 }else if(motivazione.getText().toString().isEmpty()){
                     motivazione.setError("Per favore, inserisca una motivazione");
                     motivazione.requestFocus();
@@ -67,9 +67,9 @@ public class CreaCommentoActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<DocumentReference> task) {
                             if(task.isSuccessful()){
-                                Toast.makeText(CreaCommentoActivity.this, R.string.grazie_voto, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(CommentCreateActivity.this, R.string.grazie_voto, Toast.LENGTH_SHORT).show();
                                 motivazione.setText("");
-                                startActivity(new Intent(CreaCommentoActivity.this, StudenteActivity.class));
+                                startActivity(new Intent(CommentCreateActivity.this, StudentActivity.class));
                             }
                         }
                     });
