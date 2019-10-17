@@ -60,14 +60,15 @@ public class QRCodeScanner extends AppCompatActivity {
         final String lessName = getIntent().getStringExtra("name_lesson").trim();
         final String courseid = getIntent().getStringExtra("course_id");
         final String lessid = getIntent().getStringExtra("lesson_id");
+        final String user = getIntent().getStringExtra("userMail");
         if(result != null) {
             final String QRString = result.getContents().trim();
             if(QRString.equals(lessName)) {
                 Intent QRtoComment = new Intent();
-                QRtoComment.putExtra("course_id", courseid);
-                QRtoComment.putExtra("lesson_id", lessid);
-                QRtoComment.putExtra("lessonName", lessName);
-                startActivity(new Intent(QRCodeScanner.this, CommentCreateActivity.class));
+                QRtoComment.putExtra("courseid", courseid);
+                QRtoComment.putExtra("lessonid", lessid);
+                QRtoComment.putExtra("user", user);
+                startActivity(QRtoComment);
             }
              else
                 Toast.makeText(this, R.string.errore_corrispondenza, Toast.LENGTH_SHORT).show();

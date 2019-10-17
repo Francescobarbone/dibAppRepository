@@ -20,12 +20,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.Objects;
 
 public class CommentCreateActivity extends AppCompatActivity {
 
     private EditText motivazione;
     private FirebaseFirestore mFirestore;
-    private FirebaseAuth firebaseAuth;
     private Button saveComment;
     private RatingBar valutazione;
 
@@ -45,9 +45,11 @@ public class CommentCreateActivity extends AppCompatActivity {
         motivazione = (EditText)findViewById(R.id.editText);
         mFirestore = FirebaseFirestore.getInstance();
 
-        final String corso = getIntent().getStringExtra("course_id");
-        final String userEmail = firebaseAuth.getCurrentUser().getEmail();
-        final String less = getIntent().getStringExtra("lesson_id");
+        final String corso = getIntent().getStringExtra("courseid");
+        final String userEmail = getIntent().getStringExtra("user");
+        final String less = getIntent().getStringExtra("lessonid");
+
+        Toast.makeText(this, corso + "" + less + "" + userEmail, Toast.LENGTH_SHORT).show();
 
         saveComment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,7 +61,7 @@ public class CommentCreateActivity extends AppCompatActivity {
                 }else if(motivazione.getText().toString().isEmpty()){
                     motivazione.setError("Per favore, inserisca una motivazione");
                     motivazione.requestFocus();
-                }else if(!((valutazione.getRating() == 0.0)&& (motivazione.getText().toString().isEmpty()))){
+                }else if(!((valutazione.getRating() == 0.0) && (motivazione.getText().toString().isEmpty()))){
                     String currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(Calendar.getInstance().getTime());
                     String mComment = motivazione.getText().toString();
                     Comment commento = new Comment(mComment, currentDate, less, userEmail);

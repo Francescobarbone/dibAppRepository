@@ -82,6 +82,7 @@ public class LessonsListAdapter extends RecyclerView.Adapter<LessonsListAdapter.
                     intent.putExtra("course_id", courseID);
                     intent.putExtra("lesson_id", lessID);
                     intent.putExtra("name_lesson", nameLess);
+                    intent.putExtra("userMail", admin.getEmail());
                     context.startActivity(intent);
                 }
             });

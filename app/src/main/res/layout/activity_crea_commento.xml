@@ -39,7 +39,7 @@
         android:hint="@string/indica_la_motivazione"
         android:textSize="20sp"
         android:inputType="textPersonName"
-        />
+        android:importantForAutofill="no" />
 
     <Button
         android:id="@+id/buttonComment"
