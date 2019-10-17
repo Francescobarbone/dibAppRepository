@@ -50,7 +50,7 @@ public class LessonActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lezioni);
+        setContentView(R.layout.activity_lessons);
 
         lessonList = new ArrayList<>();
         lessonsListAdapter = new LessonsListAdapter(lessonList, getApplicationContext());

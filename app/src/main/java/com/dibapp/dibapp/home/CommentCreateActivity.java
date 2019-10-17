@@ -14,13 +14,11 @@ import android.widget.Toast;
 import com.dibapp.dibapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.DateFormat;
 import java.util.Calendar;
-import java.util.Objects;
 
 public class CommentCreateActivity extends AppCompatActivity {
 
@@ -38,7 +36,7 @@ public class CommentCreateActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crea_commento);
+        setContentView(R.layout.activity_create_comment);
 
         valutazione = (RatingBar)findViewById(R.id.ratingBar);
         saveComment = (Button) findViewById(R.id.buttonComment);

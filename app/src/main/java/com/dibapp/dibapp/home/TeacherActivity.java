@@ -28,7 +28,7 @@ public class TeacherActivity extends HomeActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_docente);
+        setContentView(R.layout.activity_teacher);
         showLess = findViewById(R.id.showLessons);
         createless = findViewById(R.id.creaLezione);
         logOut = findViewById(R.id.logoutDocente);

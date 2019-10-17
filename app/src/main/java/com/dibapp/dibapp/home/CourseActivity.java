@@ -28,7 +28,7 @@ public class CourseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_corsi);
+        setContentView(R.layout.activity_courses);
 
         courseList = new ArrayList<>();
         courseListAdapter = new CoursesListAdapter(getApplicationContext(), courseList);

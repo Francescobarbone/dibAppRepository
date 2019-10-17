@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.dibapp.dibapp.QRCodeScanner;
 import com.dibapp.dibapp.R;
 import com.dibapp.dibapp.autenticazione.MainActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,7 +23,7 @@ public class StudentActivity extends HomeActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_studente);
+        setContentView(R.layout.activity_student);
         visualizzaLezione = findViewById(R.id.butLezione);
         logOut = findViewById(R.id.logoutStudente);
         firebaseAuth = FirebaseAuth.getInstance();
