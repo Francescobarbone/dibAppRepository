@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--suppress ALL -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.dibapp.dibapp">
 
     <application
@@ -8,16 +10,22 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_application_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".home.QRCodeGenerator"></activity>
-        <activity android:name=".home.CommentCreateActivity" />
-        <activity android:name=".home.CommentActivity" />
-        <activity android:name=".home.CourseActivity" />
-        <activity android:name=".home.LessonActivity" />
+        android:theme="@style/AppTheme"
+        android:fullBackupContent="@xml/backup_descriptor"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".home.CommentCreateActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".home.CommentActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".home.CourseActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".home.LessonActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".home.LessonCreateActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".QRCodeScanner" />
+        <activity android:name=".QRCodeScanner"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".autenticazione.ForgotPasswordActivity"
             android:screenOrientation="portrait" />
@@ -43,8 +51,5 @@
             </intent-filter>
         </activity>
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
-
-    <uses-permission android:name="android.permission.CAMERA" />
 
 </manifest>

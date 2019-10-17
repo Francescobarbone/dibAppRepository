@@ -46,7 +46,7 @@ public class CommentCreateActivity extends AppCompatActivity {
         mFirestore = FirebaseFirestore.getInstance();
 
         final String corso = getIntent().getStringExtra("course_id");
-        final String userEmail = getIntent().getStringExtra("email");
+        final String userEmail = firebaseAuth.getCurrentUser().getEmail();
         final String less = getIntent().getStringExtra("lesson_id");
 
         saveComment.setOnClickListener(new View.OnClickListener() {
@@ -62,7 +62,7 @@ public class CommentCreateActivity extends AppCompatActivity {
                 }else if(!((valutazione.getRating() == 0.0)&& (motivazione.getText().toString().isEmpty()))){
                     String currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(Calendar.getInstance().getTime());
                     String mComment = motivazione.getText().toString();
-                    Comment commento = new Comment(mComment, currentDate, less);
+                    Comment commento = new Comment(mComment, currentDate, less, userEmail);
                     mFirestore.collection("Courses /" + corso + "/Lessons/" + less + "/Comments").add(commento).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                         @Override
                         public void onComplete(@NonNull Task<DocumentReference> task) {

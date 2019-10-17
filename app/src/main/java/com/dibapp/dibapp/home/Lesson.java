@@ -1,5 +1,7 @@
 package com.dibapp.dibapp.home;
 
+import android.widget.ImageView;
+
 import java.util.List;
 
 public class Lesson extends LessonID{

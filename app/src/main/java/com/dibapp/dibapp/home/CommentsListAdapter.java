@@ -37,6 +37,7 @@ public class CommentsListAdapter extends RecyclerView.Adapter<CommentsListAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.dateText.setText(commentList.get(position).getTimestamp());
         holder.commentText.setText(commentList.get(position).getMessage());
+        holder.userString.setText(commentList.get(position).getUserComment());
     }
 
     @Override
@@ -51,12 +52,14 @@ public class CommentsListAdapter extends RecyclerView.Adapter<CommentsListAdapte
 
         public TextView dateText;
         public TextView commentText;
+        public TextView userString;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             mView = itemView;
             dateText = (TextView) mView.findViewById(R.id.date_text);
             commentText = (TextView) mView.findViewById(R.id.comment_text);
+            userString = (TextView) mView.findViewById(R.id.user_text);
         }
     }
 

@@ -44,12 +44,13 @@
     <string name="close">Close</string>
     <string name="segui_lezione">Join lesson</string>
     <string name="visualizza_corsi">View courses</string>
-    <string name="valuta_lezione">Rate the lesson</string>
+    <string name="valuta_lezione">Rate this lesson</string>
     <string name="benvenuto_in_dibapp">Welcome to DibApp</string>
     <string name="recupero_password">Password recovery</string>
     <string name="pagina_lezione">"Inserting lessson page "</string>
     <string name="registra_dibapp">Create an account</string>
     <string name="grazie_voto">"Thanks for voting "</string>
-    <string name="inserisci_commento">I</string>
     <string name="benvenuto">Welcome</string>
+    <string name="inserisci_commento">Insert comment</string>
+    <string name="errore_corrispondenza">QR correspondance error</string>
 </resources>

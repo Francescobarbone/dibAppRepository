@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:text="@string/pagina_lezione"
             android:textSize="30sp"
-            android:layout_marginBottom="75dp"
+            android:layout_marginBottom="200dp"
             />
 
         <EditText
@@ -26,32 +26,33 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/inserire_argomento"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:autofillHints="" />
 
         <ImageView
             android:id="@+id/ic_generate_qr"
-            android:layout_width="wrap_content"
-            android:layout_height="34dp"
-            android:layout_marginTop="-40dp"
-            android:layout_marginEnd="-120dp"
+            android:layout_width="42dp"
+            android:layout_height="43dp"
+            android:layout_marginTop="-45dp"
+            android:layout_marginEnd="-130dp"
             android:contentDescription="TODO"
             android:src="@drawable/ic_generate_qr" />
 
         <ImageView
             android:id="@+id/id_qr"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:contentDescription="TODO" />
 
 
         <Button
             android:id="@+id/saveLessonButton"
-            android:layout_width="wrap_content"
+            android:layout_width="135dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:background="@drawable/rounded_button"
-            android:textColor="@color/txtColor"
-            android:text="@string/salva_lezione" />
+            android:text="@string/salva_lezione"
+            android:textColor="@color/txtColor" />
 
     </LinearLayout>
 

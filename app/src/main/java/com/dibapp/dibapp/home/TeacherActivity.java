@@ -32,7 +32,6 @@ public class TeacherActivity extends HomeActivity {
         showLess = findViewById(R.id.showLessons);
         createless = findViewById(R.id.creaLezione);
         logOut = findViewById(R.id.logoutDocente);
-        QR = findViewById(R.id.provaQR);
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
@@ -64,13 +63,6 @@ public class TeacherActivity extends HomeActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(TeacherActivity.this, LessonActivity.class));
-            }
-        });
-
-        QR.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(TeacherActivity.this, QRCodeGenerator.class));
             }
         });
 

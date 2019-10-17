@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.dibapp.dibapp.home.Comment;
 import com.dibapp.dibapp.home.CommentCreateActivity;
 import com.dibapp.dibapp.home.StudentActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,11 +27,13 @@ public class QRCodeScanner extends AppCompatActivity {
 
     private static final String TAG = "Name: ";
     private Button scanButton;
+    FirebaseFirestore mFirebase = FirebaseFirestore.getInstance();
+    FirebaseAuth user = FirebaseAuth.getInstance();
+    final String userEmail = user.getCurrentUser().getEmail();
 
     @Override
     public void onBackPressed(){
-        Intent regToMain = new Intent(QRCodeScanner.this, StudentActivity.class);
-        startActivity(regToMain);
+        startActivity(new Intent(QRCodeScanner.this, StudentActivity.class));
     }
 
     @Override
@@ -39,6 +42,7 @@ public class QRCodeScanner extends AppCompatActivity {
         setContentView(R.layout.activity_qrcode);
         scanButton = findViewById(R.id.scanBtn);
         final Activity activity = this;
+
         scanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,49 +60,22 @@ public class QRCodeScanner extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if(result!=null) {
-            String scanningContent = result.getContents();
-            final String corso = scanningContent.substring(0,20);
-            final String lezione = scanningContent.substring(20,40);
-            FirebaseFirestore mFirebase = FirebaseFirestore.getInstance();
-            FirebaseAuth user = FirebaseAuth.getInstance();
-            final String userEmail = user.getCurrentUser().getEmail();
-
-            mFirebase.collection("Courses /"+corso+"/Lessons").addSnapshotListener(QRCodeScanner.this, new EventListener<QuerySnapshot>() {
-                @Override
-                public void onEvent(@Nullable QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
-                    if(e!=null){
-                        Log.d(TAG, "error : "+ e.getMessage());
-
-                    }
-
-                    boolean isSub = false;
-
-                    for(DocumentSnapshot doc: documentSnapshots){
-                        String lessID = doc.getId();
-
-                        if(lessID.equals(lezione)){
-                            isSub = true;
-                            break;
-                        }
-                    }
-
-                    if(isSub){
-                        Intent intent = new Intent(QRCodeScanner.this, CommentCreateActivity.class);
-                        intent.putExtra("idLezione",lezione);
-                        intent.putExtra("idCorso",corso);
-                        intent.putExtra("email",userEmail);
-                        startActivity(intent);
-                    }else Toast.makeText(QRCodeScanner.this, "Lezione non Trovata", Toast.LENGTH_SHORT).show();
-
-                }
-            });
-
-            if(result.getContents()==null)
-                Toast.makeText(this, "Errore di scan", Toast.LENGTH_LONG).show();
-            else
-                Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
-        } else
-            super.onActivityResult(requestCode, resultCode, data);
+        final String lessName = getIntent().getStringExtra("name_lesson").trim();
+        final String courseid = getIntent().getStringExtra("course_id");
+        final String lessid = getIntent().getStringExtra("lesson_id");
+        if(result != null) {
+            final String QRString = result.getContents().trim();
+            if(QRString.equals(lessName)) {
+                Intent QRtoComment = new Intent(this, CommentCreateActivity.class);
+                QRtoComment.putExtra("course_id", courseid);
+                QRtoComment.putExtra("lesson_id", lessid);
+                QRtoComment.putExtra("lessonName", lessName);
+                startActivity(QRtoComment);
+            }
+             else
+                Toast.makeText(this, R.string.errore_corrispondenza, Toast.LENGTH_SHORT).show();
+        }
+        else
+            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
     }
 }

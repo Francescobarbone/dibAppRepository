@@ -45,15 +45,6 @@
             android:text="@string/crea_lezione"/>
 
         <Button
-            android:id="@+id/provaQR"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/rounded_button"
-            android:textColor="@color/txtColor"
-            android:text="QRCODE"/>
-
-        <Button
             android:id="@+id/logoutDocente"
             android:layout_width="150dp"
             android:layout_height="wrap_content"

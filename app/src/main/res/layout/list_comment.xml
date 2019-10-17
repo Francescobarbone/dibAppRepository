@@ -39,5 +39,16 @@
             app:layout_constraintBottom_toTopOf="@+id/arg_text"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/user_text"
+            android:layout_width="-150dp"
+            android:layout_height="-150dp"
+            android:layout_marginEnd="168dp"
+            android:layout_marginBottom="40dp"
+            android:text="user"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

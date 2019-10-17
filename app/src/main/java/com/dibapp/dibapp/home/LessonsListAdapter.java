@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.dibapp.dibapp.QRCodeScanner;
 import com.dibapp.dibapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -56,6 +57,7 @@ public class LessonsListAdapter extends RecyclerView.Adapter<LessonsListAdapter.
 
         final String courseID = lessonList.get(i).getIdCourse();
         final String lessID = lessonList.get(i).getLessonID();
+        final String nameLess = lessonList.get(i).getArgument();
         final int position = i;
 
        holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -76,9 +78,10 @@ public class LessonsListAdapter extends RecyclerView.Adapter<LessonsListAdapter.
             holder.create.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, CommentCreateActivity.class);
+                    Intent intent = new Intent(context, QRCodeScanner.class);
                     intent.putExtra("course_id", courseID);
                     intent.putExtra("lesson_id", lessID);
+                    intent.putExtra("name_lesson", nameLess);
                     context.startActivity(intent);
                 }
             });

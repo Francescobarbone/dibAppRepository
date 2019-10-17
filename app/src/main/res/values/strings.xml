@@ -61,6 +61,7 @@
     <string name="visualizza_corsi">Visualizza corsi</string>
     <string name="valuta_lezione">Valuta la lezione</string>
     <string name="recupero_password">Recupera la password</string>
-    <string name="pagina_lezione">Pagina di inserimento lezione</string>
+    <string name="pagina_lezione">Inserimento lezione</string>
     <string name="grazie_voto">Grazie per il tuo voto</string>
+    <string name="errore_corrispondenza">Errore di corrispondenza con il QR</string>
 </resources>

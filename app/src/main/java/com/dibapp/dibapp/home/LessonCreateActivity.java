@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.dibapp.dibapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -115,7 +116,6 @@ public class LessonCreateActivity extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         Toast.makeText(LessonCreateActivity.this, R.string.lezione_inserita, Toast.LENGTH_SHORT).show();
                                         argomento.setText("");
-                                        startActivity(new Intent(LessonCreateActivity.this, TeacherActivity.class));
                                     }
                                 }
                             });

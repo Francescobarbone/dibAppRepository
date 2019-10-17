@@ -7,13 +7,15 @@ public class Comment {
     private String message;
     private String timestamp;
     private String lessonID;
+    private String userComment;
 
     public Comment(){}
 
-    public Comment(String message, String timestamp, String lessonID){
+    public Comment(String message, String timestamp, String lessonID, String userComment){
         this.message = message;
         this.timestamp = timestamp;
         this.lessonID = lessonID;
+        this.userComment = userComment;
     }
 
     public String getMessage() {
@@ -38,5 +40,9 @@ public class Comment {
 
     public void setLessonID(String lessonID) {
         this.lessonID = lessonID;
+    }
+
+    public String getUserComment() {
+        return userComment;
     }
 }

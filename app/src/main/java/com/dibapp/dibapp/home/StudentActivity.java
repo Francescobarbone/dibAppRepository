@@ -25,7 +25,6 @@ public class StudentActivity extends HomeActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_studente);
-        seguiLezione = findViewById(R.id.seguiLezione);
         visualizzaLezione = findViewById(R.id.butLezione);
         logOut = findViewById(R.id.logoutStudente);
         firebaseAuth = FirebaseAuth.getInstance();
@@ -43,14 +42,6 @@ public class StudentActivity extends HomeActivity {
                 Intent intToMain = new Intent(StudentActivity.this, MainActivity.class);
                 startActivity(intToMain);
                 finishAffinity();
-            }
-        });
-
-        //Accesso alla lezione previa scansione del codice QR
-        seguiLezione.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(StudentActivity.this, QRCodeScanner.class));
             }
         });
 
