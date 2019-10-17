@@ -27,9 +27,6 @@ public class QRCodeScanner extends AppCompatActivity {
 
     private static final String TAG = "Name: ";
     private Button scanButton;
-    FirebaseFirestore mFirebase = FirebaseFirestore.getInstance();
-    FirebaseAuth user = FirebaseAuth.getInstance();
-    final String userEmail = user.getCurrentUser().getEmail();
 
     @Override
     public void onBackPressed(){
@@ -66,11 +63,11 @@ public class QRCodeScanner extends AppCompatActivity {
         if(result != null) {
             final String QRString = result.getContents().trim();
             if(QRString.equals(lessName)) {
-                Intent QRtoComment = new Intent(this, CommentCreateActivity.class);
+                Intent QRtoComment = new Intent();
                 QRtoComment.putExtra("course_id", courseid);
                 QRtoComment.putExtra("lesson_id", lessid);
                 QRtoComment.putExtra("lessonName", lessName);
-                startActivity(QRtoComment);
+                startActivity(new Intent(QRCodeScanner.this, CommentCreateActivity.class));
             }
              else
                 Toast.makeText(this, R.string.errore_corrispondenza, Toast.LENGTH_SHORT).show();
