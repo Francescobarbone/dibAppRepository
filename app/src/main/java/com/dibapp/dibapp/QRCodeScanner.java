@@ -64,7 +64,7 @@ public class QRCodeScanner extends AppCompatActivity {
         if(result != null) {
             final String QRString = result.getContents().trim();
             if(QRString.equals(lessName)) {
-                Intent QRtoComment = new Intent();
+                Intent QRtoComment = new Intent(this, CommentCreateActivity.class);
                 QRtoComment.putExtra("courseid", courseid);
                 QRtoComment.putExtra("lessonid", lessid);
                 QRtoComment.putExtra("user", user);

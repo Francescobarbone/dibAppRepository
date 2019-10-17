@@ -49,8 +49,6 @@ public class CommentCreateActivity extends AppCompatActivity {
         final String userEmail = getIntent().getStringExtra("user");
         final String less = getIntent().getStringExtra("lessonid");
 
-        Toast.makeText(this, corso + "" + less + "" + userEmail, Toast.LENGTH_SHORT).show();
-
         saveComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
