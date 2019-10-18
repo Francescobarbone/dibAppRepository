@@ -20,14 +20,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.zxing.integration.android.IntentIntegrator;
 
 import java.util.List;
-
-import javax.annotation.Nullable;
 
 public class LessonsListAdapter extends RecyclerView.Adapter<LessonsListAdapter.ViewHolder> {
 
@@ -82,14 +79,33 @@ public class LessonsListAdapter extends RecyclerView.Adapter<LessonsListAdapter.
             holder.create.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, QRCodeScanner.class);
-                    intent.putExtra("course_id", courseID);
-                    intent.putExtra("lesson_id", lessID);
-                    intent.putExtra("name_lesson", nameLess);
-                    intent.putExtra("userMail", admin.getEmail());
-                    context.startActivity(intent);
+                    firebaseFirestore.collection("Courses /" + courseID + "/Lessons/" + lessID + "/Comments").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            boolean flag = false;
+                            for (DocumentSnapshot doc : task.getResult()) {
+                                String email = doc.getString("userComment");
+
+                                if (email.equals(admin.getEmail())) {
+                                    flag = true;
+                                    break;
+                                }
+                            }
+                            if (!flag) {
+                                Intent intent = new Intent(context, QRCodeScanner.class);
+                                intent.putExtra("course_id", courseID);
+                                intent.putExtra("lesson_id", lessID);
+                                intent.putExtra("name_lesson", nameLess);
+                                intent.putExtra("userMail", admin.getEmail());
+                                context.startActivity(intent);
+                            } else {
+                                Toast.makeText(context, R.string.commento_effettuato, Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
                 }
             });
+
         }
 
         firebaseFirestore.collection("Users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
