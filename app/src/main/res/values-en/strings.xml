@@ -57,4 +57,5 @@
     <string name="scan_text">Scan the QR code shown by the teacher</string>
     <string name="no_less">"No lesson has been created "</string>
     <string name="no_comm">No comment has been posted</string>
+    <string name="commento_effettuato">You have already commented!</string>
 </resources>

@@ -65,42 +65,19 @@ public class QRCodeScanner extends AppCompatActivity {
         setContentView(R.layout.activity_qrcode);
         scanButton = findViewById(R.id.scanBtn);
         final Activity activity = this;
-        mFirestore = FirebaseFirestore.getInstance();
-        String path = "Courses /" + getIntent().getStringExtra("course_id") + "/Lessons/" + getIntent().getStringExtra("lesson_id") + "/Comments";
 
-
-        mFirestore.collection(path).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        scanButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                boolean flag = false;
-                for(DocumentSnapshot doc : task.getResult()){
-                    String email = doc.getString("userComment");
-
-                    if(email.equals(getIntent().getStringExtra("userMail"))) {
-                        flag = true;
-                        break;
-                    }
-                }
-                if(!flag){
-                    scanButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            IntentIntegrator integrator = new IntentIntegrator(activity);
-                            integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
-                            integrator.setPrompt("Scan");
-                            integrator.setCameraId(0);
-                            integrator.setBeepEnabled(false);
-                            integrator.setBarcodeImageEnabled(false);
-                            integrator.initiateScan();
-                        }
-                    });
-                }else{
-                    Toast.makeText(QRCodeScanner.this, R.string.commento_effettuato, Toast.LENGTH_SHORT).show();
-                }
+            public void onClick(View view) {
+                IntentIntegrator integrator = new IntentIntegrator(activity);
+                integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
+                integrator.setPrompt("Scan");
+                integrator.setCameraId(0);
+                integrator.setBeepEnabled(false);
+                integrator.setBarcodeImageEnabled(false);
+                integrator.initiateScan();
             }
         });
-
-
     }
 
     @Override
