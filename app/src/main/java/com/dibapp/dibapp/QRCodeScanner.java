@@ -1,5 +1,6 @@
 package com.dibapp.dibapp;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,6 +18,9 @@ import com.dibapp.dibapp.autenticazione.MainActivity;
 import com.dibapp.dibapp.home.Comment;
 import com.dibapp.dibapp.home.CommentCreateActivity;
 import com.dibapp.dibapp.home.StudentActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -30,6 +34,7 @@ public class QRCodeScanner extends AppCompatActivity {
 
     private static final String TAG = "Name: ";
     private Button scanButton;
+    private FirebaseFirestore mFirestore;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
@@ -60,19 +65,42 @@ public class QRCodeScanner extends AppCompatActivity {
         setContentView(R.layout.activity_qrcode);
         scanButton = findViewById(R.id.scanBtn);
         final Activity activity = this;
+        mFirestore = FirebaseFirestore.getInstance();
+        String path = "Courses /" + getIntent().getStringExtra("course_id") + "/Lessons/" + getIntent().getStringExtra("lesson_id") + "/Comments";
 
-        scanButton.setOnClickListener(new View.OnClickListener() {
+
+        mFirestore.collection(path).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onClick(View view) {
-                IntentIntegrator integrator = new IntentIntegrator(activity);
-                integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
-                integrator.setPrompt("Scan");
-                integrator.setCameraId(0);
-                integrator.setBeepEnabled(false);
-                integrator.setBarcodeImageEnabled(false);
-                integrator.initiateScan();
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                boolean flag = false;
+                for(DocumentSnapshot doc : task.getResult()){
+                    String email = doc.getString("userComment");
+
+                    if(email.equals(getIntent().getStringExtra("userMail"))) {
+                        flag = true;
+                        break;
+                    }
+                }
+                if(!flag){
+                    scanButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            IntentIntegrator integrator = new IntentIntegrator(activity);
+                            integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
+                            integrator.setPrompt("Scan");
+                            integrator.setCameraId(0);
+                            integrator.setBeepEnabled(false);
+                            integrator.setBarcodeImageEnabled(false);
+                            integrator.initiateScan();
+                        }
+                    });
+                }else{
+                    Toast.makeText(QRCodeScanner.this, R.string.commento_effettuato, Toast.LENGTH_SHORT).show();
+                }
             }
         });
+
+
     }
 
     @Override

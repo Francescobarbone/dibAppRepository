@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <array name="corsiDiLaurea">
-        <item>ITPS</item>
-        <item>IDC</item>
-        <item>Informatica</item>
-        <item>Computer Science</item>
-        <item>Informatica Magistrale</item>
-        <item>Sicurezza Informatica</item>
-    </array>
 
     <string name="app_name">dibApp</string>
     <string name="benvenuto">Benvenuto</string>
@@ -63,6 +55,7 @@
     <string name="recupero_password">Recupera la password</string>
     <string name="pagina_lezione">Inserimento lezione</string>
     <string name="grazie_voto">Grazie per il tuo voto</string>
+    <string name="commento_effettuato">Hai già commentato la lezione!</string>
     <string name="errore_corrispondenza">Errore di corrispondenza con il QR</string>
     <string name="scansiona_qr">Verifica del codice QR</string>
     <string name="scan_text">Scansiona il codice che ti verrà mostrato a lezione</string>
