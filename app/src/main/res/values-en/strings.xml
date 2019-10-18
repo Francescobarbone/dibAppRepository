@@ -6,7 +6,7 @@
     <string name="accedi">Log in</string>
     <string name="textview">Sign in</string>
     <string name="logout">logOut</string>
-    <string name="hai_effettuato_correttamente_l_accesso_benvenuto">Succesful Login!</string>
+    <string name="hai_effettuato_correttamente_l_accesso_benvenuto">Successful Login!</string>
     <string name="passwordForg">Password forgotten?</string>
     <string name="fine_lezione">End lesson</string>
     <string name="corso_di_laurea">Degree course</string>
@@ -55,4 +55,6 @@
     <string name="errore_corrispondenza">QR correspondance error</string>
     <string name="scansiona_qr">"Scan QR code "</string>
     <string name="scan_text">Scan the QR code shown by the teacher</string>
+    <string name="no_less">"No lesson has been created "</string>
+    <string name="no_comm">No comment has been posted</string>
 </resources>

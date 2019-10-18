@@ -32,6 +32,7 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.Objects;
 
 public class LessonCreateActivity extends AppCompatActivity {
 
@@ -41,6 +42,7 @@ public class LessonCreateActivity extends AppCompatActivity {
     private Button saveLesson;
     private ImageView image;
     private ImageView generate;
+    private static boolean clicked = false;
 
     //admin per memorizzare le info
     private final User admin = new User();
@@ -84,16 +86,18 @@ public class LessonCreateActivity extends AppCompatActivity {
         final FirebaseUser user = firebaseAuth.getCurrentUser();
 
         //salvo le info dell'user
-        admin.setEmail(user.getEmail());
+        if (user != null) {
+            admin.setEmail(user.getEmail());
+        }
 
         mFirestore = FirebaseFirestore.getInstance();
         mFirestore.collection("Users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 boolean find = false;
-                for (DocumentSnapshot doc : task.getResult()) {
+                for (DocumentSnapshot doc : Objects.requireNonNull(task.getResult())) {
                     String email = doc.getString("email");
-                    if (email.equals(admin.getEmail())) {
+                    if (email != null && email.equals(admin.getEmail())) {
                         find = true;
                         //getting admin's courseID
                         admin.setCourseId(doc.getString("idCorso"));
@@ -109,7 +113,7 @@ public class LessonCreateActivity extends AppCompatActivity {
         generate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                clicked = true;
                 final String currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(Calendar.getInstance().getTime());
                 final String arg = argomento.getText().toString();
 
@@ -129,8 +133,9 @@ public class LessonCreateActivity extends AppCompatActivity {
                     saveLesson.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            final Lesson less = new Lesson(admin.getCourseId(), currentDate, arg);
-                            mFirestore.collection("Courses /" + admin.getCourseId() + "/Lessons").add(less).addOnCompleteListener(LessonCreateActivity.this, new OnCompleteListener<DocumentReference>() {
+                            if (clicked){
+                                final Lesson less = new Lesson(admin.getCourseId(), currentDate, arg);
+                                mFirestore.collection("Courses /" + admin.getCourseId() + "/Lessons").add(less).addOnCompleteListener(LessonCreateActivity.this, new OnCompleteListener<DocumentReference>() {
                                 @Override
                                 public void onComplete(@NonNull Task<DocumentReference> task) {
                                     if (task.isSuccessful()) {
@@ -138,8 +143,10 @@ public class LessonCreateActivity extends AppCompatActivity {
                                         argomento.setText("");
                                     }
                                 }
-                            });
-                        }
+                                });
+                             } else
+                                Toast.makeText(LessonCreateActivity.this, "Genera il QR prima di continuare", Toast.LENGTH_SHORT).show();
+                            }
                     });
                 }
             }

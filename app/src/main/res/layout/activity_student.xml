@@ -35,5 +35,13 @@
             android:textColor="@color/txtColor"
             android:text="@string/visualizza_lezioni" />
 
+        <Button
+            android:id="@+id/logoutStudente"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_button"
+            android:textColor="@color/txtColor"
+            android:text="@string/logout" />
+
     </LinearLayout>
 </RelativeLayout>

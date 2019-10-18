@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +27,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.annotation.Nullable;
 
@@ -62,7 +64,7 @@ public class LessonActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-        if(firebaseAuth.getCurrentUser().getEmail().endsWith("@studenti.uniba.it"))
+        if(Objects.requireNonNull(Objects.requireNonNull(firebaseAuth.getCurrentUser()).getEmail()).endsWith("@studenti.uniba.it"))
             startActivity(new Intent(LessonActivity.this, StudentActivity.class));
         else
             startActivity(new Intent(LessonActivity.this, TeacherActivity.class));
@@ -76,7 +78,7 @@ public class LessonActivity extends AppCompatActivity {
         lessonList = new ArrayList<>();
         lessonsListAdapter = new LessonsListAdapter(lessonList, getApplicationContext());
 
-        lessonRecycler = (RecyclerView)findViewById(R.id.lesson_list);
+        lessonRecycler = findViewById(R.id.lesson_list);
         lessonRecycler.setHasFixedSize(true);
         lessonRecycler.setLayoutManager(new LinearLayoutManager(this));
         lessonRecycler.setAdapter(lessonsListAdapter);
@@ -86,7 +88,9 @@ public class LessonActivity extends AppCompatActivity {
 
         final FirebaseUser user = firebaseAuth.getCurrentUser();
         //utente in uso corrente
-        admin.setEmail(user.getEmail());
+        if (user != null) {
+            admin.setEmail(user.getEmail());
+        }
         mFirestore = FirebaseFirestore.getInstance();
 
 
@@ -94,8 +98,8 @@ public class LessonActivity extends AppCompatActivity {
             mFirestore.collection("Courses /" + courseID + "/Lessons").addSnapshotListener(LessonActivity.this, new EventListener<QuerySnapshot>() {
                 @Override
                 public void onEvent(@Nullable QuerySnapshot documentSnapshots, @Nullable FirebaseFirestoreException e) {
-                    if (e != null) {
-                        Log.d(TAG, "Error :" + e.getMessage());
+                    if (documentSnapshots != null && documentSnapshots.isEmpty()) {
+                        Toast.makeText(LessonActivity.this, R.string.no_less, Toast.LENGTH_SHORT).show();
                         return;
                     }
                     for (DocumentChange doc : documentSnapshots.getDocumentChanges()) {
@@ -108,13 +112,13 @@ public class LessonActivity extends AppCompatActivity {
                 }
             });
         }else{//Visualizzazione delle lezioni per il docente
-            mFirestore.collection("Users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            mFirestore.collection("Users").get().addOnCompleteListener(LessonActivity.this, new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                     boolean find = false;
                     for (DocumentSnapshot doc : task.getResult()) {
                         String email = doc.getString("email");
-                        if (email.equals(admin.getEmail())) {
+                        if (Objects.equals(email, admin.getEmail())) {
                             find = true;
                             //getting admin's courseID
                             admin.setCourseId(doc.getString("idCorso"));
@@ -122,11 +126,11 @@ public class LessonActivity extends AppCompatActivity {
                         }
                     }
                     if(find){
-                        mFirestore.collection("Courses /" + admin.getCourseId() + "/Lessons").addSnapshotListener(new EventListener<QuerySnapshot>() {
+                        mFirestore.collection("Courses /" + admin.getCourseId() + "/Lessons").addSnapshotListener(LessonActivity.this, new EventListener<QuerySnapshot>() {
                             @Override
                             public void onEvent(@Nullable QuerySnapshot documentSnapshots, @Nullable FirebaseFirestoreException e) {
-                                if(e!=null){
-                                    Log.d(TAG, "Error :" + e.getMessage());
+                                if (documentSnapshots != null && documentSnapshots.isEmpty()) {
+                                    Toast.makeText(LessonActivity.this, R.string.no_less, Toast.LENGTH_SHORT).show();
                                     return;
                                 }
                                 for(DocumentChange doc : documentSnapshots.getDocumentChanges()){

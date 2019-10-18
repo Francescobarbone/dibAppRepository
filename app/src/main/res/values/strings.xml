@@ -67,4 +67,6 @@
     <string name="scansiona_qr">Verifica del codice QR</string>
     <string name="scan_text">Scansiona il codice che ti verrà mostrato a lezione</string>
     <string name="scan" translatable="false">Scan</string>
+    <string name="no_less">Nessuna lezione creata dal docente</string>
+    <string name="no_comm">Nessun commento per questa lezione</string>
 </resources>

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.dibapp.dibapp.R;
 import com.dibapp.dibapp.autenticazione.MainActivity;
@@ -68,7 +69,7 @@ public class CommentActivity extends AppCompatActivity {
         commentList = new ArrayList<>();
         commentsListAdapter = new CommentsListAdapter(commentList, getApplicationContext());
 
-        commentRecycler = (RecyclerView)findViewById(R.id.comment_list);
+        commentRecycler = findViewById(R.id.comment_list);
         commentRecycler.setHasFixedSize(true);
         commentRecycler.setLayoutManager(new LinearLayoutManager(this));
         commentRecycler.setAdapter(commentsListAdapter);
@@ -76,15 +77,17 @@ public class CommentActivity extends AppCompatActivity {
         firebaseFirestore.collection("Courses /" + courseID + "/Lessons/" + lessonID + "/Comments").addSnapshotListener(CommentActivity.this, new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot documentSnapshots, @Nullable FirebaseFirestoreException e) {
-                if(e!=null){
-                    Log.d(TAG, "Error: " + e.getMessage());
+                if (documentSnapshots != null && documentSnapshots.isEmpty()) {
+                    Toast.makeText(CommentActivity.this, R.string.no_comm, Toast.LENGTH_SHORT).show();
                     return;
                 }
-                for(DocumentChange doc : documentSnapshots.getDocumentChanges()){
-                    if(doc.getType() == DocumentChange.Type.ADDED){
-                        Comment comment = doc.getDocument().toObject(Comment.class);
-                        commentList.add(comment);
-                        commentsListAdapter.notifyDataSetChanged();
+                if (documentSnapshots != null) {
+                    for(DocumentChange doc : documentSnapshots.getDocumentChanges()){
+                        if(doc.getType() == DocumentChange.Type.ADDED){
+                            Comment comment = doc.getDocument().toObject(Comment.class);
+                            commentList.add(comment);
+                            commentsListAdapter.notifyDataSetChanged();
+                        }
                     }
                 }
             }
