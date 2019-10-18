@@ -4,10 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.dibapp.dibapp.R;
+import com.dibapp.dibapp.autenticazione.MainActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
@@ -28,6 +32,24 @@ public class CommentActivity extends AppCompatActivity {
     private CommentsListAdapter commentsListAdapter;
     private FirebaseFirestore firebaseFirestore;
     private FirebaseAuth firebaseAuth;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        if(item.getItemId() == R.id.logout){
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            finish();
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

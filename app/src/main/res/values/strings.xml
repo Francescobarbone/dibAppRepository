@@ -64,4 +64,7 @@
     <string name="pagina_lezione">Inserimento lezione</string>
     <string name="grazie_voto">Grazie per il tuo voto</string>
     <string name="errore_corrispondenza">Errore di corrispondenza con il QR</string>
+    <string name="scansiona_qr">Verifica del codice QR</string>
+    <string name="scan_text">Scansiona il codice che ti verrà mostrato a lezione</string>
+    <string name="scan" translatable="false">Scan</string>
 </resources>

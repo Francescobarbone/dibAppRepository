@@ -2,6 +2,8 @@ package com.dibapp.dibapp.home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -26,12 +28,29 @@ public class TeacherActivity extends HomeActivity {
     private static User admin = new User();
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        if(item.getItemId() == R.id.logout){
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            finish();
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
+        return true;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher);
         showLess = findViewById(R.id.showLessons);
         createless = findViewById(R.id.creaLezione);
-        logOut = findViewById(R.id.logoutDocente);
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
@@ -72,15 +91,6 @@ public class TeacherActivity extends HomeActivity {
                 startActivity(new Intent(TeacherActivity.this, LessonCreateActivity.class));
             }
         });
-
-
-        logOut.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                firebaseAuth.signOut();
-                Intent intToMain = new Intent(TeacherActivity.this, MainActivity.class);
-                startActivity(intToMain);
-            }
-        });
+        
     }
 }
