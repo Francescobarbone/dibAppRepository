@@ -26,10 +26,10 @@ import java.util.Calendar;
 
 public class CommentCreateActivity extends AppCompatActivity {
 
-    private EditText motivazione;
+    private EditText motivation;
     private FirebaseFirestore mFirestore;
     private Button saveComment;
-    private RatingBar valutazione;
+    private RatingBar rates;
 
 
     @Override
@@ -60,9 +60,9 @@ public class CommentCreateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_comment);
 
-        valutazione = (RatingBar)findViewById(R.id.ratingBar);
+        rates = (RatingBar)findViewById(R.id.ratingBar);
         saveComment = (Button) findViewById(R.id.buttonComment);
-        motivazione = (EditText)findViewById(R.id.editText);
+        motivation = (EditText)findViewById(R.id.editText);
         mFirestore = FirebaseFirestore.getInstance();
 
         final String corso = getIntent().getStringExtra("courseid");
@@ -72,23 +72,23 @@ public class CommentCreateActivity extends AppCompatActivity {
         saveComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if((valutazione.getRating() == 0.0)&& (motivazione.getText().toString().isEmpty())){
+                if((rates.getRating() == 0.0)&& (motivation.getText().toString().isEmpty())){
                     Toast.makeText(CommentCreateActivity.this, R.string.campi_vuoti, Toast.LENGTH_SHORT).show();
-                }else if(valutazione.getRating() == 0.0){
+                }else if(rates.getRating() == 0.0){
                     Toast.makeText(CommentCreateActivity.this, R.string.exp_valutazione, Toast.LENGTH_SHORT).show();
-                }else if(motivazione.getText().toString().isEmpty()){
-                    motivazione.setError("Per favore, inserisca una motivazione");
-                    motivazione.requestFocus();
-                }else if(!((valutazione.getRating() == 0.0) && (motivazione.getText().toString().isEmpty()))){
+                }else if(motivation.getText().toString().isEmpty()){
+                    motivation.setError("Per favore, inserisca una motivation");
+                    motivation.requestFocus();
+                }else if(!((rates.getRating() == 0.0) && (motivation.getText().toString().isEmpty()))){
                     String currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(Calendar.getInstance().getTime());
-                    String mComment = motivazione.getText().toString();
+                    String mComment = motivation.getText().toString();
                     Comment commento = new Comment(mComment, currentDate, less, userEmail);
                     mFirestore.collection("Courses /" + corso + "/Lessons/" + less + "/Comments").add(commento).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                         @Override
                         public void onComplete(@NonNull Task<DocumentReference> task) {
                             if(task.isSuccessful()){
                                 Toast.makeText(CommentCreateActivity.this, R.string.grazie_voto, Toast.LENGTH_SHORT).show();
-                                motivazione.setText("");
+                                motivation.setText("");
                                 startActivity(new Intent(CommentCreateActivity.this, StudentActivity.class));
                             }
                         }

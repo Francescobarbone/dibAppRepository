@@ -23,7 +23,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 public class TeacherActivity extends HomeActivity {
 
     private Button showLess, createless, logOut, QR;
-    private TextView textViewBenvenuto;
+    private TextView welcomeTeacher;
     private FirebaseAuth firebaseAuth;
     private static User admin = new User();
 
@@ -55,10 +55,10 @@ public class TeacherActivity extends HomeActivity {
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
-        textViewBenvenuto = (TextView) findViewById(R.id.textView3);
+        welcomeTeacher = (TextView) findViewById(R.id.textView3);
 
         if(user!=null)
-            textViewBenvenuto.setText(user.getEmail().substring( 0, (user.getEmail().indexOf('@'))));
+            welcomeTeacher.setText(user.getEmail().substring( 0, (user.getEmail().indexOf('@'))));
 
         mFirestore.collection("Users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override

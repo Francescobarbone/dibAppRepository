@@ -7,7 +7,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import com.dibapp.dibapp.R;
 import com.dibapp.dibapp.autenticazione.MainActivity;
@@ -16,9 +15,8 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class StudentActivity extends HomeActivity {
 
-    private Button visualizzaLezione;
-    private Button seguiLezione;
-    private TextView textViewBenvenuto;
+    private Button viewLessons;
+    private TextView textViewWelcome;
     private FirebaseAuth firebaseAuth;
 
     @Override
@@ -43,16 +41,16 @@ public class StudentActivity extends HomeActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student);
-        visualizzaLezione = findViewById(R.id.butLezione);
+        viewLessons = findViewById(R.id.butLezione);
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
-        textViewBenvenuto = (TextView) findViewById(R.id.benvenutoId);
-        textViewBenvenuto.setText(user.getEmail().substring(0, (user.getEmail().indexOf('@'))));
+        textViewWelcome = (TextView) findViewById(R.id.benvenutoId);
+        textViewWelcome.setText(user.getEmail().substring(0, (user.getEmail().indexOf('@'))));
 
 
         //Visualizzazione dei corsi, lezione e commenti
-        visualizzaLezione.setOnClickListener(new View.OnClickListener() {
+        viewLessons.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent studToQR = new Intent(StudentActivity.this, CourseActivity.class);
