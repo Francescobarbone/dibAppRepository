@@ -26,7 +26,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Locale;
+import java.util.Objects;
 
+@SuppressWarnings("ALL")
 public class MainActivity extends AppCompatActivity {
 
     private EditText emailId, password;
@@ -86,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                     password.setError("Inserire la password");
                     password.requestFocus();
                 }
-                else if (!(email.isEmpty() && psw.isEmpty())){
+                else {
                     firebaseAuth.signInWithEmailAndPassword(email, psw).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -94,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(MainActivity.this, R.string.error, Toast.LENGTH_SHORT).show();
                             } else {
                                 if(email.endsWith("@studenti.uniba.it")){
-                                    if(firebaseAuth.getCurrentUser().isEmailVerified()){
+                                    if(Objects.requireNonNull(firebaseAuth.getCurrentUser()).isEmailVerified()){
                                         Intent intToHome = new Intent(MainActivity.this, StudentActivity.class);
                                         startActivity(intToHome);
                                     }
@@ -109,8 +111,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                     });
-                } else
-                    Toast.makeText(MainActivity.this, R.string.error, Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -143,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
     private void showChangeLanguageDialog() {
         //array delle lingue da mostrare nella finestra di alert
         final String [] listItems = {"Italiano", "English"};
-        AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainActivity.this);
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
         mBuilder.setTitle("Seleziona la lingua..");
         mBuilder.setSingleChoiceItems(listItems, -1, new DialogInterface.OnClickListener() {
             @Override
@@ -162,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
         mDialog.show();
     }
 
+    @SuppressWarnings("deprecation")
     private void setLocale(String lang){
         Locale locale = new Locale(lang);
         Locale.setDefault(locale);
