@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.dibapp.dibapp.R;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.w3c.dom.Text;
 
@@ -38,6 +39,8 @@ public class CommentsListAdapter extends RecyclerView.Adapter<CommentsListAdapte
         holder.dateText.setText(commentList.get(position).getTimestamp());
         holder.commentText.setText(commentList.get(position).getMessage());
         holder.userString.setText(commentList.get(position).getUserComment());
+
+
     }
 
     @Override
