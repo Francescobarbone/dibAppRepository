@@ -58,4 +58,5 @@
     <string name="no_less">"No lesson has been created "</string>
     <string name="no_comm">No comment has been posted</string>
     <string name="commento_effettuato">You have already commented!</string>
+    <string name="anonimo">Anonymous Comment</string>
 </resources>
