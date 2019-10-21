@@ -96,6 +96,7 @@ public class CommentCreateActivity extends AppCompatActivity {
                     String mComment = motivation.getText().toString();
                     Comment comment = new Comment();
 
+                    //controllo sulla visibilità del commento
                     if(visibility)
                         comment = new Comment(mComment, currentDate, less, "Anonimo");
                     else
