@@ -5,6 +5,11 @@
         <item name="colorControlActivated">@color/duskYellow</item>
     </style>
 
+    <style name="RatingBarView" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/yellow</item>
+        <item name="colorControlActivated">@color/yellow</item>
+    </style>
+
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->

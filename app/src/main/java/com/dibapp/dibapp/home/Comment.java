@@ -8,16 +8,16 @@ public class Comment {
     private String timestamp;
     private String lessonID;
     private String userComment;
-    private int rate;
+    private float rate;
 
     public Comment(){}
 
-    public Comment(String message, String timestamp, String lessonID, String userComment, int stars){
+    public Comment(String message, String timestamp, String lessonID, String userComment, float stars){
         this.message = message;
         this.timestamp = timestamp;
         this.lessonID = lessonID;
         this.userComment = userComment;
-        this.rate = rate;
+        this.rate = stars;
     }
 
     public String getMessage() {
@@ -48,7 +48,7 @@ public class Comment {
         return userComment;
     }
 
-    public int getRate() {
+    public float getRate() {
         return rate;
     }
 }

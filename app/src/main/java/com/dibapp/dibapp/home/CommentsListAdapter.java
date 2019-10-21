@@ -40,7 +40,7 @@ public class CommentsListAdapter extends RecyclerView.Adapter<CommentsListAdapte
         holder.dateText.setText(commentList.get(position).getTimestamp());
         holder.commentText.setText(commentList.get(position).getMessage());
         holder.userString.setText(commentList.get(position).getUserComment());
-        holder.rating.setNumStars(commentList.get(position).getRate());
+        holder.rating.setNumStars((int)commentList.get(position).getRate());
     }
 
     @Override
