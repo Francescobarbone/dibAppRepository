@@ -64,6 +64,8 @@ public class LessonCreateActivity extends AppCompatActivity {
             FirebaseAuth.getInstance().signOut();
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
+        } else if(item.getItemId() == R.id.home){
+                startActivity(new Intent(getApplicationContext(), TeacherActivity.class));
         } else {
             return super.onOptionsItemSelected(item);
         }

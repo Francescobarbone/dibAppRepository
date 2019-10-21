@@ -53,6 +53,11 @@ public class LessonActivity extends AppCompatActivity {
             FirebaseAuth.getInstance().signOut();
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
+        } else if(item.getItemId() == R.id.home){
+            if(firebaseAuth.getCurrentUser().getEmail().endsWith("@uniba.it"))
+                startActivity(new Intent(getApplicationContext(), TeacherActivity.class));
+            else
+                startActivity(new Intent(getApplicationContext(), StudentActivity.class));
         } else {
             return super.onOptionsItemSelected(item);
         }

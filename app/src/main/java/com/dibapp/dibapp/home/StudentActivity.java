@@ -31,6 +31,8 @@ public class StudentActivity extends HomeActivity {
             FirebaseAuth.getInstance().signOut();
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
+        } else if(item.getItemId() == R.id.home){
+                startActivity(new Intent(getApplicationContext(), StudentActivity.class));
         } else {
             return super.onOptionsItemSelected(item);
         }

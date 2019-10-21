@@ -62,5 +62,7 @@
     <string name="scan" translatable="false">Scan</string>
     <string name="no_less">Nessuna lezione creata dal docente</string>
     <string name="no_comm">Nessun commento per questa lezione</string>
-    <string name="anonimo">Commento Anonimo</string>
+    <string name="num_stud">Numero di studenti</string>
+    <string name="anonimo">Commento anonimo</string>
+    <string name="home" translatable="false">Home</string>
 </resources>

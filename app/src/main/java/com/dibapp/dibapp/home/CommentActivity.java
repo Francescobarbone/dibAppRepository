@@ -7,9 +7,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,7 +35,8 @@ public class CommentActivity extends AppCompatActivity {
     private CommentsListAdapter commentsListAdapter;
     private FirebaseFirestore firebaseFirestore;
     private FirebaseAuth firebaseAuth;
-    private TextView textStudenti;
+    private TextView textStudent;
+    private TextView numOfStudent;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
@@ -49,6 +50,11 @@ public class CommentActivity extends AppCompatActivity {
             FirebaseAuth.getInstance().signOut();
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
+        } else if(item.getItemId() == R.id.home){
+            if(firebaseAuth.getCurrentUser().getEmail().endsWith("@uniba.it"))
+                startActivity(new Intent(getApplicationContext(), TeacherActivity.class));
+            else
+                startActivity(new Intent(getApplicationContext(), StudentActivity.class));
         } else {
             return super.onOptionsItemSelected(item);
         }
@@ -60,8 +66,9 @@ public class CommentActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
-        textStudenti = findViewById(R.id.numStudenti);
-
+        textStudent = findViewById(R.id.countStudenti);
+        numOfStudent = findViewById(R.id.numStudenti);
+        numOfStudent.setVisibility(View.INVISIBLE);
         //get information from lessonListAdapter
         final String lessonID = getIntent().getStringExtra("lesson_id");
         final String courseID = getIntent().getStringExtra("course_id");
@@ -96,7 +103,11 @@ public class CommentActivity extends AppCompatActivity {
                         }
                     }
                 }
-                textStudenti.setText(R.string.num_stud + " : " + commentList.size());
+
+                if(commentList != null) {
+                    numOfStudent.setVisibility(View.VISIBLE);
+                    textStudent.setText(": " + commentsListAdapter.getItemCount());
+                }
             }
         });
     }

@@ -1,5 +1,6 @@
 package com.dibapp.dibapp.home;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -7,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 
@@ -39,6 +41,8 @@ public class TeacherActivity extends HomeActivity {
             FirebaseAuth.getInstance().signOut();
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
+        } else if(item.getItemId() == R.id.home){
+            startActivity(new Intent(getApplicationContext(), TeacherActivity.class));
         } else {
             return super.onOptionsItemSelected(item);
         }
