@@ -97,9 +97,9 @@ public class CommentCreateActivity extends AppCompatActivity {
                     Comment comment = new Comment();
 
                     if(visibility)
-                        comment = new Comment(mComment, currentDate, less, "Anonimo");
+                        comment = new Comment(mComment, currentDate, less, "Anonimo", rates.getNumStars());
                     else
-                        comment = new Comment(mComment, currentDate, less,userEmail);
+                        comment = new Comment(mComment, currentDate, less,userEmail, rates.getNumStars());
 
                     mFirestore.collection("Courses /" + corso + "/Lessons/" + less + "/Comments").add(comment).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                         @Override

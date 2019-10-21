@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -39,8 +40,7 @@ public class CommentsListAdapter extends RecyclerView.Adapter<CommentsListAdapte
         holder.dateText.setText(commentList.get(position).getTimestamp());
         holder.commentText.setText(commentList.get(position).getMessage());
         holder.userString.setText(commentList.get(position).getUserComment());
-
-
+        holder.rating.setNumStars(commentList.get(position).getRate());
     }
 
     @Override
@@ -59,6 +59,7 @@ public class CommentsListAdapter extends RecyclerView.Adapter<CommentsListAdapte
         public TextView dateText;
         public TextView commentText;
         public TextView userString;
+        public RatingBar rating;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -66,6 +67,7 @@ public class CommentsListAdapter extends RecyclerView.Adapter<CommentsListAdapte
             dateText = (TextView) mView.findViewById(R.id.date_text);
             commentText = (TextView) mView.findViewById(R.id.comment_text);
             userString = (TextView) mView.findViewById(R.id.user_text);
+            rating = (RatingBar) mView.findViewById(R.id.ratingBar);
         }
     }
 
