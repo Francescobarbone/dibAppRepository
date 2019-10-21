@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dibapp.dibapp.R;
@@ -33,6 +35,7 @@ public class CommentActivity extends AppCompatActivity {
     private CommentsListAdapter commentsListAdapter;
     private FirebaseFirestore firebaseFirestore;
     private FirebaseAuth firebaseAuth;
+    private TextView textStudenti;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
@@ -57,6 +60,7 @@ public class CommentActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
+        textStudenti = findViewById(R.id.numStudenti);
 
         //get information from lessonListAdapter
         final String lessonID = getIntent().getStringExtra("lesson_id");
@@ -74,7 +78,9 @@ public class CommentActivity extends AppCompatActivity {
         commentRecycler.setLayoutManager(new LinearLayoutManager(this));
         commentRecycler.setAdapter(commentsListAdapter);
 
+
         firebaseFirestore.collection("Courses /" + courseID + "/Lessons/" + lessonID + "/Comments").addSnapshotListener(CommentActivity.this, new EventListener<QuerySnapshot>() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onEvent(@Nullable QuerySnapshot documentSnapshots, @Nullable FirebaseFirestoreException e) {
                 if (documentSnapshots != null && documentSnapshots.isEmpty()) {
@@ -90,6 +96,7 @@ public class CommentActivity extends AppCompatActivity {
                         }
                     }
                 }
+                textStudenti.setText(R.string.num_stud + " : " + commentList.size());
             }
         });
     }

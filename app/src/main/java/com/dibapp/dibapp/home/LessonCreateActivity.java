@@ -94,21 +94,18 @@ public class LessonCreateActivity extends AppCompatActivity {
         mFirestore.collection("Users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                boolean find = false;
                 for (DocumentSnapshot doc : Objects.requireNonNull(task.getResult())) {
                     String email = doc.getString("email");
                     if (email != null && email.equals(admin.getEmail())) {
-                        find = true;
                         //getting admin's courseID
                         admin.setCourseId(doc.getString("idCorso"));
                         break;
                     }
                 }
-                if(find)
-                    saveLesson.setVisibility(View.VISIBLE);
             }
         });
 
+        saveLesson.setVisibility(View.INVISIBLE);
         //Metodo per la creazione della lezione
         generate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,6 +124,7 @@ public class LessonCreateActivity extends AppCompatActivity {
                         BarcodeEncoder bce = new BarcodeEncoder();
                         Bitmap btp = bce.createBitmap(btmx);
                         image.setImageBitmap(btp);
+                        saveLesson.setVisibility(View.VISIBLE);
                     }catch(WriterException e){
                         e.printStackTrace();
                     }
