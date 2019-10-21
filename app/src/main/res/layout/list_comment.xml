@@ -12,19 +12,19 @@
     >
 
     <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         >
 
-        <RatingBar
-            android:id="@+id/ratingBar"
-            android:layout_width="150dp"
-            android:layout_height="41dp"
-            android:layout_marginBottom="40dp"
-            android:isIndicator="true"
-            android:scaleX="0.45"
-            android:scaleY="0.45"
-            android:theme="@style/RatingBarView" />
+         <RatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:isIndicator="true"
+                android:theme="@style/RatingBarView"
+                style="@android:style/Widget.Holo.Light.RatingBar.Small"
+             />
+
 
         <TextView
             android:id="@+id/date_text"
@@ -34,13 +34,14 @@
             android:layout_marginTop="44dp"
             android:text="time"
             android:textColor="#8B000000"
-            android:textSize="12sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/comment_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="44dp"
+            android:layout_marginStart="10dp"
             android:text="comment"
             android:textColor="#110D0D"
             android:textSize="14sp" />
@@ -50,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="150dp"
-            android:layout_marginBottom="40dp"
+            android:layout_marginBottom="20dp"
             android:text="user" />
 
     </RelativeLayout>

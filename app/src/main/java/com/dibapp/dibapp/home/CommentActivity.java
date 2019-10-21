@@ -87,7 +87,6 @@ public class CommentActivity extends AppCompatActivity {
 
 
         firebaseFirestore.collection("Courses /" + courseID + "/Lessons/" + lessonID + "/Comments").addSnapshotListener(CommentActivity.this, new EventListener<QuerySnapshot>() {
-            @SuppressLint("SetTextI18n")
             @Override
             public void onEvent(@Nullable QuerySnapshot documentSnapshots, @Nullable FirebaseFirestoreException e) {
                 if (documentSnapshots != null && documentSnapshots.isEmpty()) {
