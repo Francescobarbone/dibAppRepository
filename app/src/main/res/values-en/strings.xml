@@ -1,33 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">dibApp</string>
-    <string name="email">Email</string>
-    <string name="password">Password</string>
+    <string name="app_name">DibApp</string>
     <string name="accedi">Log in</string>
-    <string name="textview">Sign in</string>
-    <string name="logout">logOut</string>
+    <string name="logout">Logout</string>
     <string name="hai_effettuato_correttamente_l_accesso_benvenuto">Successful Login!</string>
-    <string name="passwordForg">Password forgotten?</string>
-    <string name="fine_lezione">End lesson</string>
-    <string name="corso_di_laurea">Degree course</string>
-    <string name="orario_inizio">Start lesson</string>
     <string name="argomento">Topic</string>
     <string name="salva_lezione">Save lesson</string>
     <string name="password_dimenticata">Forgotten password?</string>
     <string name="seleziona_lingua">Select language</string>
-    <string name="e_mail">E-mail</string>
-    <string name="invia">Send e-mail</string>
+    <string name="invia">Send E-mail</string>
     <string name="registrati">Sign in</string>
-    <string name="visualizza_lezione">Show lesson</string>
     <string name="crea_lezione">create lesson</string>
     <string name="visualizza_lezioni">Show lessons</string>
     <string name="name_course">Name course</string>
     <string name="date">Date</string>
     <string name="day_of_lesson">day_of_lesson</string>
-    <string name="argument">argument</string>
     <string name="inserire_argomento">Insert argument</string>
     <string name="indica_la_motivazione">Insert a comment</string>
-    <string name="valuta_la_lezione">Rate this lesson</string>
     <string name="campi_vuoti">Empty fields</string>
     <string name="inserisci_password">Insert password</string>
     <string name="inserisci_email">Insert email</string>
@@ -42,8 +31,6 @@
     <string name="intent_logout">Do you want to log out?</string>
     <string name="yes">Yes</string>
     <string name="close">Close</string>
-    <string name="segui_lezione">Join lesson</string>
-    <string name="visualizza_corsi">View courses</string>
     <string name="valuta_lezione">Rate this lesson</string>
     <string name="benvenuto_in_dibapp">Welcome to DibApp</string>
     <string name="recupero_password">Password recovery</string>
@@ -58,7 +45,6 @@
     <string name="no_less">"No lesson has been created "</string>
     <string name="no_comm">No comment has been posted</string>
     <string name="commento_effettuato">You have already commented!</string>
-    <string name="num_stud">Number of students</string>
+    <string name="num_stud">Student number</string>
     <string name="anonimo">Anonymous comment</string>
-    <string name="todo">todo</string>
 </resources>

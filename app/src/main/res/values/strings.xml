@@ -1,68 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">dibApp</string>
-    <string name="benvenuto">Benvenuto</string>
-    <string name="email">Email</string>
-    <string name="password">Password</string>
+    <!-- activity_main strings & message-->
+    <string name="app_name">DibApp</string>
+    <string name="password" translatable="false">Password</string>
     <string name="accedi">Accedi</string>
-    <string name="textview">Registrati</string>
     <string name="benvenuto_in_dibapp">Benvenuto in DibApp</string>
-    <string name="logout">logOut</string>
-    <string name="hai_effettuato_correttamente_l_accesso_benvenuto">Hai effettuato correttamente l\'accesso. Benvenuto!</string>
-    <string name="passwordForg">Password dimenticata?</string>
-    <string name="fine_lezione">Fine lezione</string>
-    <string name="corso_di_laurea">Corso di Laurea</string>
-    <string name="orario_inizio">Orario inizio</string>
-    <string name="argomento">Argomento</string>
-    <string name="salva_lezione">Salva Lezione</string>
     <string name="password_dimenticata">Password dimenticata?</string>
-    <string name="seleziona_lingua">seleziona lingua</string>
-    <string name="e_mail">E-mail</string>
-    <string name="invia">Invia</string>
-    <string name="registrati">registrati</string>
-    <string name="visualizza_lezione">Visualizza lezione</string>
-    <string name="crea_lezione">crea lezione</string>
-    <string name="registra_dibapp">Registrati su DibApp</string>
-    <string name="visualizza_lezioni">visualizza lezioni</string>
-    <string name="dd_mm_yyyy" translatable="false">dd/MM/yyyy</string>
-    <string name="hh_mm" translatable="false">hh:mm</string>
-    <string name="name_course">Name course</string>
-    <string name="date">Date</string>
-    <string name="inserire_argomento">Inserire argomento</string>
-    <string name="day_of_lesson">day_of_lesson</string>
-    <string name="argument">argument</string>
-    <string name="indica_la_motivazione">Indica la motivazione</string>
-    <string name="valuta_la_lezione">valuta_la_lezione</string>
+    <string name="seleziona_lingua">Seleziona lingua</string>
+    <string name="e_mail" translatable="false">E-mail</string>
+    <string name="registrati">Registrati</string>
     <string name="campi_vuoti">I campi sono vuoti</string>
     <string name="inserisci_password">Inserire password</string>
-    <string name="inserisci_commento">Inserisci commento</string>
-    <string name="inserisci_email">Inserire email</string>
-    <string name="registrazione_successo">Registrazione avvenuta con successo</string>
-    <string name="reg_mail">registrazione_mail</string>
-    <string name="successful_login">Login effettuato con successo</string>
+    <string name="inserisci_email">Inserire E-mail</string>
     <string name="error">Errore durante il login</string>
-    <string name="verify">Verifica</string>
+    <string name="verify">Verifica la tua E-mail</string>
+
+    <!--activity_registrazione strings & Toast-->
+    <string name="registra_dibapp">Registrati su DibApp</string>
+    <string name="registrazione_successo">Registrazione avvenuta con successo, controlla la tua E-mail</string>
+    <string name="reg_mail">Registrati con una E-mail istituzionale</string>
     <string name="registrazione_gia_effettuata">Registrazione già effettuata</string>
-    <string name="exp_valutazione">Valutazione non espressa</string>
+
+    <!-- activity_docente strings-->
+    <string name="benvenuto">Benvenuto</string>
+    <string name="visualizza_lezioni">Visualizza lezioni</string>
+    <string name="crea_lezione">Crea lezione</string>
+
+    <!--main_menu-->
+    <string name="logout">Esci</string>
+    <string name="home" translatable="false">Home</string>
+
+    <!--activity_home Toast-->
+    <string name="hai_effettuato_correttamente_l_accesso_benvenuto">Hai effettuato correttamente l\'accesso. Benvenuto!</string>
+    <string name="successful_login">Login effettuato con successo</string>
+
+    <!--activity_lesson_create strings-->
+    <string name="pagina_lezione">Inserimento lezione</string>
+    <string name="salva_lezione">Salva Lezione</string>
+    <string name="inserire_argomento">Inserire argomento</string>
     <string name="lezione_inserita">Lezione inserita</string>
+
+    <!--list_course String-->
+    <string name="name_course">Name course</string>
+    <string name="date">Data</string>
+
+    <!--list_comment String-->
+    <string name="time" translatable="false">time</string>
+    <string name="comment" translatable="false">comment</string>
+    <string name="user" translatable="false">user</string>
+
+    <!--list_lesson String-->
+    <string name="argomento">Argomento</string>
+    <string name="day_of_lesson">day_of_lesson</string>
+    <string name="no_less">Nessuna lezione creata dal docente</string>
+    <string name="commento_effettuato">Hai già commentato la lezione!</string>
+
+    <!--activity_create_comment String & Toast-->
+    <string name="indica_la_motivazione">Indica la motivazione</string>
+    <string name="anonimo">Commento anonimo</string>
+    <string name="inserisci_commento">Inserisci commento</string>
+    <string name="exp_valutazione">Valutazione non espressa</string>
+    <string name="valuta_lezione">Valuta la lezione</string>
+    <string name="grazie_voto">Grazie per il tuo voto</string>
+
+    <!--alert logout-->
     <string name="intent_logout">Vuoi effettuare il logout?</string>
     <string name="yes">Sì</string>
     <string name="close">Chiudi</string>
-    <string name="segui_lezione">Segui lezione</string>
-    <string name="visualizza_corsi">Visualizza corsi</string>
-    <string name="valuta_lezione">Valuta la lezione</string>
+
+    <!--activity_forgot_password Strings -->
+    <string name="invia">Invia</string>
     <string name="recupero_password">Recupera la password</string>
-    <string name="pagina_lezione">Inserimento lezione</string>
-    <string name="grazie_voto">Grazie per il tuo voto</string>
-    <string name="commento_effettuato">Hai già commentato la lezione!</string>
-    <string name="errore_corrispondenza">Errore di corrispondenza con il QR</string>
+
+    <!--activity_comment String-->
+    <string name="num_stud">Numero di studenti</string>
+    <string name="no_comm">Nessun commento per questa lezione</string>
+
+    <!--activity_qrcode String-->
     <string name="scansiona_qr">Verifica del codice QR</string>
     <string name="scan_text">Scansiona il codice che ti verrà mostrato a lezione</string>
     <string name="scan" translatable="false">Scan</string>
-    <string name="no_less">Nessuna lezione creata dal docente</string>
-    <string name="no_comm">Nessun commento per questa lezione</string>
-    <string name="num_stud">Numero di studenti</string>
-    <string name="anonimo">Commento anonimo</string>
-    <string name="home" translatable="false">Home</string>
+    <string name="errore_corrispondenza">Errore di corrispondenza con il QR</string>
+
+    <!--for image-->
+    <string name="todo" translatable="false">todo</string>
+
 </resources>

@@ -133,20 +133,17 @@ public class LessonCreateActivity extends AppCompatActivity {
                     saveLesson.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            if (clicked){
-                                final Lesson less = new Lesson(admin.getCourseId(), currentDate, arg);
-                                mFirestore.collection("Courses /" + admin.getCourseId() + "/Lessons").add(less).addOnCompleteListener(LessonCreateActivity.this, new OnCompleteListener<DocumentReference>() {
-                                @Override
-                                public void onComplete(@NonNull Task<DocumentReference> task) {
-                                    if (task.isSuccessful()) {
-                                        Toast.makeText(LessonCreateActivity.this, R.string.lezione_inserita, Toast.LENGTH_SHORT).show();
-                                        argomento.setText("");
-                                    }
+                            final Lesson less = new Lesson(admin.getCourseId(), currentDate, arg);
+                            mFirestore.collection("Courses /" + admin.getCourseId() + "/Lessons").add(less).addOnCompleteListener(LessonCreateActivity.this, new OnCompleteListener<DocumentReference>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentReference> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(LessonCreateActivity.this, R.string.lezione_inserita, Toast.LENGTH_SHORT).show();
+                                    argomento.setText("");
                                 }
-                                });
-                             } else
-                                Toast.makeText(LessonCreateActivity.this, "Genera il QR prima di continuare", Toast.LENGTH_SHORT).show();
                             }
+                            });
+                        }
                     });
                 }
             }

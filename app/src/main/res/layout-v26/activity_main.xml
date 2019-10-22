@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="@string/email"
+            android:hint="@string/e_mail"
             android:inputType="textEmailAddress"
             android:importantForAutofill="no" />
 
@@ -54,10 +54,9 @@
             android:id="@+id/textView"
             android:layout_width="64dp"
             android:layout_height="wrap_content"
-            android:text="@string/textview"
+            android:text="@string/registrati"
             android:textColor="#3F51B5"
-            android:textStyle="bold"
-            tools:text="Registrati" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/passwordForg"
@@ -67,8 +66,7 @@
             android:textColor="#3F51B5"
             android:textStyle="bold"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
-            tools:text="Password dimenticata?"/>
+            android:layout_marginBottom="20dp"/>
 
         <Button
             android:id="@+id/buttonLang"

@@ -50,7 +50,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                         }
                     });
                 } else {
-                    userEmail.setError("Inserire l'indirizzo email");
+                    userEmail.setError(getString(R.string.inserisci_email));
                     userEmail.requestFocus();
                 }
             }
