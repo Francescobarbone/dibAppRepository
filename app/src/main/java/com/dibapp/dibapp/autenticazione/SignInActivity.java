@@ -54,10 +54,10 @@ public class SignInActivity extends AppCompatActivity {
                     Toast.makeText( SignInActivity.this, R.string.campi_vuoti, Toast.LENGTH_SHORT).show();
                 }
                 else if(pwd.isEmpty()){
-                    password.setError("Inserire la password");
+                    password.setError(getString(R.string.inserisci_password));
                     password.requestFocus();
                 }else if(email.isEmpty()){
-                    emailId.setError("Inserire l'indirizzo email");
+                    emailId.setError(getString(R.string.inserisci_email));
                     emailId.requestFocus();
                 }
                 else if(!(email.isEmpty() && pwd.isEmpty())){

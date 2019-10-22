@@ -47,4 +47,5 @@
     <string name="commento_effettuato">You have already commented!</string>
     <string name="num_stud">Student number</string>
     <string name="anonimo">Anonymous comment</string>
+    <string name="inserisci_motivazione">Insert a motivation</string>
 </resources>

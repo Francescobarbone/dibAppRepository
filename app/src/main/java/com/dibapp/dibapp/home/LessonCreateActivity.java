@@ -117,7 +117,7 @@ public class LessonCreateActivity extends AppCompatActivity {
                 final String arg = argomento.getText().toString();
 
                 if(arg.isEmpty()){
-                    argomento.setError("Inserisci un argomento");
+                    argomento.setError(getString(R.string.inserire_argomento));
                     argomento.requestFocus();
                 } else {
                     MultiFormatWriter mfw  = new MultiFormatWriter();

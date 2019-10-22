@@ -82,10 +82,10 @@ public class MainActivity extends AppCompatActivity {
                 if(email.isEmpty() && psw.isEmpty()){
                     Toast.makeText(MainActivity.this, R.string.campi_vuoti, Toast.LENGTH_SHORT).show();
                 } else if(email.isEmpty()){
-                    emailId.setError("Inserire l'indirizzo email");
+                    emailId.setError(getString(R.string.inserisci_email));
                     emailId.requestFocus();
                 } else if(psw.isEmpty()){
-                    password.setError("Inserire la password");
+                    password.setError(getString(R.string.inserisci_password));
                     password.requestFocus();
                 }
                 else {

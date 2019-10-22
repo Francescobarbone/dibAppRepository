@@ -63,6 +63,7 @@
     <string name="exp_valutazione">Valutazione non espressa</string>
     <string name="valuta_lezione">Valuta la lezione</string>
     <string name="grazie_voto">Grazie per il tuo voto</string>
+    <string name="inserisci_motivazione">Inserisca una motivazione</string>
 
     <!--alert logout-->
     <string name="intent_logout">Vuoi effettuare il logout?</string>

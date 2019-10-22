@@ -89,7 +89,7 @@ public class CommentCreateActivity extends AppCompatActivity {
                 } else if (rates.getRating() == 0.0) {
                     Toast.makeText(CommentCreateActivity.this, R.string.exp_valutazione, Toast.LENGTH_SHORT).show();
                 } else if (motivation.getText().toString().isEmpty()) {
-                    motivation.setError("Per favore, inserisca una motivation");
+                    motivation.setError(getString(R.string.inserisci_motivazione));
                     motivation.requestFocus();
                 } else if (!((rates.getRating() == 0.0) && (motivation.getText().toString().isEmpty()))) {
                     String currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(Calendar.getInstance().getTime());
