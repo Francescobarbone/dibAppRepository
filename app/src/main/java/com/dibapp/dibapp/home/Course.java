@@ -3,10 +3,16 @@ package com.dibapp.dibapp.home;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/*
+ *  Classe che rappresenta il corso tenuto dal docente.
+ * Ogni corso è rappresentato univocamente dal suo ID (corrispondente a quello del docente),
+ * il nome del corso e le date in cui esso si svolge
+ * */
+
 public class Course extends CourseID{
 
     private String courseName, courseTime;
-    private List<Lesson> lessonList = new ArrayList<>();
 
     public Course(){}
 
@@ -29,14 +35,5 @@ public class Course extends CourseID{
 
     public void setCourseTime(String courseTime) {
         this.courseTime = courseTime;
-    }
-
-
-    public List<Lesson> getLessonList() {
-        return lessonList;
-    }
-
-    public void addLesson(Lesson lesson){
-        this.lessonList.add(lesson);
     }
 }

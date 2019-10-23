@@ -15,6 +15,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Objects;
+
 public class ForgotPasswordActivity extends AppCompatActivity {
 
     private EditText userEmail;
@@ -34,7 +36,10 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         userEmail = findViewById(R.id.invioButtonForg);
         userPass = findViewById(R.id.buttonInvioFP);
 
+        //Istanza di firebase relativa all'autenticazione
         firebaseAuth = FirebaseAuth.getInstance();
+
+        //Bottone da cliccare per il ripristino password
         userPass.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -45,7 +50,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                             if(task.isSuccessful()){
                                 Toast.makeText(ForgotPasswordActivity.this, R.string.verify, Toast.LENGTH_LONG).show();
                             } else {
-                                Toast.makeText(ForgotPasswordActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(ForgotPasswordActivity.this, Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_LONG).show();
                             }
                         }
                     });

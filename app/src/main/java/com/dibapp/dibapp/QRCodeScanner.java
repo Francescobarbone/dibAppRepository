@@ -30,6 +30,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import java.util.Objects;
+
 public class QRCodeScanner extends AppCompatActivity {
 
     private static final String TAG = "Name: ";
@@ -68,6 +70,7 @@ public class QRCodeScanner extends AppCompatActivity {
         scanButton = findViewById(R.id.scanBtn);
         final Activity activity = this;
 
+        //Avvio fotocamera per la scansione del QR
         scanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,10 +85,16 @@ public class QRCodeScanner extends AppCompatActivity {
         });
     }
 
+    /*
+    * Effettuo un controllo sulla scansione effettuata.
+    * Se il codice scansionato è diverso da quello del codice della lezione, si ha un messaggio di errore.
+    *
+    * */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        final String lessName = getIntent().getStringExtra("name_lesson").trim();
+        //Ottenimento info da LessonListAdapter
+        final String lessName = Objects.requireNonNull(getIntent().getStringExtra("name_lesson")).trim();
         final String courseid = getIntent().getStringExtra("course_id");
         final String lessid = getIntent().getStringExtra("lesson_id");
         final String user = getIntent().getStringExtra("userMail");

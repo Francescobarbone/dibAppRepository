@@ -34,6 +34,7 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Objects;
 
+//Activity per la creazione della lezione da parte del docente
 public class LessonCreateActivity extends AppCompatActivity {
 
     private EditText argomento;
@@ -119,7 +120,10 @@ public class LessonCreateActivity extends AppCompatActivity {
                 if(arg.isEmpty()){
                     argomento.setError(getString(R.string.inserire_argomento));
                     argomento.requestFocus();
-                } else {
+                } else
+                    /*Genero un QR dipendente dalla stringa passata come argomento,
+                    da far visualizzare allo studente tramite screenshot o videata stessa*/
+                    {
                     MultiFormatWriter mfw  = new MultiFormatWriter();
                     try{
                         BitMatrix btmx = mfw.encode(argomento.getText().toString().trim(), BarcodeFormat.QR_CODE, 300, 300);

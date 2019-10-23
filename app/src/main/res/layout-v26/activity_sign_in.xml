@@ -12,7 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
 
 
         <TextView
@@ -21,6 +22,7 @@
             android:text="@string/registra_dibapp"
             android:textSize="35sp"
             android:layout_marginBottom="75dp"
+            android:textStyle="bold"
             />
 
         <EditText

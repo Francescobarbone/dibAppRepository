@@ -13,12 +13,16 @@ import com.dibapp.dibapp.autenticazione.MainActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Objects;
+
+//Activity per la gestione dell'interfaccia studente
 public class StudentActivity extends HomeActivity {
 
     private Button viewLessons;
     private TextView textViewWelcome;
     private FirebaseAuth firebaseAuth;
 
+    //Creazione dell'overflow menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.main_menu, menu);
@@ -47,8 +51,8 @@ public class StudentActivity extends HomeActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
-        textViewWelcome = (TextView) findViewById(R.id.benvenutoId);
-        textViewWelcome.setText(user.getEmail().substring(0, (user.getEmail().indexOf('@'))));
+        textViewWelcome = findViewById(R.id.benvenutoId);
+        textViewWelcome.setText(Objects.requireNonNull(Objects.requireNonNull(user).getEmail()).substring(0, (Objects.requireNonNull(user.getEmail()).indexOf('@'))));
 
 
         //Visualizzazione dei corsi, lezione e commenti

@@ -24,12 +24,13 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.annotation.Nullable;
 
+//Activity per la visualizzazione dei commenti
 public class CommentActivity extends AppCompatActivity {
 
-    private static final String TAG = "FireLog";
     private RecyclerView commentRecycler;
     private List<Comment> commentList;
     private CommentsListAdapter commentsListAdapter;
@@ -51,7 +52,7 @@ public class CommentActivity extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
         } else if(item.getItemId() == R.id.home){
-            if(firebaseAuth.getCurrentUser().getEmail().endsWith("@uniba.it"))
+            if(Objects.requireNonNull(Objects.requireNonNull(firebaseAuth.getCurrentUser()).getEmail()).endsWith("@uniba.it"))
                 startActivity(new Intent(getApplicationContext(), TeacherActivity.class));
             else
                 startActivity(new Intent(getApplicationContext(), StudentActivity.class));
@@ -69,7 +70,8 @@ public class CommentActivity extends AppCompatActivity {
         textStudent = findViewById(R.id.countStudenti);
         numOfStudent = findViewById(R.id.numStudenti);
         numOfStudent.setVisibility(View.INVISIBLE);
-        //get information from lessonListAdapter
+
+        //Ottengo informazioni da lessonListAdapter
         final String lessonID = getIntent().getStringExtra("lesson_id");
         final String courseID = getIntent().getStringExtra("course_id");
 
@@ -77,6 +79,7 @@ public class CommentActivity extends AppCompatActivity {
         firebaseFirestore = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
 
+        //Lista dei commenti
         commentList = new ArrayList<>();
         commentsListAdapter = new CommentsListAdapter(commentList, getApplicationContext());
 
@@ -87,6 +90,7 @@ public class CommentActivity extends AppCompatActivity {
 
 
         firebaseFirestore.collection("Courses /" + courseID + "/Lessons/" + lessonID + "/Comments").addSnapshotListener(CommentActivity.this, new EventListener<QuerySnapshot>() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onEvent(@Nullable QuerySnapshot documentSnapshots, @Nullable FirebaseFirestoreException e) {
                 if (documentSnapshots != null && documentSnapshots.isEmpty()) {
@@ -103,6 +107,7 @@ public class CommentActivity extends AppCompatActivity {
                     }
                 }
 
+                //Visualizza il numero dei partecipanti
                 if(commentList != null) {
                     numOfStudent.setVisibility(View.VISIBLE);
                     textStudent.setText(": " + commentsListAdapter.getItemCount());

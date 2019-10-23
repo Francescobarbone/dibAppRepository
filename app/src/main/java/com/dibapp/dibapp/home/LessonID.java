@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 
 import com.google.firebase.firestore.Exclude;
 
+//Classe che permette di accedere alla lezione tramite il suo ID
 public class LessonID {
 
     public String getLessonID() {

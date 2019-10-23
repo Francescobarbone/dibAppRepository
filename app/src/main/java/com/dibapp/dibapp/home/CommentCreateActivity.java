@@ -25,6 +25,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.text.DateFormat;
 import java.util.Calendar;
 
+//Activity per la creazione dei commenti
 public class CommentCreateActivity extends AppCompatActivity {
 
     private EditText motivation;
@@ -32,7 +33,6 @@ public class CommentCreateActivity extends AppCompatActivity {
     private Button saveComment;
     private RatingBar rates;
     private CheckBox anonymousComment;
-    private boolean visibility = false;
 
     @Override
     public void onBackPressed(){
@@ -63,22 +63,16 @@ public class CommentCreateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_comment);
 
-        rates = (RatingBar)findViewById(R.id.ratingBar);
-        saveComment = (Button) findViewById(R.id.buttonComment);
-        motivation = (EditText)findViewById(R.id.editText);
-        anonymousComment = (CheckBox)findViewById(R.id.checkBox);
+        rates = findViewById(R.id.ratingBar);
+        saveComment = findViewById(R.id.buttonComment);
+        motivation = findViewById(R.id.editText);
+        anonymousComment = findViewById(R.id.checkBox);
         mFirestore = FirebaseFirestore.getInstance();
 
+        //Ottengo informazioni da lessonListAdapter
         final String corso = getIntent().getStringExtra("courseid");
         final String userEmail = getIntent().getStringExtra("user");
         final String less = getIntent().getStringExtra("lessonid");
-
-        anonymousComment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                visibility = true;
-            }
-        });
 
         saveComment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,7 +90,8 @@ public class CommentCreateActivity extends AppCompatActivity {
                     String mComment = motivation.getText().toString();
                     Comment comment = new Comment();
 
-                    if(visibility)
+                    //Controllo visibilità email
+                    if(anonymousComment.isChecked())
                         comment = new Comment(mComment, currentDate, less, "Anonimo", rates.getRating());
                     else
                         comment = new Comment(mComment, currentDate, less,userEmail, rates.getRating());

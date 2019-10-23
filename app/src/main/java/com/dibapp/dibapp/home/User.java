@@ -1,9 +1,15 @@
 package com.dibapp.dibapp.home;
 
+/*
+* Classe che rappresenta il docente autenticato.
+* Ogni docente è identificato univocamente dalla sua email, e dall'ID del corso
+* (corrispondente a quello della classe Course)
+* */
+
 public class User {
 
     private String email;
-    private static String courseId;
+    private String courseId;
 
     public User(){}
 
@@ -27,11 +33,5 @@ public class User {
     public void setCourseId(String courseId) {
         this.courseId = courseId;
     }
-
-    @Override
-    public String toString() {
-        return "User{" + "email='" + email + '\'' + ", courseId='" + courseId + '\'' + '}';
-    }
-
 
 }

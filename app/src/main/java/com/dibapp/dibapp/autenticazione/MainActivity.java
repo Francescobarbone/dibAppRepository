@@ -32,7 +32,7 @@ import java.util.Objects;
 public class MainActivity extends AppCompatActivity {
 
     private EditText emailId, password;
-    private Button btnSignIn;
+    private Button btnLogIn;
     private TextView tvSignUp;
     private TextView forgotPsw;
     private FirebaseAuth firebaseAuth;
@@ -49,13 +49,13 @@ public class MainActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         emailId = findViewById(R.id.editText3);
         password = findViewById(R.id.editText4);
-        btnSignIn = findViewById(R.id.buttonRegister);
+        btnLogIn = findViewById(R.id.buttonRegister);
         tvSignUp = findViewById(R.id.textView);
         forgotPsw = findViewById(R.id.passwordForg);
         changeLang = findViewById(R.id.buttonLang);
 
+        //Verifica l'autenticazione della email tramite casella di posta elettronica
         authStateListener = new FirebaseAuth.AuthStateListener() {
-
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser fireBaseUser = firebaseAuth.getCurrentUser();
@@ -74,7 +74,8 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        btnSignIn.setOnClickListener(new View.OnClickListener(){
+        //Bottone per l'accesso alle singole interfacce (studente o docente)
+        btnLogIn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 final String email = emailId.getText().toString();
@@ -100,10 +101,11 @@ public class MainActivity extends AppCompatActivity {
                                         Intent intToHome = new Intent(MainActivity.this, StudentActivity.class);
                                         startActivity(intToHome);
                                     }
+                                    //Se ancora non è stata verificata la mail
                                     else{
                                         Toast.makeText(MainActivity.this, R.string.verify, Toast.LENGTH_SHORT).show();
                                     }
-
+                                //Il docente è già registrato, non effettua la registrazione
                                 }else if(email.endsWith("@uniba.it")){
                                     Intent intToHome = new Intent(MainActivity.this, TeacherActivity.class);
                                     startActivity(intToHome);
@@ -115,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Bottone per passare all'activity per la registrazione
         tvSignUp.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -123,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Bottone per passare all'activity per lo smarrimento password
         forgotPsw.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -131,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Bottone per il cambio lingua
         changeLang.setOnClickListener(new View.OnClickListener(){
             //Mostra l'alertDialog per il cambio della lingua
             @Override
@@ -163,6 +168,8 @@ public class MainActivity extends AppCompatActivity {
         mDialog.show();
     }
 
+
+    //Indica la lingua utilizzata di default (italiano)
     @SuppressWarnings("deprecation")
     private void setLocale(String lang){
         Locale locale = new Locale(lang);

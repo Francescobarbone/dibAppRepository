@@ -31,7 +31,7 @@ import java.util.Objects;
 
 import javax.annotation.Nullable;
 
-
+//Activity per la visualizzazione delle lezioni
 public class LessonActivity extends AppCompatActivity {
 
     private static final String TAG = "FireLog";
@@ -54,7 +54,7 @@ public class LessonActivity extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
         } else if(item.getItemId() == R.id.home){
-            if(firebaseAuth.getCurrentUser().getEmail().endsWith("@uniba.it"))
+            if(Objects.requireNonNull(Objects.requireNonNull(firebaseAuth.getCurrentUser()).getEmail()).endsWith("@uniba.it"))
                 startActivity(new Intent(getApplicationContext(), TeacherActivity.class));
             else
                 startActivity(new Intent(getApplicationContext(), StudentActivity.class));
@@ -98,8 +98,8 @@ public class LessonActivity extends AppCompatActivity {
         }
         mFirestore = FirebaseFirestore.getInstance();
 
-
-        if(firebaseAuth.getCurrentUser().getEmail().endsWith("@studenti.uniba.it")) {//visualizzazione lezioni per studente
+        //Visualizzazione lezioni per studente
+        if(Objects.requireNonNull(firebaseAuth.getCurrentUser().getEmail()).endsWith("@studenti.uniba.it")) {
             mFirestore.collection("Courses /" + courseID + "/Lessons").addSnapshotListener(LessonActivity.this, new EventListener<QuerySnapshot>() {
                 @Override
                 public void onEvent(@Nullable QuerySnapshot documentSnapshots, @Nullable FirebaseFirestoreException e) {
@@ -107,7 +107,7 @@ public class LessonActivity extends AppCompatActivity {
                         Toast.makeText(LessonActivity.this, R.string.no_less, Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    for (DocumentChange doc : documentSnapshots.getDocumentChanges()) {
+                    for (DocumentChange doc : Objects.requireNonNull(documentSnapshots).getDocumentChanges()) {
                         if (doc.getType() == DocumentChange.Type.ADDED) {
                             Lesson lesson = doc.getDocument().toObject(Lesson.class).withID(doc.getDocument().getId());
                             lessonList.add(lesson);
@@ -115,13 +115,13 @@ public class LessonActivity extends AppCompatActivity {
                         }
                     }
                 }
-            });
-        }else{//Visualizzazione delle lezioni per il docente
+            });//Visualizzazione delle lezioni per il docente
+        }else{
             mFirestore.collection("Users").get().addOnCompleteListener(LessonActivity.this, new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                     boolean find = false;
-                    for (DocumentSnapshot doc : task.getResult()) {
+                    for (DocumentSnapshot doc : Objects.requireNonNull(task.getResult())) {
                         String email = doc.getString("email");
                         if (Objects.equals(email, admin.getEmail())) {
                             find = true;
@@ -138,7 +138,7 @@ public class LessonActivity extends AppCompatActivity {
                                     Toast.makeText(LessonActivity.this, R.string.no_less, Toast.LENGTH_SHORT).show();
                                     return;
                                 }
-                                for(DocumentChange doc : documentSnapshots.getDocumentChanges()){
+                                for(DocumentChange doc : Objects.requireNonNull(documentSnapshots).getDocumentChanges()){
                                     if(doc.getType() == DocumentChange.Type.ADDED){
                                         Lesson lesson = doc.getDocument().toObject(Lesson.class).withID(doc.getDocument().getId());
                                         lessonList.add(lesson);

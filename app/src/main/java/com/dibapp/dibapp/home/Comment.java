@@ -2,6 +2,13 @@ package com.dibapp.dibapp.home;
 
 import java.util.Date;
 
+/*
+*  Classe che rappresenta il singolo commento effettuato dallo studente.
+* Ogni commento è composto da un messaggio esplicativo dello studente a corredo
+* della valutazione effettuata, la data in cui il commento è stato effettuato e
+* l'indrizzo email che potrà essere reso visibile o meno a discrezione dello
+* stesso studente
+* */
 public class Comment {
 
     private String message;

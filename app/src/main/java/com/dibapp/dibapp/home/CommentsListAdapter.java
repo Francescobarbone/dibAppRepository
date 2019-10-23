@@ -37,6 +37,7 @@ public class CommentsListAdapter extends RecyclerView.Adapter<CommentsListAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        //Elementi da visualizzare nella lista dei commenti
         holder.dateText.setText(commentList.get(position).getTimestamp());
         holder.commentText.setText(commentList.get(position).getMessage());
         holder.userString.setText(commentList.get(position).getUserComment());
@@ -64,10 +65,10 @@ public class CommentsListAdapter extends RecyclerView.Adapter<CommentsListAdapte
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             mView = itemView;
-            dateText = (TextView) mView.findViewById(R.id.date_text);
-            commentText = (TextView) mView.findViewById(R.id.comment_text);
-            userString = (TextView) mView.findViewById(R.id.user_text);
-            rating = (RatingBar) mView.findViewById(R.id.ratingBar);
+            dateText =  mView.findViewById(R.id.date_text);
+            commentText =  mView.findViewById(R.id.comment_text);
+            userString =  mView.findViewById(R.id.user_text);
+            rating = mView.findViewById(R.id.ratingBar);
         }
     }
 

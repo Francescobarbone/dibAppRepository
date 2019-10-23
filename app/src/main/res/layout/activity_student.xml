@@ -17,14 +17,16 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:textSize="30sp"
-            android:text="@string/benvenuto" />
+            android:text="@string/benvenuto"
+            android:textStyle="bold"
+            />
 
         <TextView
             android:id="@+id/benvenutoId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="75dp"
-            android:textSize="20sp" />
+            android:textSize="30sp" />
 
         <Button
             android:id="@+id/butLezione"

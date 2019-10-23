@@ -25,12 +25,14 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.zxing.integration.android.IntentIntegrator;
 
 import java.util.List;
+import java.util.Objects;
+
 
 public class LessonsListAdapter extends RecyclerView.Adapter<LessonsListAdapter.ViewHolder> {
 
-    public List<Lesson> lessonList;
+    private List<Lesson> lessonList;
     public Context context;
-    final User admin = new User();
+    private final User admin = new User();
 
     public LessonsListAdapter(List<Lesson> lessonList, Context context){
         this.lessonList = lessonList;
@@ -48,14 +50,16 @@ public class LessonsListAdapter extends RecyclerView.Adapter<LessonsListAdapter.
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int i) {
 
+        //Firebase info
         final FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
         final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         final FirebaseUser user = firebaseAuth.getCurrentUser();
-        admin.setEmail(user.getEmail());
+        admin.setEmail(Objects.requireNonNull(user).getEmail());
 
         holder.dayText.setText(lessonList.get(i).getLessonDate());
         holder.argText.setText(lessonList.get(i).getArgument());
 
+        //Ottengo info da courseListAdapter
         final String courseID = lessonList.get(i).getIdCourse();
         final String lessID = lessonList.get(i).getLessonID();
         final String nameLess = lessonList.get(i).getArgument();
@@ -74,7 +78,8 @@ public class LessonsListAdapter extends RecyclerView.Adapter<LessonsListAdapter.
         holder.delete.setVisibility(View.GONE);
         holder.create.setVisibility(View.GONE);
 
-        if(firebaseAuth.getCurrentUser().getEmail().endsWith("@studenti.uniba.it")){
+        //Se studente, visualizza l'icona per effettuare il commento
+        if(Objects.requireNonNull(firebaseAuth.getCurrentUser().getEmail()).endsWith("@studenti.uniba.it")){
             holder.create.setVisibility(View.VISIBLE);
             holder.create.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -83,10 +88,10 @@ public class LessonsListAdapter extends RecyclerView.Adapter<LessonsListAdapter.
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             boolean flag = false;
-                            for (DocumentSnapshot doc : task.getResult()) {
+                            for (DocumentSnapshot doc : Objects.requireNonNull(task.getResult())) {
                                 String email = doc.getString("userComment");
 
-                                if (email.equals(admin.getEmail())) {
+                                if (Objects.equals(email, admin.getEmail())) {
                                     flag = true;
                                     break;
                                 }
@@ -107,15 +112,15 @@ public class LessonsListAdapter extends RecyclerView.Adapter<LessonsListAdapter.
             });
 
         }
-
+//Se docente, visualizza l'icona per effettuare la cancellazione della lezione
         firebaseFirestore.collection("Users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         boolean find = false;
-                        for(DocumentSnapshot doc : task.getResult()){
+                        for(DocumentSnapshot doc : Objects.requireNonNull(task.getResult())){
                             String email = doc.getString("email");
 
-                            if(email.equals(admin.getEmail())) {
+                            if(Objects.equals(email, admin.getEmail())) {
                                 find = true;
                                 //getting admin's courseID
                                 admin.setCourseId(doc.getString("idCorso"));
@@ -151,18 +156,18 @@ public class LessonsListAdapter extends RecyclerView.Adapter<LessonsListAdapter.
 
         View mView;
 
-        public TextView dayText;
-        public TextView argText;
-        public ImageView delete;
-        public ImageView create;
+        private TextView dayText;
+        private TextView argText;
+        private ImageView delete;
+        private ImageView create;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             mView = itemView;
-            dayText = (TextView) mView.findViewById(R.id.time_text);
-            argText = (TextView) mView.findViewById(R.id.arg_text);
-            delete = (ImageView) mView.findViewById(R.id.ic_delete);
-            create = (ImageView) mView.findViewById(R.id.ic_create);
+            dayText = mView.findViewById(R.id.time_text);
+            argText = mView.findViewById(R.id.arg_text);
+            delete = mView.findViewById(R.id.ic_delete);
+            create = mView.findViewById(R.id.ic_create);
         }
     }
 }

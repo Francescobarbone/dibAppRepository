@@ -22,6 +22,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.Objects;
+
+//Activity per la gestione dell'interfaccia docente
 public class TeacherActivity extends HomeActivity {
 
     private Button showLess, createless, logOut, QR;
@@ -29,12 +32,15 @@ public class TeacherActivity extends HomeActivity {
     private FirebaseAuth firebaseAuth;
     private static User admin = new User();
 
+
+    //Creazione dell'overflow menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
 
+    //Scelta dell'opzione più gradita
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         if(item.getItemId() == R.id.logout){
@@ -59,29 +65,13 @@ public class TeacherActivity extends HomeActivity {
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
-        welcomeTeacher = (TextView) findViewById(R.id.textView3);
+        welcomeTeacher = findViewById(R.id.textView3);
 
+        //Ottengo sottostringa dell'indirizzo email fino al simbolo @
         if(user!=null)
-            welcomeTeacher.setText(user.getEmail().substring( 0, (user.getEmail().indexOf('@'))));
+            welcomeTeacher.setText(Objects.requireNonNull(user.getEmail()).substring( 0, (user.getEmail().indexOf('@'))));
 
-        mFirestore.collection("Users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                boolean find = false;
-                for (DocumentSnapshot doc : task.getResult()) {
-                    String email = doc.getString("email");
-                    if (email.equals(admin.getEmail())) {
-                        find = true;
-                        //getting admin's courseID
-                        admin.setCourseId(doc.getString("courseId"));
-                        break;
-                    }
-                }
-            }
-        });
-
-
-
+        //Mostra le lezioni relative al docente in uso corrente
         showLess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,6 +79,7 @@ public class TeacherActivity extends HomeActivity {
             }
         });
 
+        //Crea le lezioni relative al corso insegnato dal docente in uso corrente
         createless.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

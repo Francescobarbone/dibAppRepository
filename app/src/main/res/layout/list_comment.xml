@@ -30,7 +30,7 @@
             android:id="@+id/date_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="200dp"
+            android:layout_marginStart="170dp"
             android:layout_marginTop="44dp"
             android:text="@string/time"
             android:textColor="#8B000000"
@@ -50,7 +50,7 @@
             android:id="@+id/user_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="150dp"
+            android:layout_marginStart="155dp"
             android:layout_marginBottom="20dp"
             android:text="@string/user" />
 

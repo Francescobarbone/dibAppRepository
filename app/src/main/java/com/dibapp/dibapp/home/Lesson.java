@@ -4,11 +4,18 @@ import android.widget.ImageView;
 
 import java.util.List;
 
+
+/*
+ *  Classe che rappresenta la lezione creata dal docente.
+ * Ogni lezione è composta dalla data in cui essa viene resa pubblica, il
+ * nome dell'argomento scelto dal docente e l'indirizzo univoco del
+ * corso di appartenenza e della lezione stessa
+ * */
+
 public class Lesson extends LessonID{
 
     private String lessonDate;
     private String argument;
-    private List<String> usersList;
     private String idCourse;
 
     public Lesson(){}
@@ -25,10 +32,6 @@ public class Lesson extends LessonID{
         this.lessonDate = lessonDate;
         this.argument = argument;
         this.idCourse = idCourse;
-    }
-
-    public void addUser(String email){
-        usersList.add(email);
     }
 
     public String getLessonDate() {

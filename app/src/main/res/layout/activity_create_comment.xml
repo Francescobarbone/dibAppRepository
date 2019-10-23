@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--suppress AndroidUnknownAttribute -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,15 +10,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
 
     <TextView
         android:id="@+id/viewComment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/valuta_lezione"
+        android:textStyle="bold"
         android:layout_marginTop="50sp"
-        android:textSize="30sp"/>
+        android:textSize="35sp"/>
 
     <RatingBar
         android:id="@+id/ratingBar"
@@ -29,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:theme="@style/RatingBar"
-        android:layout_marginTop="120dp"/>
+        android:layout_marginTop="100dp"/>
 
     <EditText
         android:id="@+id/editText"

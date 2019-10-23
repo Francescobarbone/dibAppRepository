@@ -20,9 +20,11 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.annotation.Nullable;
 
+//Activity per la visualizzazione dei corsi
 public class CourseActivity extends AppCompatActivity {
 
     private RecyclerView mMainList;
@@ -55,10 +57,11 @@ public class CourseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courses);
 
+        //Lista corsi
         courseList = new ArrayList<>();
         courseListAdapter = new CoursesListAdapter(getApplicationContext(), courseList);
 
-        mMainList = (RecyclerView) findViewById(R.id.main_list);
+        mMainList = findViewById(R.id.main_list);
         mMainList.setHasFixedSize(true);
         mMainList.setLayoutManager(new LinearLayoutManager(this));
         mMainList.setAdapter(courseListAdapter);
@@ -67,7 +70,7 @@ public class CourseActivity extends AppCompatActivity {
         mFirestore.collection("Courses ").addSnapshotListener(CourseActivity.this, new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot documentSnapshots, @Nullable FirebaseFirestoreException e) {
-                for(DocumentChange doc : documentSnapshots.getDocumentChanges()){
+                for(DocumentChange doc : Objects.requireNonNull(documentSnapshots).getDocumentChanges()){
                     if(doc.getType() == DocumentChange.Type.ADDED){
                         Course course = doc.getDocument().toObject(Course.class).withId(doc.getDocument().getId());
                         courseList.add(course);

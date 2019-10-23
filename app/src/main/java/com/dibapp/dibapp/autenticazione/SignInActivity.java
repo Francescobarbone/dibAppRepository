@@ -19,11 +19,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class SignInActivity extends AppCompatActivity {
 
     private EditText emailId, password;
-    private Button btnRegistrati;
+    private Button btnSignIn;
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore mFirestore;
 
@@ -42,13 +43,16 @@ public class SignInActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         emailId = findViewById(R.id.editText3);
         password = findViewById(R.id.editText4);
-        btnRegistrati = findViewById(R.id.buttonRegister);
-        btnRegistrati.setOnClickListener(new View.OnClickListener() {
+        btnSignIn = findViewById(R.id.buttonRegister);
 
+        //Bottone per effettuare la registrazione
+        btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 final String email = emailId.getText().toString();
                 String pwd = password.getText().toString();
+
                 final Map<String, String> userMap = new HashMap<>();
                 if(email.isEmpty() && pwd.isEmpty()){
                     Toast.makeText( SignInActivity.this, R.string.campi_vuoti, Toast.LENGTH_SHORT).show();
@@ -60,13 +64,15 @@ public class SignInActivity extends AppCompatActivity {
                     emailId.setError(getString(R.string.inserisci_email));
                     emailId.requestFocus();
                 }
-                else if(!(email.isEmpty() && pwd.isEmpty())){
+                //Se sono stati inseriti entrambi i campi
+                else {
+                    //Per la registrazione è richiesto esplicitamente un indrizzo di posta elettronica istituzionale
                     if(email.endsWith("@studenti.uniba.it")) {
                         firebaseAuth.createUserWithEmailAndPassword(email, pwd).addOnCompleteListener(new OnCompleteListener<AuthResult>(){
                             @Override
-                            public void onComplete(Task<AuthResult> task){
+                            public void onComplete(@NonNull Task<AuthResult> task){
                                 if(task.isSuccessful()) {
-                                    firebaseAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    Objects.requireNonNull(firebaseAuth.getCurrentUser()).sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
@@ -85,8 +91,7 @@ public class SignInActivity extends AppCompatActivity {
                     else
                      Toast.makeText(SignInActivity.this, R.string.reg_mail ,Toast.LENGTH_SHORT).show();
 
-            } else
-                Toast.makeText(SignInActivity.this, R.string.campi_vuoti,Toast.LENGTH_SHORT).show();
+            }
             }
         });
     }
