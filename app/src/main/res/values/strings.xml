@@ -63,11 +63,11 @@
     <string name="valuta_lezione">Valuta la lezione</string>
     <string name="grazie_voto">Grazie per il tuo voto</string>
     <string name="commento">Commento Lezione</string>
-    <string name="pessima">Lezione Pessima</string>
+    <string name="pessima">Pessima Lezione</string>
     <string name="mediocre">Lezione Mediocre</string>
     <string name="sufficiente">Lezione Sufficiente</string>
-    <string name="buona">Lezione Buona</string>
-    <string name="ottima">Lezione Ottima</string>
+    <string name="buona">Buona Lezione</string>
+    <string name="ottima">Ottima Lezione</string>
 
     <!--alert logout-->
     <string name="intent_logout">Vuoi effettuare il logout?</string>
