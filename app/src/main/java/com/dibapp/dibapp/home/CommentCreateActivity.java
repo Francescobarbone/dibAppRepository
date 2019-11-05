@@ -3,7 +3,10 @@ package com.dibapp.dibapp.home;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,6 +15,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dibapp.dibapp.R;
@@ -24,15 +28,35 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 //Activity per la creazione dei commenti
 public class CommentCreateActivity extends AppCompatActivity {
 
-    private EditText motivation;
+    private TextView motivation;
     private FirebaseFirestore mFirestore;
     private Button saveComment;
     private RatingBar rates;
     private CheckBox anonymousComment;
+
+    private void setLocale(String lang){
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        //salva dati per preferenze condivise
+        SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
+        editor.putString("Mia_lingua", lang);
+        editor.apply();
+    }
+
+    public void loadLocale(){
+        SharedPreferences prefs = getSharedPreferences("Settings", Activity.MODE_PRIVATE);
+        String language = prefs.getString("Mia_lingua", "");
+        setLocale(language);
+    }
+
 
     @Override
     public void onBackPressed(){
@@ -62,10 +86,11 @@ public class CommentCreateActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_comment);
+        loadLocale();
 
         rates = findViewById(R.id.ratingBar);
         saveComment = findViewById(R.id.buttonComment);
-        motivation = findViewById(R.id.editText);
+        motivation = findViewById(R.id.viewMotiv);
         anonymousComment = findViewById(R.id.checkBox);
         mFirestore = FirebaseFirestore.getInstance();
 
@@ -74,27 +99,52 @@ public class CommentCreateActivity extends AppCompatActivity {
         final String userEmail = getIntent().getStringExtra("user");
         final String less = getIntent().getStringExtra("lessonid");
 
+
+        rates.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
+
+                // set del commento in base alla valutazione
+                switch (((int) rates.getRating())){
+                    case 1:
+                        motivation.setText(getString(R.string.pessima));
+                        break;
+                    case 2:
+                        motivation.setText(getString(R.string.mediocre));
+                        break;
+                    case 3:
+                        motivation.setText(getString(R.string.sufficiente));
+                        break;
+                    case 4:
+                        motivation.setText(getString(R.string.buona));
+                        break;
+                    case 5:
+                        motivation.setText(getString(R.string.ottima));
+                        break;
+                    default:
+                        motivation.setText(getString(R.string.commento));
+                        break;
+                }
+
+
+            }
+        });
+
         saveComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if ((rates.getRating() == 0.0) && (motivation.getText().toString().isEmpty())) {
-                    Toast.makeText(CommentCreateActivity.this, R.string.campi_vuoti, Toast.LENGTH_SHORT).show();
-                } else if (rates.getRating() == 0.0) {
+                if (rates.getRating() == 0.0) {
                     Toast.makeText(CommentCreateActivity.this, R.string.exp_valutazione, Toast.LENGTH_SHORT).show();
-                } else if (motivation.getText().toString().isEmpty()) {
-                    motivation.setError(getString(R.string.inserisci_motivazione));
-                    motivation.requestFocus();
-                } else if (!((rates.getRating() == 0.0) && (motivation.getText().toString().isEmpty()))) {
+                } else{
                     String currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(Calendar.getInstance().getTime());
-                    String mComment = motivation.getText().toString();
                     Comment comment = new Comment();
 
                     //Controllo visibilità email
                     if(anonymousComment.isChecked())
-                        comment = new Comment(mComment, currentDate, less, "Anonimo", rates.getRating());
+                        comment = new Comment(motivation.getText().toString(), currentDate, less, "Anonimo", rates.getRating());
                     else
-                        comment = new Comment(mComment, currentDate, less,userEmail, rates.getRating());
+                        comment = new Comment(motivation.getText().toString(), currentDate, less,userEmail, rates.getRating());
 
                     mFirestore.collection("Courses /" + corso + "/Lessons/" + less + "/Comments").add(comment).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                         @Override

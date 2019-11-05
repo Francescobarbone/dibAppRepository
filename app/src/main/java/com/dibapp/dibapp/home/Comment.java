@@ -47,6 +47,14 @@ public class Comment {
         return lessonID;
     }
 
+    public void setUserComment(String userComment) {
+        this.userComment = userComment;
+    }
+
+    public void setRate(float rate) {
+        this.rate = rate;
+    }
+
     public void setLessonID(String lessonID) {
         this.lessonID = lessonID;
     }

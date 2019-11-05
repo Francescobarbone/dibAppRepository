@@ -57,13 +57,17 @@
     <string name="commento_effettuato">Hai già commentato la lezione!</string>
 
     <!--activity_create_comment String & Toast-->
-    <string name="indica_la_motivazione">Indica la motivazione</string>
     <string name="anonimo">Commento anonimo</string>
     <string name="inserisci_commento">Inserisci commento</string>
     <string name="exp_valutazione">Valutazione non espressa</string>
     <string name="valuta_lezione">Valuta la lezione</string>
     <string name="grazie_voto">Grazie per il tuo voto</string>
-    <string name="inserisci_motivazione">Inserisca una motivazione</string>
+    <string name="commento">Commento Lezione</string>
+    <string name="pessima">Lezione Pessima</string>
+    <string name="mediocre">Lezione Mediocre</string>
+    <string name="sufficiente">Lezione Sufficiente</string>
+    <string name="buona">Lezione Buona</string>
+    <string name="ottima">Lezione Ottima</string>
 
     <!--alert logout-->
     <string name="intent_logout">Vuoi effettuare il logout?</string>

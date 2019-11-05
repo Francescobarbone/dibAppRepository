@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -30,6 +32,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import java.util.Locale;
 import java.util.Objects;
 
 public class QRCodeScanner extends AppCompatActivity {
@@ -37,6 +40,24 @@ public class QRCodeScanner extends AppCompatActivity {
     private static final String TAG = "Name: ";
     private Button scanButton;
     private FirebaseFirestore mFirestore;
+
+    private void setLocale(String lang){
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        //salva dati per preferenze condivise
+        SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
+        editor.putString("Mia_lingua", lang);
+        editor.apply();
+    }
+
+    public void loadLocale(){
+        SharedPreferences prefs = getSharedPreferences("Settings", Activity.MODE_PRIVATE);
+        String language = prefs.getString("Mia_lingua", "");
+        setLocale(language);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
@@ -60,6 +81,7 @@ public class QRCodeScanner extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
+        loadLocale();
         startActivity(new Intent(QRCodeScanner.this, StudentActivity.class));
     }
 
@@ -67,6 +89,7 @@ public class QRCodeScanner extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qrcode);
+        loadLocale();
         scanButton = findViewById(R.id.scanBtn);
         final Activity activity = this;
 

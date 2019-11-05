@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+
     <string name="app_name">DibApp</string>
     <string name="accedi">Log in</string>
     <string name="logout">Logout</string>
@@ -16,13 +18,12 @@
     <string name="date">Date</string>
     <string name="day_of_lesson">day_of_lesson</string>
     <string name="inserire_argomento">Insert argument</string>
-    <string name="indica_la_motivazione">Insert a comment</string>
     <string name="campi_vuoti">Empty fields</string>
     <string name="inserisci_password">Insert password</string>
     <string name="inserisci_email">Insert email</string>
     <string name="registrazione_successo">Successful sign in, check your mailbox</string>
     <string name="reg_mail">"You can't sign in using a not institutional email "</string>
-    <string name="successful_login">Successful login</string>
+    <string name="successful_login">Successful Login</string>
     <string name="error">Login error</string>
     <string name="verify">Verify your email address</string>
     <string name="registrazione_gia_effettuata">"You already signed in "</string>
@@ -47,5 +48,10 @@
     <string name="commento_effettuato">You have already commented!</string>
     <string name="num_stud">Student number</string>
     <string name="anonimo">Anonymous comment</string>
-    <string name="inserisci_motivazione">Insert a motivation</string>
+    <string name="commento">Lesson Comment</string>
+    <string name="buona">Good Lesson</string>
+    <string name="pessima">Terrible Lesson</string>
+    <string name="ottima">Excellent Lesson</string>
+    <string name="mediocre">Mediocre Lesson</string>
+    <string name="sufficiente">Sufficient Lesson</string>
 </resources>

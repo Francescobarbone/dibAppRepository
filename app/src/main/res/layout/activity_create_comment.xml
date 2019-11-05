@@ -32,31 +32,29 @@
         android:theme="@style/RatingBar"
         android:layout_marginTop="100dp"/>
 
-    <EditText
-        android:id="@+id/editText"
+    <TextView
+        android:id="@+id/viewMotiv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:hint="@string/indica_la_motivazione"
-        android:textSize="20sp"
-        android:inputType="textPersonName"
-        android:importantForAutofill="no" />
+        android:layout_marginTop="40dp"
+        android:text="@string/commento" />
 
-        <CheckBox
-            android:id="@+id/checkBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:text="@string/anonimo"/>
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/anonimo"/>
 
-        <Button
-            android:id="@+id/buttonComment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20sp"
-            android:background="@drawable/rounded_button"
-            android:text="@string/inserisci_commento"
-            android:textColor="@color/txtColor" />
+    <Button
+        android:id="@+id/buttonComment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20sp"
+        android:background="@drawable/rounded_button"
+        android:text="@string/inserisci_commento"
+        android:textColor="@color/txtColor" />
+
 
     </LinearLayout>
 </RelativeLayout>
