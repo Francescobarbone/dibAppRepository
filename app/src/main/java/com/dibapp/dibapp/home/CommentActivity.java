@@ -1,5 +1,6 @@
 package com.dibapp.dibapp.home;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,11 +16,14 @@ import android.widget.Toast;
 
 import com.dibapp.dibapp.R;
 import com.dibapp.dibapp.autenticazione.MainActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -89,30 +93,28 @@ public class CommentActivity extends AppCompatActivity {
         commentRecycler.setAdapter(commentsListAdapter);
 
 
-        firebaseFirestore.collection("Courses /" + courseID + "/Lessons/" + lessonID + "/Comments").addSnapshotListener(CommentActivity.this, new EventListener<QuerySnapshot>() {
+        firebaseFirestore.collection("Courses /" + courseID + "/Lessons/" + lessonID + "/Comments").get().addOnCompleteListener(CommentActivity.this, new OnCompleteListener<QuerySnapshot>() {
             @SuppressLint("SetTextI18n")
             @Override
-            public void onEvent(@Nullable QuerySnapshot documentSnapshots, @Nullable FirebaseFirestoreException e) {
-                if (documentSnapshots != null && documentSnapshots.isEmpty()) {
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (Objects.requireNonNull(task.getResult()).isEmpty()) {
                     Toast.makeText(CommentActivity.this, R.string.no_comm, Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (documentSnapshots != null) {
-                    for(DocumentChange doc : documentSnapshots.getDocumentChanges()){
-                        if(doc.getType() == DocumentChange.Type.ADDED){
-                            Comment comment = doc.getDocument().toObject(Comment.class);
+                else{
+                    for(QueryDocumentSnapshot doc : task.getResult()){
+                            Comment comment = doc.toObject(Comment.class);
                             commentList.add(comment);
                             commentsListAdapter.notifyDataSetChanged();
-                        }
-                    }
-                }
 
+                }
+            }
                 //Visualizza il numero dei partecipanti
                 if(commentList != null) {
                     numOfStudent.setVisibility(View.VISIBLE);
                     textStudent.setText(": " + commentsListAdapter.getItemCount());
                 }
-            }
+        }
         });
     }
 }

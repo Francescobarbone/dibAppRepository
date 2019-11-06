@@ -2,20 +2,25 @@ package com.dibapp.dibapp.home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.dibapp.dibapp.R;
 import com.dibapp.dibapp.autenticazione.MainActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -31,6 +36,7 @@ public class CourseActivity extends AppCompatActivity {
     private FirebaseFirestore mFirestore;
     private List<Course> courseList;
     private CoursesListAdapter courseListAdapter;
+    private static final String TAG = "FireLog";
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
@@ -67,15 +73,13 @@ public class CourseActivity extends AppCompatActivity {
         mMainList.setAdapter(courseListAdapter);
         mFirestore = FirebaseFirestore.getInstance();
 
-        mFirestore.collection("Courses ").addSnapshotListener(CourseActivity.this, new EventListener<QuerySnapshot>() {
+        mFirestore.collection("Courses ").get().addOnCompleteListener(CourseActivity.this, new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onEvent(@Nullable QuerySnapshot documentSnapshots, @Nullable FirebaseFirestoreException e) {
-                for(DocumentChange doc : Objects.requireNonNull(documentSnapshots).getDocumentChanges()){
-                    if(doc.getType() == DocumentChange.Type.ADDED){
-                        Course course = doc.getDocument().toObject(Course.class).withId(doc.getDocument().getId());
-                        courseList.add(course);
-                        courseListAdapter.notifyDataSetChanged();
-                    }
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                for(QueryDocumentSnapshot doc : Objects.requireNonNull(task.getResult())){
+                    Course course = doc.toObject(Course.class).withId(doc.getId());
+                    courseList.add(course);
+                    courseListAdapter.notifyDataSetChanged();
                 }
             }
         });

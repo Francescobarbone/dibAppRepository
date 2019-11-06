@@ -54,4 +54,5 @@
     <string name="ottima">Excellent Lesson</string>
     <string name="mediocre">Mediocre Lesson</string>
     <string name="sufficiente">Sufficient Lesson</string>
+    <string name="utenteAnonimo">Anonymous</string>
 </resources>

@@ -26,6 +26,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -122,22 +123,21 @@ public class LessonActivity extends AppCompatActivity {
 
         //Visualizzazione lezioni per studente
         if(Objects.requireNonNull(firebaseAuth.getCurrentUser().getEmail()).endsWith("@studenti.uniba.it")) {
-            mFirestore.collection("Courses /" + courseID + "/Lessons").addSnapshotListener(LessonActivity.this, new EventListener<QuerySnapshot>() {
+            mFirestore.collection("Courses /" + courseID + "/Lessons").get().addOnCompleteListener(LessonActivity.this, new OnCompleteListener<QuerySnapshot>() {
                 @Override
-                public void onEvent(@Nullable QuerySnapshot documentSnapshots, @Nullable FirebaseFirestoreException e) {
-                    if (documentSnapshots != null && documentSnapshots.isEmpty()) {
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (Objects.requireNonNull(task.getResult()).isEmpty()) {
                         Toast.makeText(LessonActivity.this, R.string.no_less, Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    for (DocumentChange doc : Objects.requireNonNull(documentSnapshots).getDocumentChanges()) {
-                        if (doc.getType() == DocumentChange.Type.ADDED) {
-                            Lesson lesson = doc.getDocument().toObject(Lesson.class).withID(doc.getDocument().getId());
-                            lessonList.add(lesson);
-                            lessonsListAdapter.notifyDataSetChanged();
-                        }
+                    for(QueryDocumentSnapshot doc : task.getResult()) {
+                        Lesson lesson = doc.toObject(Lesson.class).withID(doc.getId());
+                        lessonList.add(lesson);
+                        lessonsListAdapter.notifyDataSetChanged();
                     }
                 }
-            });//Visualizzazione delle lezioni per il docente
+            });
+            //Visualizzazione delle lezioni per il docente
         }else{
             mFirestore.collection("Users").get().addOnCompleteListener(LessonActivity.this, new OnCompleteListener<QuerySnapshot>() {
                 @Override
@@ -153,19 +153,17 @@ public class LessonActivity extends AppCompatActivity {
                         }
                     }
                     if(find){
-                        mFirestore.collection("Courses /" + admin.getCourseId() + "/Lessons").addSnapshotListener(LessonActivity.this, new EventListener<QuerySnapshot>() {
+                        mFirestore.collection("Courses /" + admin.getCourseId() + "/Lessons").get().addOnCompleteListener(LessonActivity.this, new OnCompleteListener<QuerySnapshot>() {
                             @Override
-                            public void onEvent(@Nullable QuerySnapshot documentSnapshots, @Nullable FirebaseFirestoreException e) {
-                                if (documentSnapshots != null && documentSnapshots.isEmpty()) {
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (Objects.requireNonNull(task.getResult()).isEmpty()) {
                                     Toast.makeText(LessonActivity.this, R.string.no_less, Toast.LENGTH_SHORT).show();
                                     return;
                                 }
-                                for(DocumentChange doc : Objects.requireNonNull(documentSnapshots).getDocumentChanges()){
-                                    if(doc.getType() == DocumentChange.Type.ADDED){
-                                        Lesson lesson = doc.getDocument().toObject(Lesson.class).withID(doc.getDocument().getId());
-                                        lessonList.add(lesson);
-                                        lessonsListAdapter.notifyDataSetChanged();
-                                    }
+                                for(QueryDocumentSnapshot doc : task.getResult()) {
+                                    Lesson lesson = doc.toObject(Lesson.class).withID(doc.getId());
+                                    lessonList.add(lesson);
+                                    lessonsListAdapter.notifyDataSetChanged();
                                 }
                             }
                         });
@@ -173,7 +171,6 @@ public class LessonActivity extends AppCompatActivity {
                 }
             });
         }
-
     }
 }
 

@@ -68,6 +68,7 @@
     <string name="sufficiente">Lezione Sufficiente</string>
     <string name="buona">Buona Lezione</string>
     <string name="ottima">Ottima Lezione</string>
+    <string name="utenteAnonimo">Anonimo</string>
 
     <!--alert logout-->
     <string name="intent_logout">Vuoi effettuare il logout?</string>

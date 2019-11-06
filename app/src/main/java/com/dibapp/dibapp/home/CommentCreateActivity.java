@@ -33,30 +33,12 @@ import java.util.Locale;
 //Activity per la creazione dei commenti
 public class CommentCreateActivity extends AppCompatActivity {
 
+    private TextView titleComment;
     private TextView motivation;
     private FirebaseFirestore mFirestore;
     private Button saveComment;
     private RatingBar rates;
     private CheckBox anonymousComment;
-
-    private void setLocale(String lang){
-        Locale locale = new Locale(lang);
-        Locale.setDefault(locale);
-        Configuration config = new Configuration();
-        config.locale = locale;
-        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-        //salva dati per preferenze condivise
-        SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
-        editor.putString("Mia_lingua", lang);
-        editor.apply();
-    }
-
-    public void loadLocale(){
-        SharedPreferences prefs = getSharedPreferences("Settings", Activity.MODE_PRIVATE);
-        String language = prefs.getString("Mia_lingua", "");
-        setLocale(language);
-    }
-
 
     @Override
     public void onBackPressed(){
@@ -88,17 +70,21 @@ public class CommentCreateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_comment);
         loadLocale();
 
+        titleComment = findViewById(R.id.viewComment);
         rates = findViewById(R.id.ratingBar);
         saveComment = findViewById(R.id.buttonComment);
         motivation = findViewById(R.id.viewMotiv);
         anonymousComment = findViewById(R.id.checkBox);
         mFirestore = FirebaseFirestore.getInstance();
 
+        titleComment.setText(getString(R.string.valuta_lezione));
+
         //Ottengo informazioni da lessonListAdapter
         final String corso = getIntent().getStringExtra("courseid");
         final String userEmail = getIntent().getStringExtra("user");
         final String less = getIntent().getStringExtra("lessonid");
 
+        motivation.setVisibility(View.INVISIBLE);
 
         rates.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
@@ -125,11 +111,12 @@ public class CommentCreateActivity extends AppCompatActivity {
                         motivation.setText(getString(R.string.commento));
                         break;
                 }
-
-
+                motivation.setVisibility(View.VISIBLE);
             }
         });
 
+        anonymousComment.setText(getString(R.string.anonimo));
+        saveComment.setText(getString(R.string.inserisci_commento));
         saveComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -138,13 +125,13 @@ public class CommentCreateActivity extends AppCompatActivity {
                     Toast.makeText(CommentCreateActivity.this, R.string.exp_valutazione, Toast.LENGTH_SHORT).show();
                 } else{
                     String currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(Calendar.getInstance().getTime());
-                    Comment comment = new Comment();
+                    Comment comment;
 
                     //Controllo visibilità email
                     if(anonymousComment.isChecked())
-                        comment = new Comment(motivation.getText().toString(), currentDate, less, "Anonimo", rates.getRating());
+                        comment = new Comment(motivation.getText().toString(), currentDate, less, getString(R.string.utenteAnonimo), rates.getRating());
                     else
-                        comment = new Comment(motivation.getText().toString(), currentDate, less,userEmail, rates.getRating());
+                        comment = new Comment(motivation.getText().toString(), currentDate, less, userEmail, rates.getRating());
 
                     mFirestore.collection("Courses /" + corso + "/Lessons/" + less + "/Comments").add(comment).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                         @Override
@@ -163,4 +150,22 @@ public class CommentCreateActivity extends AppCompatActivity {
 
     }
 
+
+    private void setLocale(String lang){
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        //salva dati per preferenze condivise
+        SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
+        editor.putString("Mia_lingua", lang);
+        editor.apply();
+    }
+
+    public void loadLocale(){
+        SharedPreferences prefs = getSharedPreferences("Settings", Activity.MODE_PRIVATE);
+        String language = prefs.getString("Mia_lingua", "");
+        setLocale(language);
+    }
 }
