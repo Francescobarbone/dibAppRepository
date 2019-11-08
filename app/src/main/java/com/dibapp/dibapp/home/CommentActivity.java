@@ -93,7 +93,7 @@ public class CommentActivity extends AppCompatActivity {
         commentRecycler.setAdapter(commentsListAdapter);
 
 
-        firebaseFirestore.collection("Courses /" + courseID + "/Lessons/" + lessonID + "/Comments").get().addOnCompleteListener(CommentActivity.this, new OnCompleteListener<QuerySnapshot>() {
+        firebaseFirestore.collection("Courses /" + courseID + "/Lessons/" + lessonID + "/Comments").orderBy("timestamp").get().addOnCompleteListener(CommentActivity.this, new OnCompleteListener<QuerySnapshot>() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {

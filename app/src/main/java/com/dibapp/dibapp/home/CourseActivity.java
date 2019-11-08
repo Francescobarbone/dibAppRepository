@@ -73,7 +73,7 @@ public class CourseActivity extends AppCompatActivity {
         mMainList.setAdapter(courseListAdapter);
         mFirestore = FirebaseFirestore.getInstance();
 
-        mFirestore.collection("Courses ").get().addOnCompleteListener(CourseActivity.this, new OnCompleteListener<QuerySnapshot>() {
+        mFirestore.collection("Courses ").orderBy("courseName").get().addOnCompleteListener(CourseActivity.this, new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 for(QueryDocumentSnapshot doc : Objects.requireNonNull(task.getResult())){
