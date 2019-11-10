@@ -123,7 +123,7 @@ public class LessonActivity extends AppCompatActivity {
 
         //Visualizzazione lezioni per studente
         if(Objects.requireNonNull(firebaseAuth.getCurrentUser().getEmail()).endsWith("@studenti.uniba.it")) {
-            mFirestore.collection("Courses /" + courseID + "/Lessons").orderBy("lessonDate").get().addOnCompleteListener(LessonActivity.this, new OnCompleteListener<QuerySnapshot>() {
+            mFirestore.collection("Courses /" + courseID + "/Lessons").orderBy("argument").get().addOnCompleteListener(LessonActivity.this, new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                     if (Objects.requireNonNull(task.getResult()).isEmpty()) {
@@ -153,7 +153,7 @@ public class LessonActivity extends AppCompatActivity {
                         }
                     }
                     if(find){
-                        mFirestore.collection("Courses /" + admin.getCourseId() + "/Lessons").orderBy("lessonDate").get().addOnCompleteListener(LessonActivity.this, new OnCompleteListener<QuerySnapshot>() {
+                        mFirestore.collection("Courses /" + admin.getCourseId() + "/Lessons").orderBy("argument").get().addOnCompleteListener(LessonActivity.this, new OnCompleteListener<QuerySnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 if (Objects.requireNonNull(task.getResult()).isEmpty()) {
